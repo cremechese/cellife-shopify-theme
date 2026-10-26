@@ -15,14 +15,495 @@
         "eyebrow": "CELLIFE HEALTHCARE",
         "heading": "Science for better everyday health.",
         "text": "<p>Explore the Cellife supplement range.</p>",
-        "image": "shopify://shop_images/Cellife_Supplement_Bottles_in_Motion_a32a4e6f-472b-464f-8045-d5156ec92ede.png",
-        "mobile_image": "shopify://shop_images/Cellife_Supplement_Bottles_in_Motion.png",
+        "image": "shopify://shop_images/desktop-hero.png",
+        "mobile_image": "shopify://shop_images/mobile_hero.png",
         "placeholder_label": "Product photography placeholder",
         "button_label": "Shop Now",
         "button_link": "/collections/supplements",
-        "secondary_uses_quiz": true,
         "secondary_label": "Take The Quiz",
-        "secondary_link": "#cellife-quiz-placeholder"
+        "secondary_link": "#cellife-quiz-placeholder",
+        "secondary_uses_quiz": true
+      }
+    },
+    "product_shelf": {
+      "type": "cellife-product-shelf",
+      "settings": {
+        "eyebrow": "EXPLORE SUPPLEMENTS",
+        "heading": "Find your daily essentials.",
+        "text": "<p>Explore the Cellife supplement range and the details behind each product.</p>",
+        "tone": "soft",
+        "collection": "supplements",
+        "limit": 4,
+        "product_label": "View product",
+        "label": "Explore the range",
+        "empty_label": "Product placeholder — select a collection",
+        "bestseller_tag": "BESTSELLER",
+        "new_tag": "NEW"
+      }
+    },
+    "approach": {
+      "type": "cellife-content-grid",
+      "blocks": {
+        "item_0": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Origin icon placeholder",
+            "draft": true,
+            "heading": "Our Australian story",
+            "text": "<p>Placeholder: add verified origin and manufacturing details for the relevant products.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Ingredient icon placeholder",
+            "draft": true,
+            "heading": "Ingredients, considered",
+            "text": "<p>Placeholder: add approved ingredient and sourcing information.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Formulation icon placeholder",
+            "draft": true,
+            "heading": "Formulation with purpose",
+            "text": "<p>Placeholder: explain the thinking behind the range using approved copy.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Evidence icon placeholder",
+            "draft": true,
+            "heading": "Evidence in focus",
+            "text": "<p>Placeholder: add product-specific references and verified supporting information.</p>",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_0",
+        "item_1",
+        "item_2",
+        "item_3"
+      ],
+      "settings": {
+        "eyebrow": "THE CELLIFE APPROACH",
+        "heading": "Good details. Clear choices.",
+        "text": "",
+        "tone": "light",
+        "layout": "benefits",
+        "draft_label": "Content placeholder — approval required"
+      }
+    },
+    "community": {
+      "type": "cellife-community",
+      "blocks": {
+        "story_0": {
+          "type": "story",
+          "settings": {
+            "approved": false,
+            "quote": "",
+            "attribution": "",
+            "transcript": "",
+            "product": ""
+          }
+        },
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "approved": false,
+            "quote": "",
+            "attribution": "",
+            "transcript": "",
+            "product": ""
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "approved": false,
+            "quote": "",
+            "attribution": "",
+            "transcript": "",
+            "product": ""
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "approved": false,
+            "quote": "",
+            "attribution": "",
+            "transcript": "",
+            "product": ""
+          }
+        },
+        "story_4": {
+          "type": "story",
+          "settings": {
+            "approved": false,
+            "quote": "",
+            "attribution": "",
+            "transcript": "",
+            "product": ""
+          }
+        },
+        "story_5": {
+          "type": "story",
+          "settings": {
+            "approved": false,
+            "quote": "",
+            "attribution": "",
+            "transcript": "",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "story_0",
+        "story_1",
+        "story_2",
+        "story_3",
+        "story_4",
+        "story_5"
+      ],
+      "settings": {
+        "eyebrow": "THE HUMAN SIDE",
+        "heading": "Stories from the Cellife community.",
+        "text": "<p>Customer story placeholders. Approved videos and testimonials will appear here.</p>",
+        "tone": "soft",
+        "placeholder_label": "Video story placeholder",
+        "draft_label": "Unpublished story placeholder",
+        "placeholder_text": "Add a consented customer story, accurate attribution and captions or transcript.",
+        "transcript_label": "Read transcript",
+        "auto_scroll": true,
+        "scroll_speed": 24,
+        "pause_label": "Pause stories",
+        "play_label": "Resume stories",
+        "rail_label": "Cellife customer stories"
+      }
+    },
+    "quiz_banner": {
+      "type": "cellife-quiz-banner",
+      "settings": {
+        "placeholder_label": "Campaign photography placeholder",
+        "eyebrow": "YOUR NEXT CHAPTER",
+        "heading": "A routine that starts with you.",
+        "text": "<p>Explore the supplement range, or start with a little guidance.</p>",
+        "shop_label": "Shop Now",
+        "shop_link": "",
+        "quiz_label": "Take The Quiz",
+        "pending_label": "Quiz setup pending — connect the recommendation quiz in Theme settings."
+      }
+    },
+    "cellife_gateway": {
+      "type": "cellife-journey-gateway",
+      "settings": {
+        "show_gateway": false,
+        "eyebrow": "TWO WAYS TO EXPLORE",
+        "heading": "What brings you to Cellife?",
+        "text": "Choose a starting point. Both ranges are always available to explore.",
+        "supplements_title": "Supplements",
+        "supplements_text": "Explore the Cellife supplement range.",
+        "supplements_label": "Explore supplements",
+        "diagnostics_title": "Diagnostic Test Kits",
+        "diagnostics_text": "Browse respiratory, drug and alcohol, and women’s and urinary health tests.",
+        "diagnostics_label": "Explore diagnostic test kits",
+        "overlay_enabled": true,
+        "overlay_heading": "Where would you like to start?",
+        "overlay_text": "Explore supplements or diagnostic test kits. You can switch at any time.",
+        "dismiss_label": "Continue browsing"
+      }
+    },
+    "evidence": {
+      "type": "cellife-content-grid",
+      "blocks": {
+        "item_0": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Approved evidence mark",
+            "draft": true,
+            "heading": "Evidence placeholder",
+            "text": "<p>Add an approved testing or quality reference.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Approved logo placeholder",
+            "draft": true,
+            "heading": "Source placeholder",
+            "text": "<p>Add a verified source or partner, if applicable.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Documentation placeholder",
+            "draft": true,
+            "heading": "Standards placeholder",
+            "text": "<p>Add product-specific supporting documentation.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Reference placeholder",
+            "draft": true,
+            "heading": "Transparency placeholder",
+            "text": "<p>Add an approved supporting reference.</p>",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_0",
+        "item_1",
+        "item_2",
+        "item_3"
+      ],
+      "disabled": true,
+      "settings": {
+        "eyebrow": "QUALITY & TRANSPARENCY",
+        "heading": "Quality, with the details in view.",
+        "text": "",
+        "tone": "soft",
+        "layout": "logos",
+        "draft_label": "Content placeholder — approval required"
+      }
+    },
+    "product_story": {
+      "type": "cellife-editorial",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "",
+        "heading": "The details behind the product.",
+        "text": "<p>Replace this panel with an approved product story, product image and supporting references. Choose the featured Cellife product before adding any benefit statements.</p>",
+        "tone": "dark",
+        "placeholder_label": "Editorial image placeholder",
+        "image_position": "left",
+        "draft": true,
+        "draft_label": "Editorial placeholder — approved copy required",
+        "label": "Explore supplements",
+        "link": "/collections/supplements"
+      }
+    },
+    "education": {
+      "type": "cellife-content-grid",
+      "blocks": {
+        "item_0": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Ingredient editorial image",
+            "draft": true,
+            "heading": "An ingredient, explained.",
+            "text": "<p>Add an approved ingredient explainer and its sources.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Routine editorial image",
+            "draft": true,
+            "heading": "From formulation to routine.",
+            "text": "<p>Add approved formulation and use information.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Product information image",
+            "draft": true,
+            "heading": "Read the label. Know the details.",
+            "text": "<p>Add an approved product-information guide.</p>",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_0",
+        "item_1",
+        "item_2"
+      ],
+      "disabled": true,
+      "settings": {
+        "eyebrow": "LEARN WITH CELLIFE",
+        "heading": "Explore the thinking behind the range.",
+        "text": "",
+        "tone": "soft",
+        "layout": "cards",
+        "draft_label": "Content placeholder — approval required"
+      }
+    },
+    "people": {
+      "type": "cellife-content-grid",
+      "blocks": {
+        "item_0": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Portrait placeholder",
+            "draft": true,
+            "heading": "Profile placeholder",
+            "text": "<p>Add an approved name, role and biography. Do not imply an advisory board or credentials without verification.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Portrait placeholder",
+            "draft": true,
+            "heading": "Profile placeholder",
+            "text": "<p>Add a consented portrait and verified biography.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "placeholder_label": "Portrait placeholder",
+            "draft": true,
+            "heading": "Profile placeholder",
+            "text": "<p>Add a verified Cellife team or expert profile.</p>",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_0",
+        "item_1",
+        "item_2"
+      ],
+      "disabled": true,
+      "settings": {
+        "eyebrow": "BEHIND THE BRAND",
+        "heading": "People & expertise.",
+        "text": "",
+        "tone": "light",
+        "layout": "people",
+        "draft_label": "Content placeholder — approval required"
+      }
+    },
+    "campaign": {
+      "type": "cellife-editorial",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "",
+        "heading": "The fountain of you.",
+        "text": "<p>Replace this campaign panel with your finished brand photography and approved supporting copy.</p>",
+        "tone": "dark",
+        "placeholder_label": "Editorial image placeholder",
+        "image_position": "right",
+        "draft": true,
+        "draft_label": "Editorial placeholder — approved copy required",
+        "label": "Explore supplements",
+        "link": "/collections/supplements"
+      }
+    },
+    "questions": {
+      "type": "cellife-faq",
+      "blocks": {
+        "q0": {
+          "type": "question",
+          "settings": {
+            "question": "Where can I find ingredients and directions?",
+            "answer": "<p>Add the approved Cellife answer, relevant product guidance and any necessary policy links.</p>",
+            "draft": true
+          }
+        },
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "How do I choose between products?",
+            "answer": "<p>Add the approved Cellife answer, relevant product guidance and any necessary policy links.</p>",
+            "draft": true
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Where can I find delivery and returns information?",
+            "answer": "<p>Add the approved Cellife answer, relevant product guidance and any necessary policy links.</p>",
+            "draft": true
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How can I contact Cellife?",
+            "answer": "<p>Add the approved Cellife answer, relevant product guidance and any necessary policy links.</p>",
+            "draft": true
+          }
+        }
+      },
+      "block_order": [
+        "q0",
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "disabled": true,
+      "settings": {
+        "eyebrow": "YOUR QUESTIONS",
+        "heading": "A little clarity, before you choose.",
+        "text": "",
+        "tone": "soft",
+        "draft_label": "Answer placeholder — approval required",
+        "label": "",
+        "link": ""
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "supplements",
+        "products_to_show": 4,
+        "title": "Explore Cellife supplements",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
       }
     },
     "cellife_pathways": {
@@ -71,391 +552,11 @@
         "pathway_2",
         "pathway_3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "EXPLORE CELLIFE",
         "heading": "Find your starting point."
-      },
-      "disabled": true
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "supplements",
-        "products_to_show": 4,
-        "title": "Explore Cellife supplements",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
-        "padding_bottom": 36
-      },
-      "disabled": true
-    },
-    "cellife_gateway": {
-      "type": "cellife-journey-gateway",
-      "settings": {
-        "overlay_enabled": true,
-        "show_gateway": false
       }
-    },
-    "evidence": {
-      "type": "cellife-content-grid",
-      "settings": {
-        "heading": "Quality, with the details in view.",
-        "layout": "logos",
-        "tone": "soft",
-        "eyebrow": "QUALITY & TRANSPARENCY"
-      },
-      "blocks": {
-        "item_0": {
-          "type": "item",
-          "settings": {
-            "heading": "Evidence placeholder",
-            "text": "<p>Add an approved testing or quality reference.</p>",
-            "placeholder_label": "Approved evidence mark",
-            "draft": true
-          }
-        },
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "heading": "Source placeholder",
-            "text": "<p>Add a verified source or partner, if applicable.</p>",
-            "placeholder_label": "Approved logo placeholder",
-            "draft": true
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "heading": "Standards placeholder",
-            "text": "<p>Add product-specific supporting documentation.</p>",
-            "placeholder_label": "Documentation placeholder",
-            "draft": true
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "heading": "Transparency placeholder",
-            "text": "<p>Add an approved supporting reference.</p>",
-            "placeholder_label": "Reference placeholder",
-            "draft": true
-          }
-        }
-      },
-      "block_order": [
-        "item_0",
-        "item_1",
-        "item_2",
-        "item_3"
-      ],
-      "disabled": true
-    },
-    "product_shelf": {
-      "type": "cellife-product-shelf",
-      "settings": {
-        "eyebrow": "EXPLORE SUPPLEMENTS",
-        "heading": "Find your daily essentials.",
-        "text": "<p>Explore the Cellife supplement range and the details behind each product.</p>",
-        "collection": "supplements",
-        "limit": 4,
-        "tone": "soft"
-      }
-    },
-    "approach": {
-      "type": "cellife-content-grid",
-      "settings": {
-        "heading": "Good details. Clear choices.",
-        "layout": "benefits",
-        "tone": "light",
-        "eyebrow": "THE CELLIFE APPROACH"
-      },
-      "blocks": {
-        "item_0": {
-          "type": "item",
-          "settings": {
-            "heading": "Our Australian story",
-            "text": "<p>Placeholder: add verified origin and manufacturing details for the relevant products.</p>",
-            "placeholder_label": "Origin icon placeholder",
-            "draft": true
-          }
-        },
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "heading": "Ingredients, considered",
-            "text": "<p>Placeholder: add approved ingredient and sourcing information.</p>",
-            "placeholder_label": "Ingredient icon placeholder",
-            "draft": true
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "heading": "Formulation with purpose",
-            "text": "<p>Placeholder: explain the thinking behind the range using approved copy.</p>",
-            "placeholder_label": "Formulation icon placeholder",
-            "draft": true
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "heading": "Evidence in focus",
-            "text": "<p>Placeholder: add product-specific references and verified supporting information.</p>",
-            "placeholder_label": "Evidence icon placeholder",
-            "draft": true
-          }
-        }
-      },
-      "block_order": [
-        "item_0",
-        "item_1",
-        "item_2",
-        "item_3"
-      ]
-    },
-    "community": {
-      "type": "cellife-community",
-      "settings": {
-        "heading": "Stories from the Cellife community.",
-        "eyebrow": "THE HUMAN SIDE",
-        "tone": "soft",
-        "text": "<p>Customer story placeholders. Approved videos and testimonials will appear here.</p>",
-        "auto_scroll": true,
-        "scroll_speed": 24
-      },
-      "blocks": {
-        "story_0": {
-          "type": "story",
-          "settings": {
-            "approved": false
-          }
-        },
-        "story_1": {
-          "type": "story",
-          "settings": {
-            "approved": false
-          }
-        },
-        "story_2": {
-          "type": "story",
-          "settings": {
-            "approved": false
-          }
-        },
-        "story_3": {
-          "type": "story",
-          "settings": {
-            "approved": false
-          }
-        },
-        "story_4": {
-          "type": "story",
-          "settings": {
-            "approved": false
-          }
-        },
-        "story_5": {
-          "type": "story",
-          "settings": {
-            "approved": false
-          }
-        }
-      },
-      "block_order": [
-        "story_0",
-        "story_1",
-        "story_2",
-        "story_3",
-        "story_4",
-        "story_5"
-      ]
-    },
-    "product_story": {
-      "type": "cellife-editorial",
-      "settings": {
-        "heading": "The details behind the product.",
-        "text": "<p>Replace this panel with an approved product story, product image and supporting references. Choose the featured Cellife product before adding any benefit statements.</p>",
-        "tone": "dark",
-        "image_position": "left",
-        "draft": true,
-        "label": "Explore supplements",
-        "link": "/collections/supplements",
-        "placeholder_label": "Editorial image placeholder"
-      },
-      "disabled": true
-    },
-    "education": {
-      "type": "cellife-content-grid",
-      "settings": {
-        "heading": "Explore the thinking behind the range.",
-        "layout": "cards",
-        "tone": "soft",
-        "eyebrow": "LEARN WITH CELLIFE"
-      },
-      "blocks": {
-        "item_0": {
-          "type": "item",
-          "settings": {
-            "heading": "An ingredient, explained.",
-            "text": "<p>Add an approved ingredient explainer and its sources.</p>",
-            "placeholder_label": "Ingredient editorial image",
-            "draft": true
-          }
-        },
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "heading": "From formulation to routine.",
-            "text": "<p>Add approved formulation and use information.</p>",
-            "placeholder_label": "Routine editorial image",
-            "draft": true
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "heading": "Read the label. Know the details.",
-            "text": "<p>Add an approved product-information guide.</p>",
-            "placeholder_label": "Product information image",
-            "draft": true
-          }
-        }
-      },
-      "block_order": [
-        "item_0",
-        "item_1",
-        "item_2"
-      ],
-      "disabled": true
-    },
-    "people": {
-      "type": "cellife-content-grid",
-      "settings": {
-        "heading": "People & expertise.",
-        "layout": "people",
-        "tone": "light",
-        "eyebrow": "BEHIND THE BRAND"
-      },
-      "blocks": {
-        "item_0": {
-          "type": "item",
-          "settings": {
-            "heading": "Profile placeholder",
-            "text": "<p>Add an approved name, role and biography. Do not imply an advisory board or credentials without verification.</p>",
-            "placeholder_label": "Portrait placeholder",
-            "draft": true
-          }
-        },
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "heading": "Profile placeholder",
-            "text": "<p>Add a consented portrait and verified biography.</p>",
-            "placeholder_label": "Portrait placeholder",
-            "draft": true
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "heading": "Profile placeholder",
-            "text": "<p>Add a verified Cellife team or expert profile.</p>",
-            "placeholder_label": "Portrait placeholder",
-            "draft": true
-          }
-        }
-      },
-      "block_order": [
-        "item_0",
-        "item_1",
-        "item_2"
-      ],
-      "disabled": true
-    },
-    "campaign": {
-      "type": "cellife-editorial",
-      "settings": {
-        "heading": "The fountain of you.",
-        "text": "<p>Replace this campaign panel with your finished brand photography and approved supporting copy.</p>",
-        "tone": "dark",
-        "image_position": "right",
-        "draft": true,
-        "label": "Explore supplements",
-        "link": "/collections/supplements",
-        "placeholder_label": "Editorial image placeholder"
-      },
-      "disabled": true
-    },
-    "questions": {
-      "type": "cellife-faq",
-      "settings": {
-        "heading": "A little clarity, before you choose.",
-        "tone": "soft",
-        "eyebrow": "YOUR QUESTIONS"
-      },
-      "blocks": {
-        "q0": {
-          "type": "question",
-          "settings": {
-            "question": "Where can I find ingredients and directions?",
-            "answer": "<p>Add the approved Cellife answer, relevant product guidance and any necessary policy links.</p>",
-            "draft": true
-          }
-        },
-        "q1": {
-          "type": "question",
-          "settings": {
-            "question": "How do I choose between products?",
-            "answer": "<p>Add the approved Cellife answer, relevant product guidance and any necessary policy links.</p>",
-            "draft": true
-          }
-        },
-        "q2": {
-          "type": "question",
-          "settings": {
-            "question": "Where can I find delivery and returns information?",
-            "answer": "<p>Add the approved Cellife answer, relevant product guidance and any necessary policy links.</p>",
-            "draft": true
-          }
-        },
-        "q3": {
-          "type": "question",
-          "settings": {
-            "question": "How can I contact Cellife?",
-            "answer": "<p>Add the approved Cellife answer, relevant product guidance and any necessary policy links.</p>",
-            "draft": true
-          }
-        }
-      },
-      "block_order": [
-        "q0",
-        "q1",
-        "q2",
-        "q3"
-      ],
-      "disabled": true
-    },
-    "quiz_banner": {
-      "type": "cellife-quiz-banner",
-      "settings": {}
     }
   },
   "order": [

@@ -162,15 +162,26 @@
             "transcript": "",
             "product": ""
           }
+        },
+        "mosaic_placeholder_0": {
+          "type": "story",
+          "settings": {
+            "approved": false,
+            "quote": "",
+            "attribution": "",
+            "transcript": "",
+            "product": ""
+          }
         }
       },
       "block_order": [
-        "story_2",
         "story_0",
         "story_1",
         "story_3",
+        "story_2",
         "story_4",
-        "story_5"
+        "story_5",
+        "mosaic_placeholder_0"
       ],
       "settings": {
         "eyebrow": "",

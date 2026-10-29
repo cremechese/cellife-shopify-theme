@@ -1,0 +1,26 @@
+<article class="cellife-community-card{% if portrait %} cellife-community-card--portrait{% else %} cellife-community-card--quote{% endif %}" {{ block.shopify_attributes }}{% unless portrait %} tabindex="0"{% endunless %}>
+  {% if portrait %}
+    <div class="cellife-community-card__media">
+      {% if block.settings.approved and block.settings.video != blank %}
+        {% assign story_poster = block.settings.video.preview_image | image_url: width: 800 %}
+        {% if block.settings.poster != blank %}{% assign story_poster = block.settings.poster | image_url: width: 800 %}{% endif %}
+        {{ block.settings.video | video_tag: controls: true, autoplay: false, loop: false, preload: 'none', image_size: '800x', poster: story_poster }}
+      {% elsif block.settings.approved and block.settings.poster != blank %}
+        {{ block.settings.poster | image_url: width: 800 | image_tag: widths: '400, 600, 800', sizes: '(min-width: 750px) 40vw, 85vw', loading: 'lazy' }}
+      {% else %}{% render 'cellife-media-placeholder', label: section.settings.placeholder_label %}{% endif %}
+    </div>
+  {% endif %}
+  {% if block.settings.approved != true or block.settings.quote != blank or block.settings.attribution != blank or block.settings.transcript != blank or block.settings.product != blank %}
+  <div class="cellife-community-card__copy">
+    {% if block.settings.approved %}
+      {% if block.settings.quote != blank %}<blockquote>{{ block.settings.quote | escape }}</blockquote>{% endif %}
+      {% if block.settings.attribution != blank %}<p class="cellife-story-attribution">{{ block.settings.attribution | escape }}</p>{% endif %}
+      {% if block.settings.transcript != blank %}<details><summary>{{ section.settings.transcript_label | escape }}</summary><div class="rte">{{ block.settings.transcript }}</div></details>{% endif %}
+      {% if block.settings.product != blank %}<a class="cellife-editorial-link" href="{{ block.settings.product.url }}">{{ block.settings.product.title | escape }}</a>{% endif %}
+    {% else %}
+      <p class="cellife-draft-label">{{ section.settings.draft_label | escape }}</p>
+      <p>{{ section.settings.placeholder_text | escape }}</p>
+    {% endif %}
+  </div>
+  {% endif %}
+</article>

@@ -1,42 +1,34 @@
+{{ 'section-cellife-story-mosaic.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'cellife-story-rail.js' | asset_url }}" defer="defer"></script>
 <section class="cellife-section cellife-tone--{{ section.settings.tone }}" aria-labelledby="Editorial-{{ section.id }}">
-  <div class="cellife-container"><div class="cellife-section-heading">
-  {% if section.settings.eyebrow != blank %}<p class="cellife-kicker">{{ section.settings.eyebrow | escape }}</p>{% endif %}
-  <h2 id="Editorial-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
-  {% if section.settings.text != blank %}<div class="rte">{{ section.settings.text }}</div>{% endif %}
-</div>
-    <cellife-story-rail data-auto-scroll="{{ section.settings.auto_scroll }}" data-speed="{{ section.settings.scroll_speed }}">
+  <div class="cellife-container">
+    <div class="cellife-section-heading">
+      {% if section.settings.eyebrow != blank %}<p class="cellife-kicker">{{ section.settings.eyebrow | escape }}</p>{% endif %}
+      <h2 id="Editorial-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.text != blank %}<div class="rte">{{ section.settings.text }}</div>{% endif %}
+    </div>
+    <cellife-story-rail data-layout="mosaic" data-auto-scroll="{{ section.settings.auto_scroll }}" data-speed="{{ section.settings.scroll_speed }}">
       <div class="cellife-story-controls"><button type="button" data-rail-toggle hidden data-pause-label="{{ section.settings.pause_label | escape }}" data-play-label="{{ section.settings.play_label | escape }}">{{ section.settings.pause_label | escape }}</button></div>
       <div class="cellife-story-viewport" tabindex="0" role="region" aria-label="{{ section.settings.rail_label | escape }}">
-      <div class="cellife-community-grid" data-story-track aria-live="off">
-      {% for block in section.blocks %}
-        {% if block.type == '@app' %}<div class="cellife-community-app" {{ block.shopify_attributes }}>{% render block %}</div>
-        {% else %}
-          <article class="cellife-community-card{% if block.settings.approved and block.settings.video == blank and block.settings.poster == blank %} cellife-community-card--text{% endif %}" {{ block.shopify_attributes }}>
-            {% unless block.settings.approved and block.settings.video == blank and block.settings.poster == blank %}
-            <div class="cellife-community-card__media">
-              {% if block.settings.approved and block.settings.video != blank %}
-                {% assign story_poster = block.settings.video.preview_image | image_url: width: 800 %}
-                {% if block.settings.poster != blank %}{% assign story_poster = block.settings.poster | image_url: width: 800 %}{% endif %}
-                {{ block.settings.video | video_tag: controls: true, autoplay: false, loop: false, preload: 'none', image_size: '800x', poster: story_poster }}
-              {% elsif block.settings.approved and block.settings.poster != blank %}
-                {{ block.settings.poster | image_url: width: 800 | image_tag: widths: '400, 600, 800', sizes: '(min-width: 750px) 30vw, 85vw', loading: 'lazy' }}
-              {% else %}{% render 'cellife-media-placeholder', label: section.settings.placeholder_label %}{% endif %}
-            </div>
-            {% endunless %}
-            <div class="cellife-community-card__copy">
-              {% if block.settings.approved %}
-                {% if block.settings.quote != blank %}<blockquote>{{ block.settings.quote | escape }}</blockquote>{% endif %}
-                <p>{{ block.settings.attribution | escape }}</p>
-                {% if block.settings.transcript != blank %}<details><summary>{{ section.settings.transcript_label | escape }}</summary><div class="rte">{{ block.settings.transcript }}</div></details>{% endif %}
-                {% if block.settings.product != blank %}<a class="cellife-editorial-link" href="{{ block.settings.product.url }}">{{ block.settings.product.title | escape }}</a>{% endif %}
-              {% else %}<p class="cellife-draft-label">{{ section.settings.draft_label | escape }}</p><p>{{ section.settings.placeholder_text | escape }}</p>{% endif %}
-            </div>
-          </article>
-        {% endif %}
-      {% endfor %}
-    </div>
-    </div>
+        <div class="cellife-community-grid" data-story-track aria-live="off">
+          {% assign stories = section.blocks | where: 'type', 'story' %}
+          {% for block in stories %}
+            {% assign slot = forloop.index0 | modulo: 7 %}
+            {% case slot %}
+              {% when 0 %}<div class="cellife-story-unit cellife-story-unit--trio" data-story-unit>
+              {% when 3 or 6 %}<div class="cellife-story-unit cellife-story-unit--portrait" data-story-unit>
+              {% when 4 %}<div class="cellife-story-unit cellife-story-unit--stack" data-story-unit>
+            {% endcase %}
+            {% assign portrait = false %}
+            {% if slot == 3 or slot == 6 %}{% assign portrait = true %}{% endif %}
+            {% render 'cellife-story-card', block: block, section: section, portrait: portrait %}
+            {% if slot == 2 or slot == 3 or slot == 5 or slot == 6 or forloop.last %}</div>{% endif %}
+          {% endfor %}
+          {% for block in section.blocks %}
+            {% if block.type == '@app' %}<div class="cellife-community-app" {{ block.shopify_attributes }}>{% render block %}</div>{% endif %}
+          {% endfor %}
+        </div>
+      </div>
     </cellife-story-rail>
   </div>
 </section>
@@ -45,6 +37,10 @@
 {
   "name": "Cellife community stories",
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "Each seven-story pattern uses: wide quote, two small quotes, portrait video, two stacked quotes, portrait video. Reorder story blocks to place content in those slots. Add approved media to slots 4 and 7."
+    },
     {
       "type": "text",
       "id": "eyebrow",
@@ -139,7 +135,7 @@
       "default": "Cellife customer stories"
     }
   ],
-  "max_blocks": 8,
+  "max_blocks": 14,
   "blocks": [
     {
       "type": "story",
@@ -192,6 +188,18 @@
     {
       "name": "Cellife community stories",
       "blocks": [
+        {
+          "type": "story"
+        },
+        {
+          "type": "story"
+        },
+        {
+          "type": "story"
+        },
+        {
+          "type": "story"
+        },
         {
           "type": "story"
         },

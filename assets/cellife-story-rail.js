@@ -32,11 +32,18 @@ if (!customElements.get('cellife-story-rail')) {
         const first = this.track.firstElementChild;
         const gap = parseFloat(getComputedStyle(this.track).gap) || 0;
         const count = this.track.children.length;
-        const visibleCards = Math.min(this.viewport.clientWidth < 750 ? 1.15 : 3.2, count - 1);
+        const mobile = matchMedia('(max-width: 749px)').matches;
+        let visibleCards = Math.min(mobile ? 1.15 : 3.2, count - 1);
+        if (this.dataset.layout === 'mosaic') {
+          const weights = [...this.track.children].map(unit => !mobile && unit.classList.contains('cellife-story-unit--trio') ? 2 : 1);
+          const total = weights.reduce((sum, weight) => sum + weight, 0);
+          visibleCards = count > 1 ? Math.max(0.8, Math.min(mobile ? 1.15 : 2.8, total - Math.max(...weights) - 0.1)) : (mobile ? 1 : 2);
+        }
+        this.canCycle = count > 1 && !this.querySelector('.cellife-community-app');
         if (visibleCards > 0) this.style.setProperty('--story-card-width', `${(this.viewport.clientWidth - gap * (visibleCards - 1)) / visibleCards}px`);
         this.step = first ? first.getBoundingClientRect().width + gap : 0;
         this.overflowing = this.viewport.scrollWidth > this.viewport.clientWidth + 2;
-        this.toggle.hidden = !this.overflowing || Boolean(this.querySelector('.cellife-community-app'));
+        this.toggle.hidden = !this.overflowing || !this.canCycle;
       };
       this.resize = new ResizeObserver(measure);
       this.resize.observe(this.viewport);
@@ -49,13 +56,14 @@ if (!customElements.get('cellife-story-rail')) {
         previous = now;
         const focused = this.viewport.contains(document.activeElement);
         const playing = [...this.querySelectorAll('video')].some(video => !video.paused);
-        const moving = !this.paused && !this.hovered && !focused && !playing && this.visible && !document.hidden && this.overflowing && this.step > 0 && !this.querySelector('.cellife-community-app');
+        const moving = !this.paused && !this.hovered && !focused && !playing && this.visible && !document.hidden && this.overflowing && this.step > 0 && this.canCycle;
         if (moving) {
           if (!wasMoving) position = this.viewport.scrollLeft;
           position += delta * this.speed / 1000;
           if (position >= this.step) {
             position -= this.step;
             this.track.append(this.track.firstElementChild);
+            this.step = this.track.firstElementChild.getBoundingClientRect().width + (parseFloat(getComputedStyle(this.track).gap) || 0);
           }
           this.viewport.scrollLeft = position;
         }

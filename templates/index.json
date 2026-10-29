@@ -101,6 +101,18 @@
     "community": {
       "type": "cellife-community",
       "blocks": {
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "approved": true,
+            "video": "shopify://files/videos/testimonial_1.mov",
+            "poster": "shopify://shop_images/testimonial_1_poster.png",
+            "quote": "",
+            "attribution": "",
+            "transcript": "",
+            "product": ""
+          }
+        },
         "story_0": {
           "type": "story",
           "settings": {
@@ -112,16 +124,6 @@
           }
         },
         "story_1": {
-          "type": "story",
-          "settings": {
-            "approved": false,
-            "quote": "",
-            "attribution": "",
-            "transcript": "",
-            "product": ""
-          }
-        },
-        "story_2": {
           "type": "story",
           "settings": {
             "approved": false,
@@ -163,9 +165,9 @@
         }
       },
       "block_order": [
+        "story_2",
         "story_0",
         "story_1",
-        "story_2",
         "story_3",
         "story_4",
         "story_5"

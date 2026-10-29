@@ -54,21 +54,24 @@
         "icon_0": {
           "type": "icon",
           "settings": {
-            "top_caption": "Origin placeholder",
-            "bottom_caption": "<p>Placeholder caption. Add approved details here.</p>"
+            "top_caption": "Our Aussie beginnings",
+            "image": "shopify://shop_images/operahouse.png",
+            "bottom_caption": "<p>Founded in Sydney in 2002.</p>"
           }
         },
         "icon_1": {
           "type": "icon",
           "settings": {
-            "top_caption": "Ingredients placeholder",
-            "bottom_caption": "<p>Placeholder caption. Add approved details here.</p>"
+            "top_caption": "Manufactured in Australia",
+            "image": "shopify://shop_images/aus.png",
+            "bottom_caption": "<p>Our supplement range is manufactured in Australia.</p>"
           }
         },
         "icon_2": {
           "type": "icon",
           "settings": {
             "top_caption": "Formulation placeholder",
+            "image": "shopify://shop_images/ingredients.png",
             "bottom_caption": "<p>Placeholder caption. Add approved details here.</p>"
           }
         },
@@ -76,6 +79,7 @@
           "type": "icon",
           "settings": {
             "top_caption": "Evidence placeholder",
+            "image": "shopify://shop_images/high-quality.png",
             "bottom_caption": "<p>Placeholder caption. Add approved details here.</p>"
           }
         }

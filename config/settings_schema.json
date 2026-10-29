@@ -514,6 +514,17 @@
         "default": 0
       },
       {
+        "type": "range",
+        "id": "cellife_product_hover_zoom",
+        "label": "Product image hover zoom",
+        "min": 0,
+        "max": 50,
+        "step": 0.5,
+        "unit": "%",
+        "default": 3.5,
+        "info": "Applies to product cards on devices with a mouse. 0% disables zoom. Higher values may crop the bottle while hovering. Reduced-motion preferences disable the effect."
+      },
+      {
         "type": "select",
         "id": "card_text_alignment",
         "options": [
@@ -1506,17 +1517,6 @@
         "id": "cellife_mobile_product_link",
         "label": "Show mobile link to purchase options",
         "default": true
-      },
-      {
-        "type": "range",
-        "id": "cellife_product_hover_zoom",
-        "label": "Product image hover zoom",
-        "min": 0,
-        "max": 50,
-        "step": 0.5,
-        "unit": "%",
-        "default": 3.5,
-        "info": "Applies to product cards on devices with a mouse. 0% disables zoom. Higher values may crop the bottle while hovering. Reduced-motion preferences disable the effect."
       }
     ]
   }

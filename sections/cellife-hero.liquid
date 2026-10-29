@@ -11,7 +11,7 @@
 {%- capture quiz_url -%}{%- render 'cellife-quiz-url' -%}{%- endcapture -%}
 {%- assign secondary_url = section.settings.secondary_link -%}
 {%- if section.settings.secondary_uses_quiz -%}{%- assign secondary_url = quiz_url -%}{%- endif -%}
-<section class="cellife-home cellife-hero" aria-labelledby="CellifeHero-{{ section.id }}">
+<section class="cellife-home cellife-hero" aria-labelledby="CellifeHero-{{ section.id }}" style="--cellife-hero-height: {{ section.settings.desktop_height | default: 720 }}px; --cellife-hero-ratio: {{ hero_image.aspect_ratio | default: 1.714286 }}; --cellife-hero-background: {{ section.settings.background_color | default: '#f4f3f2' }};">
   <div class="cellife-hero__copy">
     {% if section.settings.eyebrow != blank %}<p class="cellife-eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
     <h1 id="CellifeHero-{{ section.id }}">{{ section.settings.heading | escape }}</h1>
@@ -69,7 +69,23 @@
       "type": "image_picker",
       "id": "image",
       "label": "Desktop image",
-      "info": "Recommended: 2400 × 1400px. Full-width image; keep the subject right of the text panel and set the focal point."
+      "info": "Recommended: 2400 × 1400px. The full image fits within the desktop height without cropping. Wider screens show the background colour at the sides. Keep the subject right of the text panel."
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop image height",
+      "min": 480,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 720
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Hero background colour",
+      "default": "#f4f3f2"
     },
     {
       "type": "image_picker",

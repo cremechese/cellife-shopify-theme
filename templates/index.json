@@ -16,6 +16,8 @@
         "heading": "Science for better everyday health.",
         "text": "<p>Explore the Cellife supplement range.</p>",
         "image": "shopify://shop_images/desktop-hero.png",
+        "desktop_height": 720,
+        "background_color": "#f4f3f2",
         "placeholder_label": "Product photography placeholder",
         "button_label": "Shop Now",
         "button_link": "/collections/supplements",
@@ -32,6 +34,12 @@
         "text": "<p>Explore the Cellife supplement range and the details behind each product.</p>",
         "tone": "soft",
         "collection": "supplements",
+        "products": [
+          "cellife-ampk-fatburst-60s",
+          "cellife-detox-60-tablets-copy",
+          "cellife-antioxidant",
+          "cellife-detox-60-tablets-expo"
+        ],
         "limit": 4,
         "product_label": "View product",
         "label": "Explore the range",

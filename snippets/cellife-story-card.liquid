@@ -15,7 +15,7 @@
     assign show_copy = true
   endif
 -%}
-<article class="cellife-community-card{% if portrait %} cellife-community-card--portrait{% else %} cellife-community-card--quote{% endif %}" {{ block.shopify_attributes }}{% unless portrait %} tabindex="0"{% endunless %}>
+<article class="cellife-community-card{% if portrait %} cellife-community-card--portrait{% else %} cellife-community-card--quote{% endif %}" style="--story-quote-scale: {{ block.settings.quote_text_scale | default: 100 | divided_by: 100.0 }};" {{ block.shopify_attributes }}{% unless portrait %} tabindex="0"{% endunless %}>
   {% if portrait %}
     <div class="cellife-community-card__media">
       {% if block.settings.approved and block.settings.video != blank %}

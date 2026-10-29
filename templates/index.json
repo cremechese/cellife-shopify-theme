@@ -49,67 +49,50 @@
       }
     },
     "approach": {
-      "type": "cellife-content-grid",
+      "type": "cellife-icon-values",
+      "settings": {
+        "eyebrow": "THE CELLIFE APPROACH",
+        "heading": "A closer look at Cellife.",
+        "text": "<p>Placeholder supporting text. Add approved brand information here.</p>",
+        "row_width": 1120,
+        "icon_size": 112
+      },
       "blocks": {
-        "item_0": {
-          "type": "item",
+        "icon_0": {
+          "type": "icon",
           "settings": {
-            "placeholder_label": "Origin icon placeholder",
-            "draft": true,
-            "heading": "Our Australian story",
-            "text": "<p>Placeholder: add verified origin and manufacturing details for the relevant products.</p>",
-            "label": "",
-            "link": ""
+            "top_caption": "Origin placeholder",
+            "bottom_caption": "<p>Placeholder caption. Add approved details here.</p>"
           }
         },
-        "item_1": {
-          "type": "item",
+        "icon_1": {
+          "type": "icon",
           "settings": {
-            "placeholder_label": "Ingredient icon placeholder",
-            "draft": true,
-            "heading": "Ingredients, considered",
-            "text": "<p>Placeholder: add approved ingredient and sourcing information.</p>",
-            "label": "",
-            "link": ""
+            "top_caption": "Ingredients placeholder",
+            "bottom_caption": "<p>Placeholder caption. Add approved details here.</p>"
           }
         },
-        "item_2": {
-          "type": "item",
+        "icon_2": {
+          "type": "icon",
           "settings": {
-            "placeholder_label": "Formulation icon placeholder",
-            "draft": true,
-            "heading": "Formulation with purpose",
-            "text": "<p>Placeholder: explain the thinking behind the range using approved copy.</p>",
-            "label": "",
-            "link": ""
+            "top_caption": "Formulation placeholder",
+            "bottom_caption": "<p>Placeholder caption. Add approved details here.</p>"
           }
         },
-        "item_3": {
-          "type": "item",
+        "icon_3": {
+          "type": "icon",
           "settings": {
-            "placeholder_label": "Evidence icon placeholder",
-            "draft": true,
-            "heading": "Evidence in focus",
-            "text": "<p>Placeholder: add product-specific references and verified supporting information.</p>",
-            "label": "",
-            "link": ""
+            "top_caption": "Evidence placeholder",
+            "bottom_caption": "<p>Placeholder caption. Add approved details here.</p>"
           }
         }
       },
       "block_order": [
-        "item_0",
-        "item_1",
-        "item_2",
-        "item_3"
-      ],
-      "settings": {
-        "eyebrow": "THE CELLIFE APPROACH",
-        "heading": "Good details. Clear choices.",
-        "text": "",
-        "tone": "light",
-        "layout": "benefits",
-        "draft_label": "Content placeholder — approval required"
-      }
+        "icon_0",
+        "icon_1",
+        "icon_2",
+        "icon_3"
+      ]
     },
     "community": {
       "type": "cellife-community",

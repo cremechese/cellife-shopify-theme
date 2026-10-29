@@ -162,12 +162,12 @@
         "story_4": {
           "type": "story",
           "settings": {
-            "approved": false,
-            "quote": "",
-            "attribution": "",
-            "attribution_subtitle": "",
-            "rating": 0,
-            "verified": false,
+            "approved": true,
+            "quote": "I have been taking Cellife NMN Extra for several years now. Over this time, I’ve noticed a significant improvement in my energy levels and metabolism. Having used it consistently for years, I honestly can’t see myself stopping.",
+            "attribution": "Natasha L.",
+            "attribution_subtitle": "Pharmacist · Bondi Beach Chemist  ",
+            "rating": 5,
+            "verified": true,
             "transcript": "",
             "product": "",
             "product_overlay": true

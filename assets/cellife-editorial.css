@@ -79,10 +79,16 @@
 .cellife-product-shelf { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 0; }
 .cellife-product-shelf > li { min-width: 0; padding: 18px; border-radius: 12px; background: #fff; color: #262125; border: 1px solid var(--cellife-line, #e4e0e9); }
 .cellife-product-shelf .card__inner { border-radius: 8px; overflow: hidden; }
-/* Product pack shots keep the full bottle visible, including hover images. */
+/* Product pack shots retain the full bottle with room for a subtle hover zoom. */
 .cellife-shell .product-card-wrapper .card__media .media > img { object-fit: contain; object-position: center; padding: clamp(12px, 2vw, 28px); }
-.cellife-shell .product-card-wrapper:hover .card__media .media > img:first-child:only-child,
-.cellife-shell .product-card-wrapper:hover .card__media .media > img + img { transform: none; }
+.cellife-shell .product-card-wrapper:hover .card__media .media > img:first-child:only-child { transform: none; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .cellife-shell .product-card-wrapper .card__media .media > img:first-child:only-child { transition: transform 350ms ease; }
+  .cellife-shell .product-card-wrapper:hover .card__media .media > img:first-child:only-child { transform: scale(1.035); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cellife-shell .product-card-wrapper .card__media .media > img:first-child:only-child { transform: none; transition: none; }
+}
 
 .cellife-product-shelf .card__heading { font-size: 19px; }
 .cellife-product-shelf .price { font-size: 16px; font-weight: 600; }

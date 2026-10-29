@@ -50,13 +50,6 @@
     },
     "approach": {
       "type": "cellife-icon-values",
-      "settings": {
-        "eyebrow": "THE CELLIFE APPROACH",
-        "heading": "A closer look at Cellife.",
-        "text": "<p>Placeholder supporting text. Add approved brand information here.</p>",
-        "row_width": 1120,
-        "icon_size": 112
-      },
       "blocks": {
         "icon_0": {
           "type": "icon",
@@ -92,7 +85,14 @@
         "icon_1",
         "icon_2",
         "icon_3"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "THE CELLIFE APPROACH",
+        "heading": "Know more about what you choose.",
+        "text": "<p>Discover our Australian story and explore the ingredients, directions and product details across the Cellife supplement range.</p>",
+        "row_width": 1120,
+        "icon_size": 112
+      }
     },
     "community": {
       "type": "cellife-community",

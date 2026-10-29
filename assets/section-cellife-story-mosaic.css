@@ -40,3 +40,11 @@ cellife-story-rail[data-layout="mosaic"] .cellife-community-grid { align-items: 
   .cellife-story-product__title { font-size: 12px; }
   .cellife-story-product__arrow { flex-basis: 28px; height: 28px; }
 }
+
+/* Keep the approved display name distinct from professional and location details. */
+.cellife-story-attribution { align-items: flex-start; }
+.cellife-story-attribution__identity { min-width: 0; width: 100%; max-width: 100%; text-align: right; overflow-wrap: anywhere; }
+.cellife-story-attribution__name { display: block; color: #3e2b62; font-weight: 600; font-size: 15px; line-height: 1.5; }
+.cellife-story-attribution__subtitle { display: block; max-width: 42ch; margin: 4px 0 0 auto; color: #514b55; font-size: 12px; font-weight: 400; line-height: 1.6; }
+.cellife-story-attribution .cellife-story-verified { margin-top: 3px; }
+.cellife-story-attribution__name-row { display: flex; align-items: baseline; justify-content: flex-end; flex-wrap: wrap; gap: 4px 10px; }

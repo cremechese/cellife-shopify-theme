@@ -7,7 +7,7 @@
     endif
   endif
   assign show_copy = false
-  if block.settings.approved != true or block.settings.quote != blank or block.settings.attribution != blank or block.settings.transcript != blank
+  if block.settings.approved != true or block.settings.quote != blank or block.settings.attribution != blank or block.settings.attribution_subtitle != blank or block.settings.transcript != blank
     assign show_copy = true
   elsif story_rating > 0 or block.settings.verified
     assign show_copy = true
@@ -49,11 +49,18 @@
           </span>
         {% endif %}
         {% if block.settings.quote != blank %}<blockquote>{{ block.settings.quote | escape }}</blockquote>{% endif %}
-        {% if block.settings.attribution != blank or block.settings.verified %}
-          <p class="cellife-story-attribution">
-            {% if block.settings.attribution != blank %}<span>{{ block.settings.attribution | escape }}</span>{% endif %}
-            {% if block.settings.verified %}<span class="cellife-story-verified"><span aria-hidden="true">✓</span> Verified</span>{% endif %}
-          </p>
+        {% if block.settings.attribution != blank or block.settings.attribution_subtitle != blank or block.settings.verified %}
+          <div class="cellife-story-attribution">
+            <div class="cellife-story-attribution__identity">
+              {% if block.settings.attribution != blank or block.settings.verified %}
+                <div class="cellife-story-attribution__name-row">
+                  {% if block.settings.attribution != blank %}<span class="cellife-story-attribution__name">{{ block.settings.attribution | escape }}</span>{% endif %}
+                  {% if block.settings.verified %}<span class="cellife-story-verified"><span aria-hidden="true">✓</span> Verified</span>{% endif %}
+                </div>
+              {% endif %}
+              {% if block.settings.attribution_subtitle != blank %}<span class="cellife-story-attribution__subtitle">{{ block.settings.attribution_subtitle | escape }}</span>{% endif %}
+            </div>
+          </div>
         {% endif %}
         {% if block.settings.transcript != blank %}<details><summary>{{ section.settings.transcript_label | escape }}</summary><div class="rte">{{ block.settings.transcript }}</div></details>{% endif %}
         {% if block.settings.product != blank and overlay_product == false %}<a class="cellife-editorial-link" href="{{ block.settings.product.url }}">{{ block.settings.product.title | escape }}</a>{% endif %}

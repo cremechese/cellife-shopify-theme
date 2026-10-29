@@ -169,6 +169,23 @@
           "label": "Approved attribution"
         },
         {
+          "type": "range",
+          "id": "rating",
+          "label": "Customer star rating",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "default": 0,
+          "info": "0 hides stars. Enter the customer's actual rating only."
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show Verified label",
+          "default": false,
+          "info": "Enable only when this customer's identity or purchase has been independently verified. This is a manual label, not an automatic Shopify verification."
+        },
+        {
           "type": "richtext",
           "id": "transcript",
           "label": "Transcript"
@@ -177,6 +194,13 @@
           "type": "product",
           "id": "product",
           "label": "Related product"
+        },
+        {
+          "type": "checkbox",
+          "id": "product_overlay",
+          "label": "Overlay related product on portrait video",
+          "default": true,
+          "info": "Select a related product above. The overlay shows its current image, title and price, and links to the product page."
         }
       ]
     },

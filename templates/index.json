@@ -101,26 +101,17 @@
     "community": {
       "type": "cellife-community",
       "blocks": {
-        "story_2": {
-          "type": "story",
-          "settings": {
-            "approved": true,
-            "video": "shopify://files/videos/testimonial_1.mov",
-            "poster": "shopify://shop_images/testimonial_1_poster.png",
-            "quote": "",
-            "attribution": "",
-            "transcript": "",
-            "product": ""
-          }
-        },
         "story_0": {
           "type": "story",
           "settings": {
-            "approved": false,
-            "quote": "",
-            "attribution": "",
+            "approved": true,
+            "quote": "After taking NADH, I felt noticeably more alert, and my thoughts seemed sharper and more focused. I also found my mind felt more active and engaged while taking it, along with experiencing an increase in overall energy levels.",
+            "attribution": "Clement L., Pharmacist",
+            "rating": 5,
+            "verified": true,
             "transcript": "",
-            "product": ""
+            "product": "",
+            "product_overlay": true
           }
         },
         "story_1": {
@@ -129,8 +120,11 @@
             "approved": false,
             "quote": "",
             "attribution": "",
+            "rating": 0,
+            "verified": false,
             "transcript": "",
-            "product": ""
+            "product": "",
+            "product_overlay": true
           }
         },
         "story_3": {
@@ -139,8 +133,26 @@
             "approved": false,
             "quote": "",
             "attribution": "",
+            "rating": 0,
+            "verified": false,
             "transcript": "",
-            "product": ""
+            "product": "",
+            "product_overlay": true
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "approved": true,
+            "video": "shopify://files/videos/testimonial_1.mov",
+            "poster": "shopify://shop_images/testimonial_1_poster.png",
+            "quote": "",
+            "attribution": "",
+            "rating": 0,
+            "verified": false,
+            "transcript": "",
+            "product": "",
+            "product_overlay": true
           }
         },
         "story_4": {
@@ -149,8 +161,11 @@
             "approved": false,
             "quote": "",
             "attribution": "",
+            "rating": 0,
+            "verified": false,
             "transcript": "",
-            "product": ""
+            "product": "",
+            "product_overlay": true
           }
         },
         "story_5": {
@@ -159,8 +174,11 @@
             "approved": false,
             "quote": "",
             "attribution": "",
+            "rating": 0,
+            "verified": false,
             "transcript": "",
-            "product": ""
+            "product": "",
+            "product_overlay": true
           }
         },
         "mosaic_placeholder_0": {
@@ -169,8 +187,11 @@
             "approved": false,
             "quote": "",
             "attribution": "",
+            "rating": 0,
+            "verified": false,
             "transcript": "",
-            "product": ""
+            "product": "",
+            "product_overlay": true
           }
         }
       },

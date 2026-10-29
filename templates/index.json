@@ -70,9 +70,9 @@
         "icon_2": {
           "type": "icon",
           "settings": {
-            "top_caption": "Formulation placeholder",
+            "top_caption": "Ingredients in focus",
             "image": "shopify://shop_images/ingredients.png",
-            "bottom_caption": "<p>Placeholder caption. Add approved details here.</p>"
+            "bottom_caption": "<p>Explore the ingredient list and amounts for each product.</p>"
           }
         },
         "icon_3": {

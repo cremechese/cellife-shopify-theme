@@ -84,7 +84,7 @@
 .cellife-shell .product-card-wrapper:hover .card__media .media > img:first-child:only-child { transform: none; }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .cellife-shell .product-card-wrapper .card__media .media > img:first-child:only-child { transition: transform 350ms ease; }
-  .cellife-shell .product-card-wrapper:hover .card__media .media > img:first-child:only-child { transform: scale(1.035); }
+  .cellife-shell .product-card-wrapper:hover .card__media .media > img:first-child:only-child { transform: scale(var(--cellife-product-hover-scale, 1.035)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .cellife-shell .product-card-wrapper .card__media .media > img:first-child:only-child { transform: none; transition: none; }

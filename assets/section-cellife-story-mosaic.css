@@ -12,7 +12,7 @@ cellife-story-rail[data-layout="mosaic"] .cellife-community-grid { align-items: 
 .cellife-story-attribution { margin: 20px 0 0; text-align: right; }
 .cellife-story-unit--portrait > .cellife-community-card { display: flex; flex-direction: column; height: 100%; }
 .cellife-story-unit--portrait .cellife-community-card__media { flex: 1; min-height: 0; aspect-ratio: auto; overflow: hidden; background: #e9e6ee; }
-.cellife-story-unit--portrait .cellife-community-card__media video, .cellife-story-unit--portrait .cellife-community-card__media img { height: 100%; width: 100%; object-fit: contain; }
+.cellife-story-unit--portrait .cellife-community-card__media > video, .cellife-story-unit--portrait .cellife-community-card__media > img { display: block; height: 100%; width: 100%; object-fit: cover; object-position: center; }
 .cellife-story-unit--portrait .cellife-community-card__copy { flex: 0 1 auto; max-height: 35%; overflow-y: auto; }
 .cellife-story-unit--portrait .cellife-community-card__copy:empty { display: none; }
 @media (max-width: 749px) {

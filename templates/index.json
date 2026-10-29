@@ -29,10 +29,10 @@
     "product_shelf": {
       "type": "cellife-product-shelf",
       "settings": {
-        "eyebrow": "EXPLORE SUPPLEMENTS",
+        "eyebrow": "",
         "heading": "Find your daily essentials.",
         "text": "<p>Explore the Cellife supplement range and the details behind each product.</p>",
-        "tone": "soft",
+        "tone": "dark",
         "collection": "supplements",
         "products": [
           "cellife-ampk-fatburst-60s",
@@ -171,10 +171,10 @@
         "story_5"
       ],
       "settings": {
-        "eyebrow": "THE HUMAN SIDE",
+        "eyebrow": "",
         "heading": "Stories from the Cellife community.",
         "text": "<p>Customer story placeholders. Approved videos and testimonials will appear here.</p>",
-        "tone": "soft",
+        "tone": "dark",
         "placeholder_label": "Video story placeholder",
         "draft_label": "Unpublished story placeholder",
         "placeholder_text": "Add a consented customer story, accurate attribution and captions or transcript.",

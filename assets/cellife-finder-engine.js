@@ -1,6 +1,6 @@
 /** Interest-based discovery only. No health screening, scoring or suitability inference. */
 export const RULES_VERSION = 'cellife-discovery-v2';
-const EXPECTED_SEAL = '082957d6';
+const EXPECTED_SEAL = '1af40abc';
 const PUBLIC_RELEASE_APPROVED = false;
 const IDS = ['stress','propolis','man','sugar','bq','rrr','coq10','detox','boost','vision','ampk','antioxidant'];
 export function fingerprint(value) {

@@ -22,7 +22,7 @@ if (!customElements.get('cellife-product-finder')) {
           if (action === 'back') this.showQuestion(this.showingResult ? this.step : Math.max(0,this.step-1));
         },options);
         this.addEventListener('change',event=>this.choose(event),options);
-        this.addEventListener('submit',event=>{event.preventDefault();this.advance();},options);
+        this.addEventListener('submit',event=>{if(event.target.matches('[data-finder-question-form]')){event.preventDefault();this.advance();}},options);
         window.addEventListener('pagehide',()=>this.clear(),options);
         window.addEventListener('pageshow',event=>{if(event.persisted)this.restart();},options);
         this.restart(false);
@@ -34,7 +34,6 @@ if (!customElements.get('cellife-product-finder')) {
     clear() {
       this.answers={};this.step=0;this.showingResult=false;
       this.stage?.replaceChildren();
-      this.querySelector('[data-finder-evidence-content]')?.replaceChildren();
     }
     restart(focus=true) {
       this.clear();
@@ -60,7 +59,7 @@ if (!customElements.get('cellife-product-finder')) {
     }
     showQuestion(step,focus=true) {
       this.step=step;this.showingResult=false;
-      const q=this.question(),form=this.node('form',null,'cellife-finder__panel');form.noValidate=true;
+      const q=this.question(),form=this.node('form',null,'cellife-finder__panel');form.noValidate=true;form.dataset.finderQuestionForm='';
       const progress=this.node('p',`Step ${step+1}${step===0?' · 2–3 quick questions':''}`,'cellife-finder__progress');progress.setAttribute('role','status');
       const fieldset=this.node('fieldset'),legend=this.node('legend',q.label);legend.tabIndex=-1;
       const choices=this.node('div',null,'cellife-finder__options');
@@ -79,9 +78,9 @@ if (!customElements.get('cellife-product-finder')) {
       fieldset.append(legend,choices);
       const actions=this.node('div',null,'cellife-finder__actions');
       if(step>0)actions.append(this.button('Back','back',true));
-      const next=this.node('button',step===2?'See product':'Continue');next.type='submit';next.dataset.finderNext='';actions.append(next);
+      const next=this.node('button',step===2?'Submit':'Continue');next.type='submit';next.dataset.finderNext='';actions.append(next);
       if(step>0)actions.append(this.button('Restart','restart',true));
-      form.append(progress,fieldset,error,actions);this.stage.replaceChildren(form);this.updateEvidence(null);
+      form.append(progress,fieldset,error,actions);this.stage.replaceChildren(form);
       this.updateNextLabel();if(focus)legend.focus({preventScroll:true});
     }
     choose(event) {
@@ -96,7 +95,7 @@ if (!customElements.get('cellife-product-finder')) {
     }
     updateNextLabel() {
       const preference=this.catalog.questions.preference.branches[`${this.answers.category}/${this.answers.interest}`];
-      this.querySelector('[data-finder-next]').textContent=this.step===0||(this.step===1&&preference)?'Continue':'See product';
+      this.querySelector('[data-finder-next]').textContent=this.step===0||(this.step===1&&preference)?'Continue':'Submit';
     }
     advance() {
       if(this.answers[this.question().key]===undefined){this.querySelector('[data-finder-error]').textContent='Choose one option to continue.';return;}
@@ -113,34 +112,29 @@ if (!customElements.get('cellife-product-finder')) {
       const {result,destination}=this.engine.connectDestination(engineResult,this.config.mappings,location.origin);
       const panel=this.node('div',null,'cellife-finder__panel');
       const match=result.status==='DISCOVERY_MATCH',product=match?this.config.mappings[result.productIds[0]]:null;
-      const heading=this.node('h3',match?`A product to explore: ${product.title}`:'Product information is awaiting review','cellife-finder__result-title');heading.tabIndex=-1;panel.append(heading);
+      const heading=this.node('h3',match?'Recommended Product':'Product information unavailable','cellife-finder__result-title');heading.tabIndex=-1;panel.append(heading);
       if(match){
         const id=result.productIds[0],rationale=this.catalog.rationales[result.rationaleId],payload=this.catalog.warnings[id];
         panel.append(this.node('p',result.scope,'cellife-finder__result-scope'));
         const card=this.node('div',null,'cellife-finder__product');
         if(product.image){const image=document.createElement('img');image.src=product.image;image.alt='';image.width=120;image.height=160;card.append(image);}
-        const explanation=this.node('div');explanation.append(this.node('p',`You selected ${rationale.interest}. Cellife’s supplied product sheet describes ${rationale.claim}.`),this.node('p','Supplier advertising, not independently verified clinical evidence.','cellife-finder__evidence-note'));card.append(explanation);panel.append(card);
+        const explanation=this.node('div');explanation.append(this.node('h4',product.title,'cellife-finder__product-title'),this.node('p',`${product.priceVaries?'From ':''}${product.price}`,'cellife-finder__price'),this.node('p',`You selected ${rationale.interest}.`));card.append(explanation);panel.append(card);
         const precautions=this.node('section',null,'cellife-finder__precautions');precautions.setAttribute('aria-label','Before you consider this product');
         precautions.append(this.node('h4','Before you consider this product'));
         const warnings=this.node('ul');for(const warning of payload.warnings)warnings.append(this.node('li',warning));precautions.append(warnings);
         if(payload.ingredientNotes.length)precautions.append(this.node('p',payload.ingredientNotes.join(' ')));
-        if(payload.verificationNotes.length)precautions.append(this.node('p',payload.verificationNotes.join(' '),'cellife-finder__verification-note'));
         precautions.append(this.node('p',this.catalog.guidance.general,'cellife-finder__general-guidance'));panel.append(precautions);
-        const link=this.node('a','Read product information','cellife-finder__product-link');link.href=destination;panel.append(link);
+        const purchase=this.querySelector(`template[data-finder-purchase="${id}"]`);
+        const commerce=this.node('div',null,'cellife-finder__commerce');
+        if(purchase)commerce.append(purchase.content.cloneNode(true));
+        if(!purchase?.content.querySelector('a')){const link=this.node('a','View product details','cellife-finder__product-link cellife-finder__secondary');link.href=destination;commerce.append(link);}
+        panel.append(commerce);
       }else{
-        const identity=result.reasonIds.includes('V2_SOURCE_IDENTITY_HOLD');
-        panel.append(this.node('p',identity?'The selected Royal Jelly product needs an updated source sheet. The supplied evidence describes propolis, so its claims and warnings cannot be transferred.':'We cannot show a product until its catalogue connection, source rationale and required warning information are complete. No substitute has been selected.'));
+        panel.append(this.node('p','We couldn’t load this product’s information. Please contact Cellife for help.'));
       }
       const actions=this.node('div',null,'cellife-finder__actions');
       if(this.answers.category)actions.append(this.button('Back','back',true));actions.append(this.button('Restart','restart',true));panel.append(actions);
-      this.stage.replaceChildren(panel);this.updateEvidence(result);heading.focus({preventScroll:true});
-    }
-    updateEvidence(result) {
-      const target=this.querySelector('[data-finder-evidence-content]');if(!target)return;
-      target.replaceChildren();
-      if(!result){target.textContent='Draft source and rule references appear here after a result. Choices are not logged.';return;}
-      target.append(this.node('p',`${result.rulesVersion}: ${result.reasonIds.join(', ')}.`));
-      for(const id of result.evidenceIds){const e=this.catalog.evidence.find(e=>e.evidenceId===id);if(e)target.append(this.node('p',`${e.evidenceId} · ${e.kind} · ${e.sourceId||'Proposed guidance'}${e.page?', p'+e.page:''}: ${e.paraphrase}`));}
+      this.stage.replaceChildren(panel);heading.focus({preventScroll:true});
     }
   });
 }

@@ -74,7 +74,7 @@
     ],
     "warnings": [
       "Do not consume if allergic to pineapple.",
-      "The sheet lists antibiotics, sedatives and anticoagulants as contraindications.",
+      "Do not take with antibiotics, sedatives or anticoagulants.",
       "Andrographis can cause allergic reactions including anaphylaxis. Discontinue and seek immediate medical attention for a severe reaction."
     ],
     "ingredientEvidenceIds": [],
@@ -94,7 +94,7 @@
     "warnings": [
       "Not recommended during pregnancy or lactation.",
       "Not recommended with BOTH a reduced-calorie diet and increased physical activity.",
-      "The sheet describes flushing, redness or itching when taken on an empty stomach. Do not assume every reaction is harmless."
+      "May cause flushing, redness or itching when taken on an empty stomach."
     ],
     "ingredientEvidenceIds": [],
     "ingredientNotes": [],
@@ -107,7 +107,7 @@
       "S07-W"
     ],
     "warnings": [
-      "The sheet says this product is not for asthma or allergy sufferers, or children.",
+      "Not for asthma or allergy sufferers, or children.",
       "Not recommended with BOTH a reduced-calorie diet and increased physical activity."
     ],
     "ingredientEvidenceIds": [
@@ -160,7 +160,7 @@
       "S10-F"
     ],
     "ingredientNotes": [
-      "The sheet lists microalgal DHA."
+      "Contains microalgal DHA."
     ],
     "policyEvidenceIds": [
       "S10-P"
@@ -193,7 +193,7 @@
       "S12-W"
     ],
     "warnings": [
-      "Not recommended during pregnancy or lactation, as stated under Dosage in the sheet."
+      "Not recommended during pregnancy or lactation."
     ],
     "ingredientEvidenceIds": [],
     "ingredientNotes": [],

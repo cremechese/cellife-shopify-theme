@@ -17,7 +17,7 @@ for(const [index,vector]of cases.entries())test(`V2 ${String(index+1).padStart(2
  const {evaluate}=await modulePromise,[category,interest,preference,id]=vector,input=answers(category,interest,preference);
  const result=evaluate(input,catalog,'draft');
  assert.equal(result.status,'DISCOVERY_MATCH');assert.deepEqual(result.productIds,[id]);
- assert.equal(Object.keys(input).length,preference?3:2);assert.equal(result.scope,'Matched to your interests. Suitability has not been assessed.');
+ assert.equal(Object.keys(input).length,preference?3:2);assert.equal(result.scope,'Matched to your interests.');
  assert(result.sourceWarningIds.length);assert(result.evidenceIds.length);assert(catalog.warnings[id].warnings.length);
  assert.deepEqual(result,evaluate(input,catalog,'draft'),'same data/input has stable product and reason order');
 });

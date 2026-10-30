@@ -23,6 +23,7 @@ Most routes use two questions. Only energy/cellular and resilience/immune ask a
 third preference question. Antioxidant is the only cross-category overlap, with
 the same general-antioxidant rationale in both places. No scoring, AI, commercial
 fallback, stack, automatic cart addition, dose selection or warning checkbox.
+An explicit Add to cart action is available on results, as subsequently requested.
 
 ## Source and runtime structure
 
@@ -60,10 +61,12 @@ Build the two dependency-free runtime assets with
 Source structure and warning/rationale relationships are checked before building;
 a runtime checksum detects accidental drift. It is not a security signature.
 Theme assets are public; no private/customer data belongs in source records.
-The evidence panel is rendered only in the Shopify Theme Editor.
+Source evidence remains in the repository; the staff evidence panel and visible
+preview/review labels were removed at the owner’s request. Removing those labels
+does not approve evidence or publish the theme.
 
 Public release remains disabled in both Liquid and the evaluator. An unpublished
-preview can demonstrate draft routes with a visible DRAFT marker. A public
+preview can demonstrate routes without customer-facing draft/review labels. A public
 release requires current labels, claims/precautions/destinations review and
 explicit approval; no Theme Editor switch can grant those approvals.
 
@@ -76,9 +79,10 @@ Q1 clears Q2/Q3 and changing Q2 clears Q3. Restart, leaving the page, browser Ba
 restoration and section teardown clear choices. Native radio controls, fieldsets,
 focus handling, errors and visible Step 1/2/optional 3 support keyboard use.
 
-Every displayed result states suitability was not assessed. A visible precautions
-panel appears before “Read product information”; no tooltip/collapsed warning,
-extra intake form or acknowledgement gate. Product detail pages retain their
+Result copy uses “Recommended Product”, “Matched to your interests.” and a narrow
+“You selected…” explanation. It shows the native product title and current price.
+A visible precautions panel appears before purchase actions; there is no
+tooltip/collapsed warning, extra intake form or acknowledgement gate. Product detail pages retain their
 full labels, storage and seal instructions. The quiz does not modify them.
 
 Validation commands/results:
@@ -88,7 +92,7 @@ Validation commands/results:
   one-result guarantees, determinism and catalogue identity/destination holds.
 - `node tests/product-finder/browser.cjs`: all 15 paths at 320/390/1440px; 2/3-step
   counts; warnings before CTA; Back/restart/upstream clearing; keyboard controls;
-  no answer requests/storage/URL data; staff panel and no-JS fallback; axe WCAG
+  no answer requests/storage/URL data; absence of review/staff labels; no-JS fallback; axe WCAG
   A/AA checks on category, formula and warning-result states. Royal Jelly is
   explicitly checked as the unresolved catalogue hold.
 - Theme Check: **0 errors**, 11 pre-existing warnings, none in the new section.
@@ -99,3 +103,19 @@ Chromium (`/usr/bin/chromium`); no test dependency is shipped in the theme.
 Set NODE_PATH to these tooling packages and SCREENSHOT_DIR for fixture images.
 These checks do not replace claims review, original-sheet/current-label checks,
 manual screen-reader review or a Shopify preview verification.
+
+## Explicit cart action
+
+The latest owner instruction supersedes the earlier brief's result-copy and
+no-cart-control directions. Final answers use “Submit”. A single-variant, available
+product can be added by an ordinary Shopify POST form. Only variant ID, quantity
+1 and the native cart return path are submitted; quiz choices are never attached.
+Products needing variant selection, a required selling plan or special quantity
+rules link to Choose options. Sold-out products show a disabled control. Prices
+come from Liquid and are prefixed From when they vary. Shopify remains
+authoritative for stock, selling plans, quantity limits and checkout validation.
+The product details link remains available alongside Add to cart.
+
+Browser tests submit only to a local fixture, never a real store cart. They check
+the exact native form fields and options/selling-plan/quantity/sold-out fallbacks.
+The published-theme and Royal Jelly evidence holds remain internal and unchanged.

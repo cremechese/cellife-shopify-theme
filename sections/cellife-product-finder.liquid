@@ -18,21 +18,38 @@
       <{{ finder_heading_tag }}>{{ section.settings.heading | escape }}</{{ finder_heading_tag }}>
       {% if section.settings.intro != blank %}<div class="rte">{{ section.settings.intro }}</div>{% endif %}
     </header>
-    <p class="cellife-finder__scope">For adults exploring wellbeing products. This quiz matches interests, not medical suitability. Check the product warnings before use.</p>
-    <p class="cellife-finder__draft"><strong>Draft preview</strong> · Product claims and labels awaiting review.</p>
+    <p class="cellife-finder__scope">For adults exploring wellbeing products. Check the product warnings before use.</p>
     <div data-finder-stage>
       {% if finder_mode == 'draft' %}
-        <p data-finder-loading role="status">Loading the draft product finder…</p>
+        <p data-finder-loading role="status">Loading the product finder…</p>
       {% else %}
-        <div class="cellife-finder__panel"><h3 class="cellife-finder__result-title">This finder is awaiting review</h3><p>No product can be suggested until current labels, claims and product destinations are reviewed. This draft cannot run on the published theme.</p></div>
+        <div class="cellife-finder__panel"><h3 class="cellife-finder__result-title">Product finder unavailable</h3><p>Please contact Cellife for help with product information.</p></div>
       {% endif %}
     </div>
     <p class="cellife-finder__privacy">No email required. Your choices stay on this page and clear when you restart or leave.</p>
     <noscript><p>This finder needs JavaScript. A pharmacist or healthcare professional can help you review suitable options.</p></noscript>
-    {% if request.design_mode %}
-      <details class="cellife-finder__evidence" data-finder-evidence><summary>Staff preview: evidence and rule references</summary><div data-finder-evidence-content>Complete a draft route to inspect its rule and evidence references. Answers are not logged.</div></details>
-    {% endif %}
   </div>
+  {% for finder_id in finder_ids %}
+    {% assign setting_id = 'product_' | append: finder_id %}
+    {% assign purchase_product = section.settings[setting_id] %}
+    {% if purchase_product != blank %}
+      {% assign purchase_variant = purchase_product.selected_or_first_available_variant %}
+      <template data-finder-purchase="{{ finder_id }}">
+        {% if purchase_product.available == false %}
+          <button type="button" disabled>Sold out</button>
+        {% elsif purchase_product.variants.size > 1 or purchase_product.requires_selling_plan or purchase_variant.quantity_rule.min > 1 or purchase_variant.quantity_rule.increment > 1 %}
+          <a class="cellife-finder__product-link" href="{{ purchase_product.url }}">Choose options</a>
+        {% else %}
+          <form action="{{ routes.cart_add_url }}" method="post" data-finder-cart-form>
+            <input type="hidden" name="id" value="{{ purchase_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
+            <button type="submit">Add to cart</button>
+          </form>
+        {% endif %}
+      </template>
+    {% endif %}
+  {% endfor %}
   {%- capture finder_config -%}
   {
     "mode": {{ finder_mode | json }},
@@ -52,7 +69,7 @@
         {%- assign finder_product = section.settings[setting_id] -%}
         {{ finder_id | json }}:
         {%- if finder_product != blank -%}
-          {"id": {{ finder_product.id | append: '' | json }}, "title": {{ finder_product.title | json }}, "url": {{ finder_product.url | json }}, "image": {% if finder_product.featured_image != blank %}{{ finder_product.featured_image | image_url: width: 480 | json }}{% else %}null{% endif %}, "price": {{ finder_product.price | money_with_currency | json }}}
+          {"id": {{ finder_product.id | append: '' | json }}, "title": {{ finder_product.title | json }}, "url": {{ finder_product.url | json }}, "image": {% if finder_product.featured_image != blank %}{{ finder_product.featured_image | image_url: width: 480 | json }}{% else %}null{% endif %}, "price": {{ finder_product.price | money_with_currency | json }}, "priceVaries": {{ finder_product.price_varies | json }}}
         {%- else -%}null{%- endif -%}{% unless forloop.last %},{% endunless %}
       {%- endfor -%}
     }

@@ -254,6 +254,22 @@
             "product": "",
             "product_overlay": true
           }
+        },
+        "story_fMTTbr": {
+          "type": "story",
+          "settings": {
+            "approved": true,
+            "video": "shopify://files/videos/testimonial_4.mp4",
+            "quote": "",
+            "quote_text_scale": 100,
+            "attribution": "",
+            "attribution_subtitle": "",
+            "rating": 0,
+            "verified": false,
+            "transcript": "",
+            "product": "nad-boost",
+            "product_overlay": true
+          }
         }
       },
       "block_order": [
@@ -266,7 +282,8 @@
         "mosaic_placeholder_0",
         "story_CbzprX",
         "story_qhH6Vd",
-        "story_xtrKQQ"
+        "story_xtrKQQ",
+        "story_fMTTbr"
       ],
       "settings": {
         "eyebrow": "",

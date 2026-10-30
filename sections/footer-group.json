@@ -76,8 +76,47 @@
         "show_policy": true,
         "margin_top": 0,
         "padding_top": 64,
-        "padding_bottom": 32
-      }
+        "padding_bottom": 32,
+        "cellife_layout": true,
+        "cellife_copyright": "Cellife Australia"
+      },
+      "blocks": {
+        "brand": {
+          "type": "cellife_brand",
+          "settings": {
+            "logo_width": 240,
+            "text": "<p>Cellife’s commitment to scientific precision, performance, and leadership is more than a claim. It is a measurable impact, driven by a relentless pursuit of excellence. Unrelenting is more than a mindset — it defines how we innovate, how we lead, and how we earn trust without compromise.</p><p>And we do it with the utmost respect for the natural workings of the body. Because once you open the floodgates and unlock your body’s incredible potential, you will literally feel the vitality flowing from the source.</p>",
+            "tagline": "CELLIFE. THE FOUNTAIN OF YOU."
+          }
+        },
+        "shop": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop",
+            "menu": ""
+          }
+        },
+        "company": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Company",
+            "menu": ""
+          }
+        },
+        "support": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Support",
+            "menu": ""
+          }
+        }
+      },
+      "block_order": [
+        "brand",
+        "shop",
+        "company",
+        "support"
+      ]
     }
   },
   "order": [

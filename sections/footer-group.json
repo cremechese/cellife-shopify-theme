@@ -76,7 +76,11 @@
     "cellife_first_offer": {
       "type": "cellife-first-offer",
       "settings": {
-        "offer_ready": false
+        "offer_ready": true,
+        "discount_code": "CELLIFE10",
+        "text": "<p>Join the Cellife list for 10% off your first order of supplements or diagnostic test kits.</p>",
+        "success_text": "Thanks for joining Cellife. Your welcome code is:",
+        "eligibility_text": "For email subscribers placing their first order. If asked, confirm your subscription by email before using the code. Eligibility and offer terms are checked at checkout."
       }
     }
   },

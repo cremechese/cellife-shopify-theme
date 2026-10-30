@@ -300,6 +300,23 @@
             "product": "",
             "product_overlay": true
           }
+        },
+        "story_yxtQiG": {
+          "type": "story",
+          "settings": {
+            "approved": true,
+            "video": "shopify://files/videos/testimonial_2.mp4",
+            "poster": "shopify://shop_images/testimonial_2_poster.png",
+            "quote": "",
+            "quote_text_scale": 100,
+            "attribution": "",
+            "attribution_subtitle": "",
+            "rating": 0,
+            "verified": false,
+            "transcript": "",
+            "product": "cellife-ampk-fatburst-60s",
+            "product_overlay": true
+          }
         }
       },
       "block_order": [
@@ -315,7 +332,8 @@
         "story_xtrKQQ",
         "story_fMTTbr",
         "story_4RM6Y4",
-        "story_QjwJQQ"
+        "story_QjwJQQ",
+        "story_yxtQiG"
       ],
       "settings": {
         "eyebrow": "",

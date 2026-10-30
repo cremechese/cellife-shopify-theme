@@ -1,0 +1,35 @@
+cellife-product-finder { display: block; }
+.cellife-finder { background: var(--finder-background, #f4f3f2); color: #262125; padding: clamp(40px, 6vw, 88px) 20px; }
+.cellife-finder__inner { max-width: var(--finder-width, 880px); margin-inline: auto; }
+.cellife-finder__header { text-align: center; max-width: 760px; margin: 0 auto 28px; }
+.cellife-finder__eyebrow { color: #8f2c26; font-size: 12px; letter-spacing: .12em; font-weight: 600; }
+.cellife-finder__header :is(h1, h2) { font-size: clamp(30px, 4vw, 50px); color: var(--finder-accent, #3e2b62); margin: 12px 0 20px; overflow-wrap: anywhere; }
+.cellife-finder p, .cellife-finder li { line-height: 1.65; }
+.cellife-finder__draft { border: 1px solid #8f2c26; border-radius: 8px; padding: 12px 16px; color: #8f2c26; font-weight: 600; font-size: 14px; }
+.cellife-finder__boundary { font-size: 15px; }
+.cellife-finder__privacy { font-size: 13px; color: #514b55; margin-bottom: 28px; }
+.cellife-finder__panel { background: #fff; border: 1px solid #d8cfdf; border-radius: 16px; padding: clamp(20px, 4vw, 40px); }
+.cellife-finder__progress { font-size: 13px; color: #514b55; margin: 0 0 20px; }
+.cellife-finder fieldset { min-width: 0; padding: 0; margin: 0; border: 0; }
+.cellife-finder legend { float: left; width: 100%; font-size: clamp(22px, 3vw, 30px); font-weight: 600; color: var(--finder-accent, #3e2b62); margin-bottom: 24px; line-height: 1.3; }
+.cellife-finder__options { clear: both; display: grid; gap: 10px; }
+.cellife-finder__option { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border: 1px solid #c8c1d1; border-radius: 8px; min-height: 48px; font-size: 15px; line-height: 1.5; cursor: pointer; }
+.cellife-finder__option:has(input:checked) { border-color: var(--finder-accent, #3e2b62); background: #f4f1f8; }
+.cellife-finder input { margin: 4px 0 0; width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--finder-accent, #3e2b62); }
+.cellife-finder__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.cellife-finder button, .cellife-finder__product-link { min-height: 48px; border: 1px solid var(--finder-accent, #3e2b62); border-radius: 6px; padding: 12px 20px; background: var(--finder-accent, #3e2b62); color: #fff; font: inherit; font-size: 15px; line-height: 1.5; cursor: pointer; text-decoration: none; }
+.cellife-finder .cellife-finder__secondary { background: transparent; color: var(--finder-accent, #3e2b62); }
+.cellife-finder :focus-visible { outline: 3px solid #8f2c26; outline-offset: 4px; }
+.cellife-finder__error { color: #8f2c26; font-size: 14px; }
+.cellife-finder__result-title { font-size: 28px; color: var(--finder-accent, #3e2b62); line-height: 1.2; margin: 0 0 20px; }
+.cellife-finder__product { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 24px; margin-block: 24px; align-items: center; }
+.cellife-finder__product img { width: 140px; height: 180px; object-fit: contain; }
+.cellife-finder__product h3 { color: var(--finder-accent, #3e2b62); font-size: 23px; overflow-wrap: anywhere; }
+.cellife-finder__product-link { display: inline-flex; align-items: center; margin-top: 12px; }
+.cellife-finder__evidence { margin-top: 24px; padding: 16px; border: 1px dashed #8f2c26; border-radius: 8px; font-size: 13px; overflow-wrap: anywhere; }
+.cellife-finder__evidence summary { cursor: pointer; padding-block: 8px; }
+@media (max-width: 599px) {
+  .cellife-finder__product { grid-template-columns: minmax(0, 1fr); }
+  .cellife-finder__product img { margin-inline: auto; }
+  .cellife-finder__actions > * { flex: 1; text-align: center; }
+}

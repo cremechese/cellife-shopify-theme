@@ -270,6 +270,36 @@
             "product": "nad-boost",
             "product_overlay": true
           }
+        },
+        "story_4RM6Y4": {
+          "type": "story",
+          "settings": {
+            "approved": true,
+            "quote": "I have been taking Cellife NMN Extra for several years now. Over this time, I’ve noticed a significant improvement in my energy levels and metabolism. Having used it consistently for years, I honestly can’t see myself stopping.",
+            "quote_text_scale": 100,
+            "attribution": "Natasha L.",
+            "attribution_subtitle": "Pharmacist · Bondi Beach Chemist  ",
+            "rating": 5,
+            "verified": true,
+            "transcript": "",
+            "product": "",
+            "product_overlay": true
+          }
+        },
+        "story_QjwJQQ": {
+          "type": "story",
+          "settings": {
+            "approved": true,
+            "quote": "I’ve been taking the Cellife NADH and was genuinely surprised by how effective it has been. My energy levels and focus have both noticeably improved. I normally wake up at 5am to exercise before work, but if I’m feeling tired, I’ll often turn the alarm off and skip training. Since taking NADH, my energy levels have been consistently better, and I haven’t been missing my morning exercise sessions. ",
+            "quote_text_scale": 75,
+            "attribution": "Fred E.",
+            "attribution_subtitle": "Pharmacist · Chemist Discount Centre",
+            "rating": 4,
+            "verified": true,
+            "transcript": "",
+            "product": "",
+            "product_overlay": true
+          }
         }
       },
       "block_order": [
@@ -283,7 +313,9 @@
         "story_CbzprX",
         "story_qhH6Vd",
         "story_xtrKQQ",
-        "story_fMTTbr"
+        "story_fMTTbr",
+        "story_4RM6Y4",
+        "story_QjwJQQ"
       ],
       "settings": {
         "eyebrow": "",

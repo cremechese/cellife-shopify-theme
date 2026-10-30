@@ -129,6 +129,12 @@ cellife-story-rail .cellife-community-app { flex: 0 0 100%; }
 .cellife-email-row { display: flex; gap: 12px; }
 .cellife-email-row input { min-width: 0; flex: 1; min-height: 48px; border: 1px solid #b5a8ca; border-radius: 6px; background: white; color: #262125; padding: 12px; font: inherit; }
 .cellife-email-row button { flex-shrink: 0; }
+.cellife-first-offer .cellife-email-row button { cursor: pointer; font-family: inherit; transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
+.cellife-first-offer .cellife-email-row button:not(:disabled):hover { background: #2f204c; border-color: #2f204c; box-shadow: 0 3px 12px rgba(62, 43, 98, .18); }
+.cellife-first-offer .cellife-email-row button:not(:disabled):active { background: #25193d; border-color: #25193d; box-shadow: none; }
+.cellife-first-offer .cellife-email-row button:focus-visible { outline: 3px solid #8f2c26; outline-offset: 4px; }
+.cellife-first-offer .cellife-email-row button:disabled { cursor: not-allowed; opacity: .55; }
+@media (prefers-reduced-motion: reduce) { .cellife-first-offer .cellife-email-row button { transition: none; } }
 .cellife-first-offer__fineprint { font-size: 12px; line-height: 1.6; }
 .cellife-offer-code { display: inline-block; border: 1px dashed #3e2b62; padding: 12px 20px; font-size: 22px; }
 @media (max-width: 749px) {

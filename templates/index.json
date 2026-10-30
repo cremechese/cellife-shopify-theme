@@ -361,7 +361,7 @@
         "shop_label": "Shop Now",
         "shop_link": "",
         "quiz_label": "Take The Quiz",
-        "pending_label": "Quiz setup pending — connect the recommendation quiz in Theme settings."
+        "pending_label": ""
       }
     },
     "cellife_gateway": {

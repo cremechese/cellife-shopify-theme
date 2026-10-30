@@ -209,6 +209,51 @@
             "product": "cellife-nad-60-tabs-exp-06-25",
             "product_overlay": true
           }
+        },
+        "story_CbzprX": {
+          "type": "story",
+          "settings": {
+            "approved": true,
+            "quote": "I noticed a real difference in my energy after taking Cellife NADH. It gave me a steady boost throughout the day without feeling jittery. I found it much easier to stay mentally clear and productive. I felt more alert, motivated and able to concentrate for longer period.  ",
+            "quote_text_scale": 85,
+            "attribution": "Anthony S.",
+            "attribution_subtitle": "Pharmacist · MediAdvice Pharmacy",
+            "rating": 5,
+            "verified": true,
+            "transcript": "",
+            "product": "",
+            "product_overlay": true
+          }
+        },
+        "story_qhH6Vd": {
+          "type": "story",
+          "settings": {
+            "approved": true,
+            "quote": "Cellife NADH most definitely gave me a lift. I had the flushing due to not eating enough, so I knew it was absorbed well. Overall, the best version I have tried of a NAD+ precursor.",
+            "quote_text_scale": 100,
+            "attribution": "Ian Z.",
+            "attribution_subtitle": "Pharmacist · HealthSave+ Custom Made Medicine",
+            "rating": 5,
+            "verified": true,
+            "transcript": "",
+            "product": "",
+            "product_overlay": true
+          }
+        },
+        "story_xtrKQQ": {
+          "type": "story",
+          "settings": {
+            "approved": true,
+            "quote": "Taking Cellife NAD and NMN has given me more stamina and made it much easier to get through long days. I’ve been so happy with the results that I even have my parents taking Cellife NMN.",
+            "quote_text_scale": 100,
+            "attribution": "Andrew S.",
+            "attribution_subtitle": "Pharmacist · Woombye Pharmacy",
+            "rating": 5,
+            "verified": true,
+            "transcript": "",
+            "product": "",
+            "product_overlay": true
+          }
         }
       },
       "block_order": [
@@ -218,7 +263,10 @@
         "story_2",
         "story_4",
         "story_5",
-        "mosaic_placeholder_0"
+        "mosaic_placeholder_0",
+        "story_CbzprX",
+        "story_qhH6Vd",
+        "story_xtrKQQ"
       ],
       "settings": {
         "eyebrow": "",

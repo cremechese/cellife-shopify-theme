@@ -1,119 +1,72 @@
-/** Pure catalogue routing only. No DOM, storage, network, medical inference or dosing. */
-export const RULES_VERSION = 'cellife-finder-draft-1';
+/** Interest-based discovery only. No health screening, scoring or suitability inference. */
+export const RULES_VERSION = 'cellife-discovery-v2';
 const EXPECTED_SEAL = '__DATA_SEAL__';
-const QUESTIONS = __QUESTIONS__;
-const IDS = ['stress','propolis','man','sugar','bq','rrr','coq10','detox','boost','vision','ampk','antioxidant'];
-// Deliberately not a Theme Editor setting. A future reviewed release requires code review.
 const PUBLIC_RELEASE_APPROVED = false;
+const IDS = ['stress','propolis','man','sugar','bq','rrr','coq10','detox','boost','vision','ampk','antioxidant'];
 export function fingerprint(value) {
-  const stable = (v) => v === null || typeof v !== 'object' ? JSON.stringify(v) : Array.isArray(v) ? `[${v.map(stable).join(',')}]` : `{${Object.keys(v).sort().map(k => `${JSON.stringify(k)}:${stable(v[k])}`).join(',')}}`;
+  const stable = v => v === null || typeof v !== 'object' ? JSON.stringify(v) : Array.isArray(v) ? `[${v.map(stable).join(',')}]` : `{${Object.keys(v).sort().map(k=>`${JSON.stringify(k)}:${stable(v[k])}`).join(',')}}`;
   let hash = 2166136261;
-  for (const character of stable(value)) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619) >>> 0;
-  return hash.toString(16).padStart(8, '0');
+  for (const c of stable(value)) hash = Math.imul(hash ^ c.charCodeAt(0),16777619) >>> 0;
+  return hash.toString(16).padStart(8,'0');
 }
 export function validateCatalog(catalog) {
-  if (!catalog || !Array.isArray(catalog.products) || !Array.isArray(catalog.sources) || !Array.isArray(catalog.evidence)) return false;
-  if (catalog.products.length !== 12 || catalog.sources.length !== 12) return false;
-  if ([...catalog.products,...catalog.sources,...catalog.evidence].some(record => !record || typeof record !== 'object' || Array.isArray(record))) return false;
-  if (new Set(catalog.products.map(p => p.id)).size !== 12 || new Set(catalog.sources.map(s => s.sourceId)).size !== 12) return false;
-  if (new Set(catalog.evidence.map(e => e.evidenceId)).size !== catalog.evidence.length) return false;
-  for (const [index, id] of IDS.entries()) {
-    const p = catalog.products.find(item => item.id === id);
-    const sourceId = `S${String(index + 1).padStart(2, '0')}`;
-    if (!p || p.sourceId !== sourceId) return false;
-    const s = catalog.sources.find(item => item.sourceId === sourceId);
-    if (!s || s.productId !== id || s.page !== 1 || !s.sections?.length) return false;
-    for (const kind of ['F','C','W','P']) {
-      const evidence = catalog.evidence.find(item => item.evidenceId === `${sourceId}-${kind}`);
-      if (!evidence || evidence.kind !== kind || evidence.productId !== id || evidence.sourceId !== sourceId || evidence.page !== 1 || !evidence.section) return false;
-    }
-  }
   try {
-    return fingerprint({products:catalog.products, evidence:catalog.evidence, sources:catalog.sources, questions:catalog.questions}) === EXPECTED_SEAL;
+    if (catalog.products.length !== 12 || catalog.sources.length !== 12 || new Set(catalog.products.map(p=>p.id)).size !== 12) return false;
+    const evidence = new Map(catalog.evidence.map(e=>[e.evidenceId,e]));
+    if (evidence.size !== catalog.evidence.length) return false;
+    for (const [index,id] of IDS.entries()) {
+      const sourceId = `S${String(index+1).padStart(2,'0')}`;
+      const p = catalog.products.find(p=>p.id===id), source = catalog.sources.find(s=>s.sourceId===sourceId);
+      if (p.sourceId !== sourceId || source.productId !== id || source.page !== 1 || !source.sections.length) return false;
+      const warnings = catalog.warnings[id];
+      if (!warnings.warnings.length || !warnings.sourceWarningIds.length) return false;
+      for (const eId of warnings.sourceWarningIds) if (evidence.get(eId)?.kind !== 'W' || evidence.get(eId)?.productId !== id) return false;
+    }
+    for (const route of Object.values(catalog.routes)) {
+      const rationale = catalog.rationales[route.rationaleId];
+      if (!IDS.includes(route.productId) || rationale.productId !== route.productId || !rationale.claim || !rationale.sourceClaimIds.length) return false;
+      for (const id of rationale.sourceClaimIds) if (evidence.get(id)?.kind !== 'C' || evidence.get(id)?.productId !== route.productId) return false;
+    }
+    if (evidence.get(catalog.guidance.evidenceId)?.kind !== 'P' || !catalog.guidance.general || !catalog.guidance.scope) return false;
+    return fingerprint(catalog) === EXPECTED_SEAL;
   } catch { return false; }
 }
-/** @returns {{status:string, productIds:string[], reasonIds:string[], exclusionReasons:Record<string,string[]>, evidenceIds:string[], nextQuestion:string|null, rulesVersion:string}} */
+/** Fixed routes: at most three single choices. Every completed route selects one source ID. */
 export function evaluate(answers, catalog, mode = 'public') {
-  const reasons = [], exclusions = {}, evidence = [];
-  const addEvidence = id => { if (!evidence.includes(id)) evidence.push(id); };
-  const result = (status, nextQuestion = null, productIds = []) => ({status, productIds, reasonIds:[...reasons], exclusionReasons:exclusions, evidenceIds:[...evidence], nextQuestion, rulesVersion:RULES_VERSION});
-  const invalid = () => { reasons.push('R0_INVALID'); return result('INVALID'); };
+  const result = (status, fields = {}) => ({status, productIds:[], reasonIds:[], evidenceIds:[], sourceWarningIds:[], rationaleId:null, routeId:null, scope:null, nextQuestion:null, rulesVersion:RULES_VERSION, ...fields});
+  const invalid = () => result('INVALID',{reasonIds:['V2_INVALID_ANSWERS']});
   if (!answers || typeof answers !== 'object' || Array.isArray(answers)) return invalid();
-  if (Object.keys(answers).some(k => !['goal','lifeStage','health','requirements','detail'].includes(k))) return invalid();
-  // Validate every supplied value, even beyond a possible early exit. Never accept stale Q5.
-  for (const q of QUESTIONS.slice(0,4)) {
-    const value = answers[q.key];
-    if (value === undefined) continue;
-    const allowed = q.options.map(option => option.value);
-    if (q.type === 'single') { if (!allowed.includes(value)) return invalid(); }
-    else {
-      if (!Array.isArray(value) || new Set(value).size !== value.length || value.some(v => !allowed.includes(v))) return invalid();
-      if (value.length > 1 && q.exclusive.some(v => value.includes(v))) return invalid();
-    }
-  }
-  const branch = QUESTIONS[4].branches[answers.goal];
-  if (answers.detail !== undefined && (!branch || !branch.options.some(o => o.value === answers.detail))) return invalid();
-  reasons.push('R0');
-  if (!validateCatalog(catalog) || !['draft','public'].includes(mode) || (mode === 'public' && !PUBLIC_RELEASE_APPROVED)) {
-    reasons.push('R1_DATA_HOLD'); return result('DATA_HOLD');
-  }
-  reasons.push('R1_DRAFT');
-  const health = answers.health || [], requirements = answers.requirements || [];
-  // Review beats commercial intent, including supplied review answers with an 'other' goal.
-  if ((answers.lifeStage !== undefined && answers.lifeStage !== 'adult') || health.some(v => ['medicine','supplement','condition','symptoms','unknown'].includes(v)) || requirements.some(v => ['allergy','unknown'].includes(v))) {
-    reasons.push('R2_REVIEW','P_GLOBAL_REVIEW');
-    if (answers.lifeStage && answers.lifeStage !== 'adult') reasons.push('P_LIFE_STAGE');
-    if (health.includes('symptoms')) reasons.push('P_SYMPTOMS');
-    if (requirements.includes('allergy')) reasons.push('P_ALLERGY');
-    return result('REVIEW');
-  }
-  if (answers.goal === undefined) return result('INCOMPLETE','Q1');
-  if (answers.goal === 'other') { reasons.push('R3_NO_ROUTE'); return result('NO_MATCH'); }
-  for (const q of QUESTIONS.slice(1,4)) if (answers[q.key] === undefined || (q.type === 'multi' && answers[q.key].length === 0)) return result('INCOMPLETE',q.id);
-  reasons.push('R2');
-  if (answers.detail === undefined) return result('INCOMPLETE','Q5');
-  if (branch.review.includes(answers.detail)) { reasons.push('R3_REVIEW','P_GOAL_INTENT'); return result('REVIEW'); }
-  const candidates = branch.candidates[answers.detail];
-  if (!candidates?.length) return invalid();
-  reasons.push('R3','R4');
-  const eligible = [];
-  let clarification = false;
-  for (const id of candidates) {
-    const product = catalog.products.find(p => p.id === id), blocked = [];
-    const exclude = (reason, kind, needsReview = false) => { blocked.push(reason); addEvidence(`${product.sourceId}-${kind}`); clarification ||= needsReview; };
-    if (requirements.includes('asthma') && ['propolis','coq10'].includes(id)) exclude('W_ASTHMA','W');
-    if (health.includes('dietActivity')) {
-      if (['propolis','coq10','rrr','boost'].includes(id)) exclude('W_DIET_ACTIVITY','W');
-      if (id === 'ampk') { exclude('P_AMPK_DIET_REVIEW','P',true); addEvidence(`${product.sourceId}-W`); }
-    }
-    if (requirements.includes('vegan')) {
-      if (id === 'coq10') exclude('F_FISH_OIL','F');
-      else if (id === 'ampk') exclude('F_OYSTER_SHELL','F');
-      else exclude('P_VEGAN_UNVERIFIED','P',true);
-    }
-    if (blocked.length) exclusions[id] = blocked;
-    else eligible.push(id);
-  }
-  reasons.push('R5');
-  if (!eligible.length) { reasons.push(clarification ? 'R6_REVIEW' : 'R6_NO_MATCH'); return result(clarification ? 'REVIEW' : 'NO_MATCH'); }
-  const chosen = eligible[0], product = catalog.products.find(p => p.id === chosen);
-  addEvidence(`${product.sourceId}-C`); addEvidence(`${product.sourceId}-W`); addEvidence(`${product.sourceId}-P`);
-  reasons.push('R6','R7_DRAFT');
-  return result('MATCH',null,[chosen]);
+  if (Object.keys(answers).some(k=>!['category','interest','preference'].includes(k)) || Object.values(answers).some(v=>typeof v !== 'string')) return invalid();
+  if (!validateCatalog(catalog) || !['draft','public'].includes(mode) || (mode==='public' && !PUBLIC_RELEASE_APPROVED)) return result('DATA_HOLD',{reasonIds:['V2_SOURCE_HOLD']});
+  const q = catalog.questions;
+  if (answers.category === undefined) return answers.interest !== undefined || answers.preference !== undefined ? invalid() : result('INCOMPLETE',{nextQuestion:'Q1'});
+  if (!q.category.options.some(o=>o.value===answers.category)) return invalid();
+  if (answers.interest === undefined) return answers.preference !== undefined ? invalid() : result('INCOMPLETE',{nextQuestion:'Q2'});
+  if (!q.interest.branches[answers.category].some(o=>o.value===answers.interest)) return invalid();
+  const branch = `${answers.category}/${answers.interest}`;
+  const preference = q.preference.branches[branch];
+  if (preference) {
+    if (answers.preference === undefined) return result('INCOMPLETE',{nextQuestion:'Q3'});
+    if (!preference.options.some(o=>o.value===answers.preference)) return invalid();
+  } else if (answers.preference !== undefined) return invalid();
+  const routeId = preference ? `${branch}/${answers.preference}` : branch;
+  const route = catalog.routes[routeId];
+  if (!route) return result('DATA_HOLD',{reasonIds:['V2_ROUTE_HOLD']});
+  const rationale = catalog.rationales[route.rationaleId], warnings = catalog.warnings[route.productId];
+  const evidenceIds = [...new Set([...rationale.sourceClaimIds,...warnings.sourceWarningIds,...warnings.ingredientEvidenceIds,...warnings.policyEvidenceIds,catalog.guidance.evidenceId])];
+  return result('DISCOVERY_MATCH',{productIds:[route.productId],reasonIds:['V2_VALIDATED','V2_FIXED_ROUTE','V2_INTERESTS_ONLY'],evidenceIds,sourceWarningIds:[...warnings.sourceWarningIds],rationaleId:route.rationaleId,routeId,scope:catalog.guidance.scope});
 }
-
-// Catalogue identity is distinct from the source-sheet route. Renaming a product
-// does not approve a new formulation. Royal Jelly is mapped to the requested ID,
-// but S02 describes propolis; no S02 product claims/warnings may transfer to it.
+/** A catalogue connection does not resolve a source/formulation identity mismatch. */
 export function connectDestination(engineResult, mappings, origin) {
-  const hold = reason => ({result:{...engineResult,status:'DATA_HOLD',productIds:[],exclusionReasons:{},reasonIds:[...engineResult.reasonIds,reason]},destination:null});
-  if ((engineResult.status === 'MATCH' && engineResult.productIds[0] === 'propolis') || (engineResult.status !== 'MATCH' && engineResult.exclusionReasons.propolis)) return hold('R7_SOURCE_IDENTITY_HOLD');
-  if (engineResult.status !== 'MATCH') return {result:engineResult,destination:null};
-  const values = Object.values(mappings || {}).filter(Boolean);
-  const mapped = mappings?.[engineResult.productIds[0]];
-  if (!mapped?.id || new Set(values.map(p=>p.id)).size !== values.length) return hold('R7_MAPPING_HOLD');
-  let url;
-  try { url = new URL(mapped.url,origin); } catch { return hold('R7_MAPPING_HOLD'); }
-  if (url.origin !== origin || !url.pathname.includes('/products/')) return hold('R7_MAPPING_HOLD');
-  return {result:engineResult,destination:url.pathname+url.search};
+  const hold = reason => ({result:{...engineResult,status:'DATA_HOLD',productIds:[],reasonIds:[...engineResult.reasonIds,reason]},destination:null});
+  if (engineResult.status !== 'DISCOVERY_MATCH') return {result:engineResult,destination:null};
+  // S02 describes propolis. The owner's Royal Jelly connection needs replacement evidence.
+  if (engineResult.productIds[0] === 'propolis') return hold('V2_SOURCE_IDENTITY_HOLD');
+  const product = mappings?.[engineResult.productIds[0]], values = Object.values(mappings || {}).filter(Boolean);
+  if (!product?.id || !product.title || new Set(values.map(p=>p.id)).size !== values.length) return hold('V2_MAPPING_HOLD');
+  try {
+    const url = new URL(product.url,origin);
+    if (url.origin !== origin || !url.pathname.includes('/products/')) return hold('V2_MAPPING_HOLD');
+    return {result:engineResult,destination:url.pathname+url.search};
+  } catch { return hold('V2_MAPPING_HOLD'); }
 }

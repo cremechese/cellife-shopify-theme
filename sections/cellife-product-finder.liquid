@@ -18,9 +18,8 @@
       <{{ finder_heading_tag }}>{{ section.settings.heading | escape }}</{{ finder_heading_tag }}>
       {% if section.settings.intro != blank %}<div class="rte">{{ section.settings.intro }}</div>{% endif %}
     </header>
-    <p class="cellife-finder__draft">Draft — product claims and labels awaiting review.</p>
-    <p class="cellife-finder__boundary">Find a Cellife product to explore for your wellbeing goal. Your answers match product-sheet information; they do not establish that a product is effective or safe for you. You can receive a no-match result. This is not a diagnosis or treatment plan.</p>
-    <p class="cellife-finder__privacy">Your answers stay in this page’s memory and clear when you restart or leave. No email is required. Avoid sharing this screen while answering.</p>
+    <p class="cellife-finder__scope">For adults exploring wellbeing products. This quiz matches interests, not medical suitability. Check the product warnings before use.</p>
+    <p class="cellife-finder__draft"><strong>Draft preview</strong> · Product claims and labels awaiting review.</p>
     <div data-finder-stage>
       {% if finder_mode == 'draft' %}
         <p data-finder-loading role="status">Loading the draft product finder…</p>
@@ -28,6 +27,7 @@
         <div class="cellife-finder__panel"><h3 class="cellife-finder__result-title">This finder is awaiting review</h3><p>No product can be suggested until current labels, claims and product destinations are reviewed. This draft cannot run on the published theme.</p></div>
       {% endif %}
     </div>
+    <p class="cellife-finder__privacy">No email required. Your choices stay on this page and clear when you restart or leave.</p>
     <noscript><p>This finder needs JavaScript. A pharmacist or healthcare professional can help you review suitable options.</p></noscript>
     {% if request.design_mode %}
       <details class="cellife-finder__evidence" data-finder-evidence><summary>Staff preview: evidence and rule references</summary><div data-finder-evidence-content>Complete a draft route to inspect its rule and evidence references. Answers are not logged.</div></details>
@@ -38,7 +38,14 @@
     "mode": {{ finder_mode | json }},
     "engineUrl": {% if finder_mode == 'draft' %}{{ 'cellife-finder-engine.js' | asset_url | json }}{% else %}null{% endif %},
     "dataUrl": {% if finder_mode == 'draft' %}{{ 'cellife-finder-data.js' | asset_url | json }}{% else %}null{% endif %},
-    "startLabel": {{ section.settings.start_label | json }},
+    "categories": {
+      {% assign category_ids = 'energy,metabolic,resilience,care' | split: ',' %}
+      {% for category_id in category_ids %}
+        {% assign label_setting = 'category_' | append: category_id | append: '_label' %}
+        {% assign subtitle_setting = 'category_' | append: category_id | append: '_subtitle' %}
+        {{ category_id | json }}: {"label": {{ section.settings[label_setting] | json }}, "subtitle": {{ section.settings[subtitle_setting] | json }}}{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    },
     "mappings": {
       {%- for finder_id in finder_ids -%}
         {%- assign setting_id = 'product_' | append: finder_id -%}
@@ -64,26 +71,19 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "FIND YOUR STARTING POINT"
+      "label": "Eyebrow"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Explore the Cellife range."
+      "default": "Find a Cellife product to explore"
     },
     {
       "type": "richtext",
       "id": "intro",
       "label": "Introductory text",
-      "default": "<p>A few questions to help you find product information for one wellbeing goal.</p>"
-    },
-    {
-      "type": "text",
-      "id": "start_label",
-      "label": "Start button",
-      "default": "Start the product finder"
+      "default": "<p>2–3 quick questions about your wellbeing goals.</p>"
     },
     {
       "type": "color",
@@ -106,6 +106,58 @@
       "step": 40,
       "unit": "px",
       "default": 880
+    },
+    {
+      "type": "header",
+      "content": "Discovery categories"
+    },
+    {
+      "type": "text",
+      "id": "category_energy_label",
+      "label": "Energy & vitality title",
+      "default": "Energy & vitality"
+    },
+    {
+      "type": "text",
+      "id": "category_energy_subtitle",
+      "label": "Energy & vitality subtitle",
+      "default": "Daily energy, endurance and cellular metabolism."
+    },
+    {
+      "type": "text",
+      "id": "category_metabolic_label",
+      "label": "Weight & metabolic wellbeing title",
+      "default": "Weight & metabolic wellbeing"
+    },
+    {
+      "type": "text",
+      "id": "category_metabolic_subtitle",
+      "label": "Weight & metabolic wellbeing subtitle",
+      "default": "Body-fat management and healthy blood-sugar support."
+    },
+    {
+      "type": "text",
+      "id": "category_resilience_label",
+      "label": "Everyday resilience title",
+      "default": "Everyday resilience"
+    },
+    {
+      "type": "text",
+      "id": "category_resilience_subtitle",
+      "label": "Everyday resilience subtitle",
+      "default": "Immune support, everyday stress and antioxidant wellbeing."
+    },
+    {
+      "type": "text",
+      "id": "category_care_label",
+      "label": "Skin, eyes & daily care title",
+      "default": "Skin, eyes & daily care"
+    },
+    {
+      "type": "text",
+      "id": "category_care_subtitle",
+      "label": "Skin, eyes & daily care subtitle",
+      "default": "Skin, hair, nails, eyes and general antioxidant wellbeing."
     },
     {
       "type": "header",

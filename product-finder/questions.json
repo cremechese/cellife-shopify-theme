@@ -1,443 +1,128 @@
-[
-  {
+{
+  "category": {
     "id": "Q1",
-    "key": "goal",
-    "type": "single",
-    "label": "What is your main goal?",
+    "key": "category",
+    "label": "What would you most like support with?",
     "options": [
-      {
-        "value": "stress",
-        "label": "Everyday stress support"
-      },
       {
         "value": "energy",
-        "label": "Energy support"
+        "label": "Energy & vitality",
+        "subtitle": "Daily energy, endurance and cellular metabolism."
       },
       {
-        "value": "eyes",
-        "label": "Eye wellbeing"
+        "value": "metabolic",
+        "label": "Weight & metabolic wellbeing",
+        "subtitle": "Body-fat management and healthy blood-sugar support."
       },
       {
-        "value": "immune",
-        "label": "Immune support"
+        "value": "resilience",
+        "label": "Everyday resilience",
+        "subtitle": "Immune support, everyday stress and antioxidant wellbeing."
       },
       {
-        "value": "glucose",
-        "label": "Healthy blood-sugar support"
-      },
-      {
-        "value": "libido",
-        "label": "Healthy libido or physical endurance"
-      },
-      {
-        "value": "skin",
-        "label": "Skin, hair and nail wellbeing"
-      },
-      {
-        "value": "cellular",
-        "label": "Cellular metabolism support"
-      },
-      {
-        "value": "weight",
-        "label": "Body-fat / weight-management support"
-      },
-      {
-        "value": "general",
-        "label": "General antioxidant wellbeing"
-      },
-      {
-        "value": "other",
-        "label": "Something else / unsure"
+        "value": "care",
+        "label": "Skin, eyes & daily care",
+        "subtitle": "Skin, hair, nails, eyes and general antioxidant wellbeing."
       }
-    ],
-    "stop": {
-      "other": "NO_MATCH"
-    }
+    ]
   },
-  {
+  "interest": {
     "id": "Q2",
-    "key": "lifeStage",
-    "type": "single",
-    "label": "Which age and life-stage option applies?",
-    "options": [
-      {
-        "value": "adult",
-        "label": "18+ and none of the following"
-      },
-      {
-        "value": "under18",
-        "label": "Under 18"
-      },
-      {
-        "value": "pregnancy",
-        "label": "Pregnant, planning pregnancy or breastfeeding"
-      },
-      {
-        "value": "unknown",
-        "label": "Unsure / prefer not to answer"
-      }
-    ],
-    "stop": {
-      "under18": "REVIEW",
-      "pregnancy": "REVIEW",
-      "unknown": "REVIEW"
+    "key": "interest",
+    "label": "Which matters most to you?",
+    "branches": {
+      "energy": [
+        {
+          "value": "daily_energy",
+          "label": "Support for my daily energy levels"
+        },
+        {
+          "value": "endurance_libido",
+          "label": "Physical endurance and healthy libido"
+        },
+        {
+          "value": "cellular",
+          "label": "Support for cellular energy metabolism"
+        }
+      ],
+      "metabolic": [
+        {
+          "value": "body_fat",
+          "label": "Support with managing excess body fat"
+        },
+        {
+          "value": "healthy_glucose",
+          "label": "Support for healthy blood-sugar levels"
+        }
+      ],
+      "resilience": [
+        {
+          "value": "immune",
+          "label": "Supporting my immune system"
+        },
+        {
+          "value": "stress",
+          "label": "Support with everyday stress"
+        },
+        {
+          "value": "antioxidant",
+          "label": "General antioxidant wellbeing"
+        }
+      ],
+      "care": [
+        {
+          "value": "skin_hair_nails",
+          "label": "Caring for my skin, hair and nails"
+        },
+        {
+          "value": "eyes",
+          "label": "Supporting healthy eyes and vision"
+        },
+        {
+          "value": "antioxidant",
+          "label": "General antioxidant wellbeing"
+        }
+      ]
     }
   },
-  {
+  "preference": {
     "id": "Q3",
-    "key": "health",
-    "type": "multi",
-    "label": "Does any of this apply to you?",
-    "exclusive": [
-      "none",
-      "unknown"
-    ],
-    "options": [
-      {
-        "value": "medicine",
-        "label": "Any prescription or non-prescription medicine"
-      },
-      {
-        "value": "supplement",
-        "label": "Other supplements"
-      },
-      {
-        "value": "condition",
-        "label": "A diagnosed condition or ongoing investigation"
-      },
-      {
-        "value": "symptoms",
-        "label": "New, severe, persistent or worsening symptoms, or seeking treatment for a condition"
-      },
-      {
-        "value": "dietActivity",
-        "label": "BOTH a reduced-calorie diet and increased physical activity"
-      },
-      {
-        "value": "none",
-        "label": "None of these"
-      },
-      {
-        "value": "unknown",
-        "label": "Unsure / prefer not to answer"
-      }
-    ],
-    "review": [
-      "medicine",
-      "supplement",
-      "condition",
-      "symptoms",
-      "unknown"
-    ]
-  },
-  {
-    "id": "Q4",
-    "key": "requirements",
-    "type": "multi",
-    "label": "Do you have asthma, any allergy, or a dietary requirement?",
-    "exclusive": [
-      "none",
-      "unknown"
-    ],
-    "options": [
-      {
-        "value": "asthma",
-        "label": "Asthma"
-      },
-      {
-        "value": "allergy",
-        "label": "Any known or suspected allergy, including ingredients"
-      },
-      {
-        "value": "vegan",
-        "label": "Vegan requirement"
-      },
-      {
-        "value": "none",
-        "label": "None of these"
-      },
-      {
-        "value": "unknown",
-        "label": "Unsure / prefer not to answer"
-      }
-    ],
-    "review": [
-      "allergy",
-      "unknown"
-    ]
-  },
-  {
-    "id": "Q5",
-    "key": "detail",
-    "type": "single",
+    "key": "preference",
     "branches": {
-      "stress": {
-        "label": "Are you exploring everyday stress support, rather than care for symptoms?",
-        "options": [
-          {
-            "value": "everyday",
-            "label": "Everyday support"
-          },
-          {
-            "value": "symptomCare",
-            "label": "Care for symptoms"
-          },
-          {
-            "value": "unsure",
-            "label": "Unsure"
-          }
-        ],
-        "candidates": {
-          "everyday": [
-            "stress"
-          ]
-        },
-        "review": [
-          "symptomCare",
-          "unsure"
-        ]
-      },
-      "energy": {
-        "label": "Are you exploring general energy support, rather than unexplained or persistent tiredness?",
-        "options": [
-          {
-            "value": "generalEnergy",
-            "label": "General energy support"
-          },
-          {
-            "value": "persistent",
-            "label": "Unexplained or persistent tiredness"
-          },
-          {
-            "value": "unsure",
-            "label": "Unsure"
-          }
-        ],
-        "candidates": {
-          "generalEnergy": [
-            "coq10"
-          ]
-        },
-        "review": [
-          "persistent",
-          "unsure"
-        ]
-      },
-      "eyes": {
-        "label": "Are you exploring general eye wellbeing?",
-        "options": [
-          {
-            "value": "wellbeing",
-            "label": "General wellbeing"
-          },
-          {
-            "value": "symptomCare",
-            "label": "Care for symptoms"
-          },
-          {
-            "value": "unsure",
-            "label": "Unsure"
-          }
-        ],
-        "candidates": {
-          "wellbeing": [
-            "vision"
-          ]
-        },
-        "review": [
-          "symptomCare",
-          "unsure"
-        ]
-      },
-      "immune": {
-        "label": "Do you have a formula preference?",
-        "options": [
-          {
-            "value": "botanical",
-            "label": "Botanical"
-          },
-          {
-            "value": "bee",
-            "label": "Bee-derived"
-          },
-          {
-            "value": "noPreference",
-            "label": "No preference"
-          }
-        ],
-        "candidates": {
-          "botanical": [
-            "bq"
-          ],
-          "bee": [
-            "propolis"
-          ],
-          "noPreference": [
-            "bq",
-            "propolis"
-          ]
-        },
-        "review": []
-      },
-      "glucose": {
-        "label": "Are you exploring support for healthy blood-sugar levels, rather than treating diabetes or abnormal readings?",
-        "options": [
-          {
-            "value": "healthy",
-            "label": "Healthy blood-sugar support"
-          },
-          {
-            "value": "treatment",
-            "label": "Treating diabetes or abnormal readings"
-          },
-          {
-            "value": "unsure",
-            "label": "Unsure"
-          }
-        ],
-        "candidates": {
-          "healthy": [
-            "sugar"
-          ]
-        },
-        "review": [
-          "treatment",
-          "unsure"
-        ]
-      },
-      "libido": {
-        "label": "Is your goal healthy libido or physical endurance, rather than care for a new or persistent problem?",
-        "options": [
-          {
-            "value": "wellbeing",
-            "label": "General wellbeing"
-          },
-          {
-            "value": "symptomCare",
-            "label": "Care for a problem"
-          },
-          {
-            "value": "unsure",
-            "label": "Unsure"
-          }
-        ],
-        "candidates": {
-          "wellbeing": [
-            "man"
-          ]
-        },
-        "review": [
-          "symptomCare",
-          "unsure"
-        ]
-      },
-      "skin": {
-        "label": "Are you exploring general skin, hair and nail wellbeing?",
-        "options": [
-          {
-            "value": "wellbeing",
-            "label": "General wellbeing"
-          },
-          {
-            "value": "symptomCare",
-            "label": "Care for symptoms"
-          },
-          {
-            "value": "unsure",
-            "label": "Unsure"
-          }
-        ],
-        "candidates": {
-          "wellbeing": [
-            "detox"
-          ]
-        },
-        "review": [
-          "symptomCare",
-          "unsure"
-        ]
-      },
-      "cellular": {
-        "label": "Which formulation would you like to explore?",
+      "energy/cellular": {
+        "label": "Which formulation would you prefer to explore?",
         "options": [
           {
             "value": "standard",
-            "label": "Standard"
+            "label": "Standard formula"
           },
           {
             "value": "sustained",
-            "label": "Sustained release"
+            "label": "Sustained-release formula"
           },
           {
             "value": "noPreference",
             "label": "No preference"
           }
-        ],
-        "candidates": {
-          "standard": [
-            "rrr"
-          ],
-          "sustained": [
-            "boost"
-          ],
-          "noPreference": [
-            "rrr"
-          ]
-        },
-        "review": []
-      },
-      "weight": {
-        "label": "Are you exploring body-fat support as a generally healthy adult?",
-        "options": [
-          {
-            "value": "healthyAdult",
-            "label": "Generally healthy adult"
-          },
-          {
-            "value": "conditionOrSymptoms",
-            "label": "A condition or symptoms"
-          },
-          {
-            "value": "unsure",
-            "label": "Unsure"
-          }
-        ],
-        "candidates": {
-          "healthyAdult": [
-            "ampk"
-          ]
-        },
-        "review": [
-          "conditionOrSymptoms",
-          "unsure"
         ]
       },
-      "general": {
-        "label": "Are you looking for general antioxidant wellbeing support?",
+      "resilience/immune": {
+        "label": "Which type of formula would you prefer to explore?",
         "options": [
           {
-            "value": "wellbeing",
-            "label": "General wellbeing"
+            "value": "botanical",
+            "label": "A botanical blend with bromelains and quercetin"
           },
           {
-            "value": "treatment",
-            "label": "Treatment"
+            "value": "bee",
+            "label": "A bee-derived propolis formula"
           },
           {
-            "value": "unsure",
-            "label": "Unsure"
+            "value": "noPreference",
+            "label": "No preference"
           }
-        ],
-        "candidates": {
-          "wellbeing": [
-            "antioxidant"
-          ]
-        },
-        "review": [
-          "treatment",
-          "unsure"
         ]
       }
     }
   }
-]
+}

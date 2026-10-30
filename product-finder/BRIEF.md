@@ -1,220 +1,212 @@
-# Cellife product finder — design and implementation brief
+# Cellife product finder — short discovery quiz
 
-Draft v1 · 30 October 2026 · UNPUBLISHED · 12 source sheets reviewed
+Draft v2 · 30 October 2026 · UNPUBLISHED
 
-## Purpose and evidence boundary
+## Status and scope
 
-Help an adult choose a product to investigate for one wellbeing goal. This is a catalogue match, not a diagnosis, treatment plan, assessment of effectiveness, or assurance that a product is safe. Return one product at most, or a clear no-match / professional-review outcome. Do not recommend a supplement stack.
+This is the current customer-flow brief. It supersedes v1's five-question flow, health questionnaire, automatic safety eligibility rules, matching tests and implementation steps that rely on those answers. Keep v1's 12-product source matrix, source register, evidence classifications, ingredient facts, explicit supplier warnings and claims-review requirements as the evidence appendix. V1's broad health-screening policy was a design choice, not a fact-sheet requirement.
 
-All product facts below come from the 12 supplied one-page PDFs. References such as [S03, p1, Warnings] point to the source register at the end. They establish what the supplier sheet says, not that the claim is clinically proven, currently authorised, or appropriate for an individual. No independent clinical, regulatory, interaction, or current-label verification was performed. The linked earlier chat exposes no readable detail of “option B”; this brief follows the current explicit request.
+Reference appendix: [12-product evidence matrix and source register](EVIDENCE_APPENDIX.md).
 
-Use these evidence labels in the data:
+This revision is a product-discovery quiz: it identifies a product to explore based on interests. It does NOT screen for suitability, allergies, interactions, pregnancy, age or medical conditions. Moving warnings to the result changes the scope; do not imply the result is clinically personalised or cleared for use.
 
-- **F — sheet fact:** ingredient, formulation, dosage wording or identifier reported by the sheet. Still requires current-label verification.
-- **C — unverified advertising claim:** benefits, mechanisms, traditional-use statements, superiority and duration claims reported by the sheet. No clinical evidence dossier was supplied.
-- **W — explicit sheet warning:** reproduce faithfully in the internal record; absence of a warning is not evidence of safety.
-- **P — proposed quiz safeguard:** conservative routing or exclusion designed here. It is not a contraindication established by the sheet and must never be presented as one.
+Do not publish. All proposed public benefit wording remains subject to current-label and claims review. Source-sheet claims are supplier advertising, not independently verified clinical evidence.
 
-All public copy is proposed copy requiring claims review. Do not display “TGA Approved,” imply an AUST L identifier proves efficacy, or convert ingredient mechanisms into proven product outcomes. Store the sheet's original wording internally with its source. Do not automatically publish even the milder benefit wording below.
+## Experience
 
-## Product-to-goal matrix
+Two questions for most routes, three only when distinguishing two similar options. One selection per question. No email gate, consumption-format question, symptom questionnaire, or unnecessary third question.
 
-Primary and secondary tags are design decisions based on the cited sheet claims. Only primary routes participate in v1 recommendations; secondary tags are editorial context, not fallback recommendations. Every benefit in this table is **C**, not independently verified evidence of efficacy.
+Intro heading: “Find a Cellife product to explore”
+Subheading: “2–3 quick questions about your wellbeing goals.”
+Small visible scope statement: “For adults exploring wellbeing products. This quiz matches interests, not medical suitability. Check the product warnings before use.”
 
-| ID / source | Primary goal route | Secondary claims: not scored in v1 | Sheet-grounded basis and ingredient facts | Warnings / recommendation constraints |
+Do not promise “under 20 seconds” until timed usability testing supports the claim, including ordinary reading time. Do not count warnings as a concealed fourth question.
+
+## Q1 — What would you most like support with?
+
+Four single-select cards, with concrete subtitles to make the broad categories understandable:
+
+1. **Energy & vitality** — Daily energy, endurance and cellular metabolism.
+2. **Weight & metabolic wellbeing** — Body-fat management and healthy blood-sugar support.
+3. **Everyday resilience** — Immune support, everyday stress and antioxidant wellbeing.
+4. **Skin, eyes & daily care** — Skin, hair, nails, eyes and general antioxidant wellbeing.
+
+“Resilience” is a navigation umbrella for separate interests. Never imply every product in that category supports both immunity and stress. Categories do not require equal numbers of products. Overlap is allowed when the specific result reason is supported by that product's sheet.
+
+## Q2 — Which matters most to you?
+
+### Branch 1: Energy & vitality
+
+| Code | Customer option | Outcome | Evidence |
+|---|---|---|---|
+| daily_energy | Support for my daily energy levels | CoQ10 (`coq10`) | S07 p1 Benefits: energy support |
+| endurance_libido | Physical endurance and healthy libido | Man Power (`man`) | S03 p1 Benefits: endurance, healthy libido |
+| cellular | Support for cellular energy metabolism | Ask Q3 formulation | S06/S09 p1 Description: energy metabolism and nicotinic acid/nicotinamide |
+
+### Branch 2: Weight & metabolic wellbeing
+
+| Code | Customer option | Outcome | Evidence |
+|---|---|---|---|
+| body_fat | Support with managing excess body fat | AMPK Fatburst (`ampk`) | S11 p1 Benefits: body-fat reduction in healthy individuals, supplier claim |
+| healthy_glucose | Support for healthy blood-sugar levels | Sugar Support (`sugar`) | S04 p1 Description |
+
+Do not add Man Power or DETOX to weight-loss results. Their supplied sheets do not support a direct weight-loss match. Do not route R.R.R. into weight loss merely because its sheet mentions metabolism. No promise of kilogram loss, appetite suppression or diabetes treatment.
+
+### Branch 3: Everyday resilience
+
+| Code | Customer option | Outcome | Evidence |
+|---|---|---|---|
+| immune | Supporting my immune system | Ask Q3 immune formula | S02/S05 p1 Benefits |
+| stress | Support with everyday stress | Stress Relief (`stress`) | S01 p1 Description and Benefits of Ingredients |
+| antioxidant | General antioxidant wellbeing | Antioxidant (`antioxidant`) | S12 p1 Benefits |
+
+### Branch 4: Skin, eyes & daily care
+
+| Code | Customer option | Outcome | Evidence |
+|---|---|---|---|
+| skin_hair_nails | Caring for my skin, hair and nails | DETOX (`detox`) | S08 p1 Description |
+| eyes | Supporting healthy eyes and vision | Vision+ (`vision`) | S10 p1 Description |
+| antioxidant | General antioxidant wellbeing | Antioxidant (`antioxidant`) | S12 p1 Benefits |
+
+Antioxidant appears in two categories for general antioxidant wellbeing only. Do not say it is proven to improve skin or vision. Do not frame DETOX as weight loss, a sleep aid, skin whitening or removal of named toxins.
+
+## Q3 — Only on two routes
+
+### Energy → cellular
+
+“Which formulation would you prefer to explore?”
+
+- **Standard formula** → R.R.R. (`rrr`).
+- **Sustained-release formula** → R.R.R. Boost (`boost`).
+- **No preference** → R.R.R. (`rrr`), a fixed editorial default.
+
+S09 describes sustained release; S06 is the comparison formula. This is a formulation preference, not evidence that one works better. Do not promise all-day energy or publicly repeat “8–10 hours” without claim verification. Do not recommend both together. Use “standard” as navigation wording, not a verified regulatory formulation designation.
+
+### Everyday resilience → immune
+
+“Which type of formula would you prefer to explore?”
+
+- **A botanical blend with bromelains and quercetin** → Bromelains & Quercetin (`bq`).
+- **A bee-derived propolis formula** → Propolis (`propolis`).
+- **No preference** → Bromelains & Quercetin (`bq`), a fixed editorial default.
+
+This preference question does not establish that a product is free of allergens, animal ingredients or interactions. Avoid “gentle”, “safe”, “allergy-friendly”, “vegan” and claims that one is more effective. Explicit product warnings follow on the result.
+
+## Coverage / overlap matrix
+
+A dot means there is a specific route in that category, not that all the category's benefits apply to the product.
+
+| Product | Energy & vitality | Weight & metabolic wellbeing | Everyday resilience | Skin, eyes & daily care |
 |---|---|---|---|---|
-| stress / S01, AUST L 399644 | Everyday stress support | Mood, sleep, energy mechanisms | Description says stress-response support; ingredient section discusses chamomile, ashwagandha and rhodiola. F: nicotinamide 8.4 mg, acetyl levocarnitine HCl 100 mg, tryptophan 130 mg/capsule; botanical amounts are dry-equivalent amounts. [p1, Description; Benefits of Ingredients; Active Ingredients] | W: follow dose guidelines; supplements do not replace balanced diet. Daily dose absent from this sheet. P: no anxiety/depression/insomnia treatment route; current label needed before dose information is shown. |
-| propolis / S02, AUST L 316796 | Immune support, bee-derived preference | General wellbeing, oral health, antioxidant, glucose metabolism, cold/flu symptoms | Benefits explicitly lists immune support. F: propolis 500 mg/capsule, with 2500 mg equivalence wording. [p1, Benefits; Active Ingredients] | W: not for asthma/allergy sufferers; not for children; not recommended with reduced-calorie diet AND increased activity. Description's extract-equivalence wording needs reconciliation with label. P: no automatic glucose/cold/flu route. |
-| man / S03, AUST L 520645 | Healthy libido / physical endurance | Energy, circulation | Benefits and Description name healthy libido and physical endurance; herbal formula described in traditional Chinese medicine terms. [p1, Description; Benefits] | W: adult use; persistent symptoms → stop and consult. P: no erectile dysfunction, testosterone, fertility, or cardiovascular treatment promise; do not infer suitability from gender. |
-| sugar / S04, AUST L 400792 | Healthy blood-sugar support in otherwise healthy adults | Sugar cravings | Description names healthy blood-sugar support; ten-ingredient table includes alpha-lipoic acid 25 mg, chromium 0.0125 mg and zinc 5 mg/capsule; barley and multiple botanicals present. [p1, Description; Benefits of Ingredients; Active Ingredients] | W: general label/dose/diet warnings. Daily dose absent. P: diabetes, abnormal glucose, medicines or a request to treat disease → professional review; barley is an ingredient fact, not a verified gluten-free/allergen declaration. |
-| bq / S05, AUST L 383218 | Immune support, botanical preference | Mild upper respiratory infection symptoms, digestion, antioxidant | Benefits names immune support; Active Ingredients table shows bromelains, quercetin, Nigella, andrographis and turmeric. [p1, Description; Benefits; Active Ingredients] | W: pineapple allergy exclusion; contraindications list antibiotics, sedatives, anticoagulants; andrographis allergy warning, including anaphylaxis and immediate medical attention. “Adults Only” dose conflicts with under-2 warning: v1 adult-only. P: no infection-treatment or automatic allergy remedy route. |
-| rrr / S06, AUST L 521752 | Cellular metabolism support, standard preference | Antioxidant, tissue regeneration | Description names nicotinic acid and nicotinamide as NAD+ precursors. Benefits names metabolism and tissue regeneration. [p1, Description; Benefits] | W: not recommended pregnancy/lactation; not recommended with reduced calories AND increased activity; empty-stomach flushing/redness/itching described. P: do not repeat “harmless” as a blanket reassurance; no longevity / DNA-repair outcome promise. |
-| coq10 / S07, AUST L 316798 | Energy support | Heart/blood health, antioxidant, immunity; blood-pressure, weight-loss and hair claims withheld | Benefits explicitly names energy support. F: CoQ10 150 mg, vitamin E amount 38.5 mg, natural fish oil 500 mg/capsule. [p1, Benefits; Active Ingredients] | W: not for asthma/allergy sufferers or children; not recommended with reduced calories AND increased activity. P: fish-derived ingredient blocks vegan preference; no hypertension, weight loss or heart-disease treatment route. Do not silently delete unusual warnings as presumed copy errors. |
-| detox / S08, AUST L 322109 | Skin/hair/nail wellbeing | Antioxidant, natural detoxification, eye protection | Description names skin, hair and nails. F: glutathione 125 mg/tablet; grape-seed quantity is extract-equivalent dry seed in the ingredient table, not 45 g of actual extract. [p1, Description; Benefits; Active Ingredients] | W: adults only; not recommended pregnancy/lactation; persistent symptoms → stop and consult. P: withhold skin whitening, wrinkle removal, “toxin removal,” superiority and “leading market” promises. |
-| boost / S09, AUST L 395833 | Cellular metabolism support, sustained-release preference | Antioxidant, tissue regeneration | Description calls formula sustained release; Benefits claims absorption over 8–10 hours. Contains nicotinic acid and nicotinamide. [p1, Description; Benefits] | W: pregnancy/planning/breastfeeding → doctor/pharmacist; not recommended with reduced calories AND increased activity; flushing warning includes stop/consult if severe or persistent. P: mutually exclusive with R.R.R.; no superiority or guaranteed all-day-energy claim. 8–10 hours remains unverified C. |
-| vision / S10, AUST L 393078 | Eye wellbeing | Eye strain, dry eyes, light adaptation/night vision, antioxidant | Description names healthy eye function; table lists beta-carotene 1 mg, microalgal DHA 40 mg, Tagetes 10 mg and bilberry dry-fruit equivalent 3000 mg/capsule. [p1, Description; Active Ingredients] | W: general label/dose/diet warnings. Daily dose absent. P: sudden changes, pain or persistent symptoms → professional review; no disease-prevention route. Microalgal DHA does not establish vegan capsule/excipients. |
-| ampk / S11, AUST L 322110 | Body-fat / weight-management interest | Metabolism, wellbeing, fibre | Benefits claims body-fat reduction in healthy individuals. F: table includes psyllium dry-herb equivalent 800 mg, oyster shell 10 mg, vitamin K2 60 mcg/tablet. [p1, Benefits; Active Ingredients] | W: adults only; take with food or within one hour, sufficient water; use caution with reduced calories AND increased activity. P: send that combination to professional review, rather than invent a ban; oyster shell blocks vegan preference; no guaranteed loss, timeline or AMPK-activation claim. |
-| antioxidant / S12, AUST L 320772 | General antioxidant wellbeing | Healthy cell function | Benefits names free-radical damage and general wellbeing. F: ingredient table includes vitamin C 100 mg, acetyl levocarnitine HCl 125 mg, beta-carotene 1 mg, quercetin 8.4 mg/tablet plus botanicals. [p1, Benefits; Active Ingredients] | W: not recommended pregnancy/lactation, stated under Dosage; general label/diet warnings. P: do not turn the hourglass image into an anti-ageing or lifespan claim. |
+| R.R.R. | Yes | — | — | — |
+| R.R.R. Boost | Yes | — | — | — |
+| Man Power | Yes | — | — | — |
+| CoQ10 | Yes | — | — | — |
+| AMPK Fatburst | — | Yes | — | — |
+| Sugar Support | — | Yes | — | — |
+| Stress Relief | — | — | Yes | — |
+| Propolis | — | — | Yes | — |
+| Bromelains & Quercetin | — | — | Yes | — |
+| Antioxidant | — | — | Yes | Yes |
+| DETOX | — | — | — | Yes |
+| Vision+ | — | — | — | Yes |
 
-**Shared W:** read label; observe dosage; keep away from children; do not use if seal is broken; storage instructions vary by product (25°C or 30°C). Do not replace these with one universal temperature. Vitamin/mineral diet caveat is present on many, not all, sheets. Keep product-specific warning records.
+All 12 are reachable in at most three questions. Only one product deliberately overlaps. Do not manufacture more overlap to make the diagram symmetrical. No sleep category: these sheets do not support a useful multi-product sleep branch; DETOX has no supplied sleep basis.
 
-**Source-dose reference, not quiz instructions:** S02/S07: 1 capsule daily with meal; S03/S06/S08/S09: 1–3 tablets daily with food/meal; S05: 2 tablets twice daily; S11: 1 tablet with food or within an hour, 1–3 daily plus sufficient water; S12: 1 tablet once or twice daily with food. S01/S04/S10: daily dose not provided. Do not choose or optimise a dose in the quiz; use current label on the product detail page after verification.
+## Results and precautions
 
-## Five-question branching flow
+Results heading: **“A product to explore: [name]”**
 
-Intro: “Find a Cellife product to explore for your wellbeing goal. Your answers match product-sheet information; they do not establish that a product is effective or safe for you. You can receive a no-match result.” No email gate; no default answers. Back navigation preserves valid answers and clears Q5 when Q1 changes.
+1. Product image and name, connected to the actual Shopify product.
+2. One narrow explanation: “You selected [specific interest]. Cellife's supplied product sheet describes [relevant support claim].” Never imply that quiz answers establish effectiveness or suitability.
+3. Visible scope line: “Matched to your interests. Suitability has not been assessed.”
+4. A visible **“Before you consider this product”** panel BEFORE the product-link button. Do not bury material exclusions in a tooltip, footer or collapsed section. The full label can be linked below.
+5. **“Read product information”** button. No automatic add-to-cart, bundle, dose selection, safety tick or preselected subscription. Do not block browsing behind another question.
 
-### Q1 — What is your main goal?
+Shared proposed caution: “Read the current label and follow its directions. If you are pregnant or breastfeeding, take medicines or other supplements, have a medical condition or allergies, ask a pharmacist or healthcare professional before use.” Label this internally as proposed general guidance (P), not a warning quoted from all 12 sheets. Actual public wording needs review.
 
-Single-select codes and labels:
-`stress` Everyday stress support; `energy` Energy support; `eyes` Eye wellbeing; `immune` Immune support; `glucose` Healthy blood-sugar support; `libido` Healthy libido or physical endurance; `skin` Skin, hair and nail wellbeing; `cellular` Cellular metabolism support; `weight` Body-fat / weight-management support; `general` General antioxidant wellbeing; `other` Something else / unsure.
+### Product-specific visible warning payload
 
-One goal prevents arbitrary mixing of low-specificity antioxidant claims. `other` ends at NO_MATCH with “We do not have a clear product-sheet match for that goal.” No commercial fallback.
+Keep these source warnings separate from general proposed guidance. The evidence appendix contains the source paths and more detail. Public copy should be reconciled against the current approved label before release; do not silently remove unusual warnings.
 
-### Q2 — Which age and life-stage option applies?
+| Product | Source-grounded warnings to surface |
+|---|---|
+| R.R.R. | Not recommended during pregnancy/lactation. Not recommended with reduced-calorie diet AND increased activity. Sheet warns of empty-stomach flushing/redness/itching; do not label every reaction harmless. |
+| R.R.R. Boost | Pregnancy/planning/breastfeeding: consult doctor/pharmacist. Same combined diet/activity warning. Flushing warning; stop and consult if severe or persistent. |
+| Man Power | Adults only; if symptoms persist, stop and consult. |
+| CoQ10 | Sheet says not for asthma/allergy sufferers or children, and not recommended with combined reduced-calorie diet/increased activity. Contains fish oil. |
+| AMPK Fatburst | Adults only; caution with combined reduced-calorie diet/increased activity. Take with food or within one hour; sufficient water. Contains oyster shell. Do not turn a caution into an invented absolute contraindication. |
+| Sugar Support | General label/dose/diet warnings. No daily dose supplied in sheet. Contains barley; full allergen declaration unverified. |
+| Stress Relief | General label/dose/diet warnings. No daily dose supplied in sheet. |
+| Propolis | Not for asthma/allergy sufferers or children; not recommended with combined reduced-calorie diet/increased activity. Bee-derived. |
+| Bromelains & Quercetin | Do not consume if allergic to pineapple. Contraindications listed: antibiotics, sedatives, anticoagulants. Andrographis allergic-reaction warning, including anaphylaxis: discontinue and seek immediate medical attention for severe reaction. Adult-only dose; reconcile inconsistent child-age warning. |
+| Antioxidant | Not recommended during pregnancy/lactation, stated in Dosage section. |
+| DETOX | Adults only; not recommended during pregnancy/lactation; persistent symptoms: stop and consult. |
+| Vision+ | General label/dose/diet warnings. No daily dose supplied in sheet. Microalgal DHA does not verify capsule/excipient compatibility for vegans. |
 
-Single-select: `adult` 18+ and none of the following; `under18` Under 18; `pregnancy` Pregnant, planning pregnancy or breastfeeding; `unknown` Unsure / prefer not to answer.
+Retain full applicable label warnings, storage instructions and seal precautions on the product detail page. A result is not a safety assessment: removing the intake questions means the engine cannot suppress a match for a user's undisclosed allergy, medication or pregnancy. Do not claim that it does. Do not suggest a replacement product when a displayed warning applies; direct the user to individual advice.
 
-Anything except `adult` ends at REVIEW with no product. **P:** 18+ and the global life-stage rule are conservative design limits, not a claim that every sheet specifies age 18 or contraindicates pregnancy. S06/S08/S12 specifically discourage pregnancy/lactation; S09 directs consultation. Do not infer other formulas are safe because they omit it.
+## Deterministic logic
 
-### Q3 — Does any of this apply to you?
+Fixed mapping; no scoring, medical inference, AI-generated recommendations or commercial fallback.
 
-Multi-select: `medicine` Any prescription or non-prescription medicine; `supplement` Other supplements; `condition` A diagnosed condition or ongoing investigation; `symptoms` New, severe, persistent or worsening symptoms, or seeking treatment for a condition; `dietActivity` BOTH a reduced-calorie diet and increased physical activity; `none`; `unknown` / prefer not to answer.
+- Validate Q1 against four category enums and Q2 against that category's options.
+- Direct Q2 route → exactly one product.
+- `energy/cellular` and `resilience/immune` → Q3; missing Q3 gives INCOMPLETE.
+- Only render Q3 for those two branches. Stale Q3 on another branch is invalid; UI clears Q2/Q3 when upstream selection changes.
+- Missing answer on a reached screen → INCOMPLETE. Unknown enum, cross-branch answer or contradictory payload → INVALID. Both return zero products.
+- Every valid completed route → exactly one DISCOVERY_MATCH, plus rationale evidence IDs, source-warning IDs and scope disclaimer. It must never return SAFE_MATCH or a safety score.
+- Missing product, product mapping, source rationale or required warning payload → DATA_HOLD; zero products and no generic substitute.
+- Same input and data version → identical product and reason order.
+- Do not apply v1's health-answer exclusions: those answers no longer exist. Keep explicit warnings in data and presentation instead. Do not treat silence as a negative health answer.
+- Public release remains disabled until required product, claims and warning reviews are complete. Preview can demonstrate draft routes with a prominent DRAFT marker.
 
-`none` and `unknown` are exclusive. Any of medicine/supplement/condition/symptoms/unknown ends at REVIEW, with no recommendation. **P:** broad professional-review gate; not an assertion that all medicines or supplements interact. Keep explicit S05 antibiotic/sedative/anticoagulant warnings in product data and detail copy. The quiz does not diagnose urgent symptoms; the REVIEW message should say to seek prompt medical attention for severe or sudden symptoms. This is proposed escalation wording, not medical triage.
+Stable category enums: `energy`, `metabolic`, `resilience`, `care`. Q2/Q3 codes are those in the tables, with Q3 codes `standard|sustained|noPreference` and `botanical|bee|noPreference` respectively.
 
-`dietActivity` alone continues and is used in product-specific routing. A reduced-calorie diet alone or activity alone is not the same source condition. Do not reinterpret the sheets as advising against exercise.
+## Replacement acceptance tests
 
-### Q4 — Do you have asthma, any allergy, or a dietary requirement?
+These replace v1's 40 flow tests; source and warning integrity tests remain relevant. Tests listed here are specification cases, not a claim of executed website tests.
 
-Multi-select: `asthma`; `allergy` Any known or suspected allergy, including bee products, pineapple, fish, shellfish, plants or ingredients; `vegan`; `none`; `unknown` / prefer not to answer. `none` and `unknown` exclusive. Any allergy or unknown ends at REVIEW (**P**, because complete excipient/allergen declarations are unavailable). No free-text allergy collection in v1. Asthma and vegan alone continue.
+1. energy/daily_energy → coq10 (2 questions).
+2. energy/endurance_libido → man (2).
+3. energy/cellular/standard → rrr (3).
+4. energy/cellular/sustained → boost (3).
+5. energy/cellular/noPreference → rrr (3).
+6. metabolic/body_fat → ampk (2).
+7. metabolic/healthy_glucose → sugar (2).
+8. resilience/immune/botanical → bq (3).
+9. resilience/immune/bee → propolis (3).
+10. resilience/immune/noPreference → bq (3).
+11. resilience/stress → stress (2).
+12. resilience/antioxidant → antioxidant (2).
+13. care/skin_hair_nails → detox (2).
+14. care/eyes → vision (2).
+15. care/antioxidant → antioxidant (2).
+16. Every complete route returns one product and visible product-specific warning payload.
+17. Both antioxidant routes return the same general antioxidant rationale; neither promises eye/skin effects.
+18. No path exceeds three questions; no extra health form or warning acknowledgement is added.
+19. Unknown/invalid Q1, cross-branch Q2 and stale Q3 → INVALID, zero products (separate cases).
+20. Missing Q2 or required Q3 → INCOMPLETE, zero products.
+21. Changing Q1 clears Q2/Q3 and result; changing Q2 clears Q3 and result.
+22. R.R.R./Boost are never returned together; no automatic stack or add-to-cart.
+23. No health-screening claim is shown; all completed results say suitability was not assessed.
+24. CoQ10/Propolis asthma warning, BQ medication/pineapple/andrographis warnings, and relevant pregnancy/diet warnings appear before CTA.
+25. AMPK diet/activity wording remains a caution; it is not rewritten as an absolute ban.
+26. Missing mapping, warning or evidence field → DATA_HOLD; no substituted product.
+27. Unreviewed public build stays disabled; draft preview carries draft status.
+28. Keyboard and screen-reader operation, mobile layout, visible progress (Step 1; Step 2; optional Step 3), restart and back navigation work.
+29. Health answers are not collected or inferred; no user choices are stored in URLs, analytics, CRM or persistent browser storage by default.
+30. “Under 20 seconds” absent unless actual usability testing supports it.
 
-Underlying explicit rules still matter: S02/S07 asthma/allergy warnings; S05 pineapple and andrographis warnings. Asthma excludes S02/S07; allergy never bypasses the global REVIEW gate even if a different product seems to match. Vegan status is a verified-compatibility filter, not a nutrition judgement.
+## Shopify implementation handoff
 
-### Q5 — Goal-specific clarification
+Build this v2 customer flow as the reusable **Cellife Product Finder** theme section proposed earlier. Inspect the actual theme first. Use a dedicated JSON page template if supported, plus theme-native Liquid rendering and scoped JavaScript/CSS. No separate app or backend is required for this fixed discovery flow unless the existing theme architecture requires a different approach.
 
-Render exactly one branch for a continuing user:
-
-| Q1 branch | Question and enum answers | Candidate order / effect |
-|---|---|---|
-| stress | “Are you exploring everyday stress support, rather than care for symptoms?” `everyday`, `symptomCare`, `unsure` | everyday → stress; others → REVIEW |
-| energy | “Are you exploring general energy support, rather than unexplained or persistent tiredness?” `generalEnergy`, `persistent`, `unsure` | generalEnergy → coq10; others → REVIEW |
-| eyes | “Are you exploring general eye wellbeing?” `wellbeing`, `symptomCare`, `unsure` | wellbeing → vision; others → REVIEW |
-| immune | “Do you have a formula preference?” `botanical`, `bee`, `noPreference` | botanical → bq only; bee → propolis only; noPreference → bq, then propolis |
-| glucose | “Are you exploring support for healthy blood-sugar levels, rather than treating diabetes or abnormal readings?” `healthy`, `treatment`, `unsure` | healthy → sugar; others → REVIEW |
-| libido | “Is your goal healthy libido or physical endurance, rather than care for a new or persistent problem?” `wellbeing`, `symptomCare`, `unsure` | wellbeing → man; others → REVIEW |
-| skin | “Are you exploring general skin, hair and nail wellbeing?” `wellbeing`, `symptomCare`, `unsure` | wellbeing → detox; others → REVIEW |
-| cellular | “Which formulation would you like to explore?” `standard`, `sustained`, `noPreference` | standard → rrr only; sustained → boost only; noPreference → rrr only |
-| weight | “Are you exploring body-fat support as a generally healthy adult?” `healthyAdult`, `conditionOrSymptoms`, `unsure` | healthyAdult → ampk; others → REVIEW |
-| general | “Are you looking for general antioxidant wellbeing support?” `wellbeing`, `treatment`, `unsure` | wellbeing → antioxidant; others → REVIEW |
-
-Early-exit users answer fewer than five questions. Five is the maximum, with one question per screen. Preference is not efficacy evidence. BQ is the documented no-preference immune default because its sheet explicitly lists immune support; propolis is a secondary editorial option, not a weaker or stronger clinical choice. R.R.R. is the no-preference cellular default to avoid asserting sustained release is better. No ranking by margin, popularity or number of claimed benefits.
-
-## Deterministic decision contract
-
-Evaluate in this order. Keep the rule IDs stable for QA and explainability.
-
-1. **R0 Validate:** reject unknown enums, contradictory exclusive selections and invalid branch answers. Missing required answers produce INCOMPLETE; do not interpret missing as “none.” No recommendation while validation errors exist.
-2. **R1 Source integrity:** require all 12 records, unique product IDs and source IDs; each source must have page/section locators. Missing/changed/unapproved data returns DATA_HOLD in a public build. Draft preview can use this design dataset but must show DRAFT.
-3. **R2 Eligibility:** apply Q2 life-stage and Q3/Q4 review gates above. Review gates take priority over commercial matching, including an `other` goal if those answers were already supplied. Under-18 ends without a product.
-4. **R3 Intent:** `other` → NO_MATCH. Q5 clinical/unsure answers → REVIEW. Explicit “noPreference” remains valid for immune/cellular; it is not a health-uncertainty answer.
-5. **R4 Build candidates:** use the exact Q1/Q5 ordered list. No secondary-tag scoring or AI inference. Immune fallback only for noPreference. No fallback for an explicitly chosen formula.
-6. **R5 Filter candidates:** asthma removes propolis/coq10 (**W**). `dietActivity` removes propolis/coq10/rrr/boost (**W**) and ampk (**P review of W caution**). Vegan preference removes coq10 (fish oil) and ampk (oyster shell) (**F**); all other products are also held for vegan users until full capsule/excipient compatibility is verified (**P**). Do not infer vegan status from botanical active ingredients. Thus v1 cannot auto-recommend for a vegan requirement.
-7. **R6 Select:** first remaining candidate wins; return exactly one MATCH. If all removed and any removal requires clarification (dietActivity+ampk or unverified vegan compatibility), return REVIEW. Otherwise return NO_MATCH. Store per-candidate reason IDs. Never relax an exclusion to produce a sale.
-8. **R7 Present:** show match reason, limits and warnings. Any warning change requires rule review. An excluded candidate may appear only in an explanation, never as a suggested purchase or clickable alternative.
-
-No-match copy: “We could not identify a product-sheet match that meets your answers. A pharmacist or healthcare professional can help review suitable options.” Review copy: “Your answers need individual review before we suggest a product. Please speak with a pharmacist or healthcare professional.” Add the relevant explicit source warning in plain language when one applies, while identifying broader routing as quiz policy.
-
-### Example result card
-
-“Product to explore: Vision+”
-
-“Why it appeared: You selected eye wellbeing. The supplied Cellife sheet describes support for healthy eye function. This is a supplier claim, not independently verified evidence of effectiveness.”
-
-“Before use: Read the current label and follow its directions. This quiz does not establish suitability. Ask a pharmacist about medicines, other supplements or ingredients. New, severe or persistent eye symptoms need individual assessment.”
-
-CTA in preview: “View draft product information.” Production CTA may become “Read product information” only after label, claim and destination checks. No “safe for you,” “perfect match,” percentages, guaranteed results, urgency, subscription preselection or automatic basket additions. No dosage recommendation in the card.
-
-## Test cases and acceptance criteria
-
-Baseline B = Q2 adult; Q3 none; Q4 none; valid Q5 wellbeing/general option for the goal. Tests target the draft engine; public builds additionally require release approval. For test data, an omitted prior answer on an early exit is permissible; a missing required answer on a continuing route is not.
-
-| Test | Inputs / change to baseline | Expected outcome |
-|---|---|---|
-| T01 | stress / everyday | MATCH stress |
-| T02 | energy / generalEnergy | MATCH coq10 |
-| T03 | eyes / wellbeing | MATCH vision |
-| T04 | immune / botanical | MATCH bq |
-| T05 | immune / bee | MATCH propolis |
-| T06 | immune / noPreference | MATCH bq, one result only |
-| T07 | glucose / healthy | MATCH sugar; no diabetes-treatment copy |
-| T08 | libido / wellbeing | MATCH man |
-| T09 | skin / wellbeing | MATCH detox; no whitening promise |
-| T10 | cellular / standard | MATCH rrr |
-| T11 | cellular / sustained | MATCH boost, never rrr+boost |
-| T12 | cellular / noPreference | MATCH rrr |
-| T13 | weight / healthyAdult | MATCH ampk |
-| T14 | general / wellbeing | MATCH antioxidant |
-| T15 | any goal, Q2 under18 | REVIEW, no product, Q3–5 not required |
-| T16 | any goal, Q2 pregnancy or unknown | REVIEW, no product |
-| T17 | any goal, Q3 medicine | REVIEW; no attempt to infer interaction safety |
-| T18 | any goal, Q3 supplement, condition, symptoms or unknown (separate runs) | REVIEW |
-| T19 | energy, Q4 asthma | NO_MATCH; coq10 excluded by W |
-| T20 | immune / bee, Q4 asthma | NO_MATCH; no switch to bq |
-| T21 | immune / noPreference, Q4 asthma | MATCH bq, propolis ineligible |
-| T22 | any goal, Q4 allergy or unknown | REVIEW; do not substitute another formula |
-| T23 | cellular / standard or sustained, Q3 dietActivity | NO_MATCH; relevant formula excluded |
-| T24 | immune / bee, Q3 dietActivity | NO_MATCH; propolis excluded |
-| T25 | immune / noPreference, Q3 dietActivity | MATCH bq |
-| T26 | weight, Q3 dietActivity | REVIEW due to AMPK caution, no product |
-| T27 | general, Q3 dietActivity | MATCH antioxidant; do not globalise diet/activity warning |
-| T28 | energy, Q4 vegan | NO_MATCH: known fish oil; no alternative |
-| T29 | weight, Q4 vegan | NO_MATCH: known oyster shell |
-| T30 | eyes, Q4 vegan | REVIEW: capsule/excipients unverified |
-| T31 | glucose / treatment; energy / persistent; any Q5 clinical/unsure branch | REVIEW |
-| T32 | goal other, no review-triggering answers | NO_MATCH |
-| T33 | Q3 none+medicine, or Q4 none+vegan | INVALID; zero products |
-| T34 | missing Q5 on continuing route | INCOMPLETE; zero products |
-| T35 | Q1 changes immune→eyes, old bee Q5 retained | clear Q5 in UI; stale payload INVALID |
-| T36 | missing record/source, duplicate ID, unreviewed public configuration | DATA_HOLD; zero products |
-| T37 | medicine+asthma+dietActivity | REVIEW wins; return no commercial fallback |
-| T38 | asthma+vegan, energy | NO_MATCH; retain both exclusion reasons |
-| T39 | unknown enum / unrecognised free text | INVALID; never guess a goal |
-| T40 | identical validated input repeated | identical status, product and reason ordering |
-
-Also verify keyboard-only completion, radio/checkbox semantics, labels and errors read by screen reader, mobile layout, back navigation, and that a result changes immediately after changing safety answers. All MATCH responses must contain exactly one eligible ID and source-backed rationale; every other status must contain zero IDs. A negative answer is not proof of safety. Tests are specification vectors; no website or clinical suitability engine has been deployed or validated.
-
-## Codex-ready implementation brief
-
-Build an unpublished, accessible, responsive product-finder prototype in the existing site repository after inspecting its local instructions and components. Do not deploy, merge, publish, modify live products or install trackers. Keep a preview flag on. Use a deterministic pure function; do not use an LLM, inferred medical classifications or fuzzy matching at runtime.
-
-Deliver these pieces:
-
-1. `products.json`: exactly 12 stable IDs from the matrix, `sourceId`, `austLReported`, `primaryGoals`, `secondaryClaims`, `ingredientFacts`, `sheetWarnings`, `policyRules`, `claimReviewStatus`, `labelReviewStatus`, `veganCompatibility` (`yes|no|unknown`), and `formulationGroup`. R.R.R./Boost share group `rrr`. Keep source facts, claims and policy separate. No claims review status may default to approved.
-2. `evidence.json`: each item has `evidenceId`, `productId`, `sourceId`, `page:1`, `section`, faithful paraphrase, `kind:F|C|W|P`, `verifiedAgainstCurrentLabel:false`, `reviewer:null`, and `reviewedAt:null`. Ingredient equivalence quantities must carry a unit and explicit `quantityBasis` (`actual|equivalentDry|equivalentNutrient`); do not flatten all to mg of extract. Public copy references approved claim IDs only.
-3. `questions.json`: typed Q1–Q5 enums, branch-specific labels, validation, stop conditions, and exclusive choices. The Q3 diet/activity option is conjunction, not OR. Keep answer labels separate from enum values.
-4. `recommend.ts`: `evaluate(answers, catalog, mode)` returns `{status, productIds, reasonIds, exclusionReasons, evidenceIds, nextQuestion, rulesVersion}`. Status enum: `INCOMPLETE|INVALID|DATA_HOLD|REVIEW|NO_MATCH|MATCH`. `productIds` has length 1 only for MATCH, otherwise 0. Validate gate screens as reached; early exits do not demand later answers. Reject contradictory or stale supplied answers before selection. Stable reason order follows rule priority then catalog candidate order.
-5. UI: intro, five-step maximum flow, early exit cards, match card, review/no-match/data-hold cards, restart, back and accessible progress. Medical questions use categorical answers only. No identifying health free text. Keep answers in memory; clear on restart and unload by default. Do not put answers in URLs, analytics, logs, CRM, local storage or email captures. Optional analytics may record aggregate completion/status without goals or health answers only after a separate privacy decision.
-6. Unit tests: implement T01–T40 as parameterised tests, expanding grouped cases. Add invariants for one result maximum, excluded products never selected, unknown data fails closed, and branch changes clear stale data. Add one end-to-end normal path and one early review path plus accessibility checks suited to the existing project.
-7. Preview evidence panel: staff-only list of evidence and rule IDs explaining the result; do not expose raw health answers through telemetry. UI preview must prominently state “Draft — product claims and labels awaiting review.”
-
-Implementation order: create evidence/catalog data → validate schema → implement pure evaluator and tests → build UI → check accessibility and mobile → review preview with product owner. Provide changed-file summary and test results. Stop before any publishing action.
-
-### Release gates (not requests to publish)
-
-- Confirm all 12 current labels, identifiers, formulations and product destinations against owner-supplied approved material. The PDFs carry no version dates establishing currency.
-- Obtain qualified review of medication, allergy, pregnancy and other safety wording; expand safeguards where needed. This draft is not a complete interaction database.
-- Reconcile unusual S02/S07 asthma/allergy and diet/activity warnings without silently discarding them; reconcile S05 age wording.
-- Verify missing daily doses for Stress Relief, Sugar Support and Vision+; never fabricate them.
-- Review source claims and proposed public copy, particularly weight/fat loss, blood sugar, infection, libido, “detox,” eye symptoms, and regulatory wording. This design does not make a legal compliance determination.
-- Verify complete ingredient/excipient and dietary declarations before allowing allergy-specific or vegan auto-matching. Current global allergy review gate remains until that work is done.
-- Treat R.R.R. and Boost as distinct formulations, not an upgrade claim; verify release-duration wording before public use.
-- Pass functional and accessibility acceptance checks; explicit user approval is still required before publishing.
-
-## Source register
-
-All 12 documents are one page. The source files were read only. Table locators refer to printed section headings; image-based ingredient tables were inspected visually. These are supplier documents, not independent clinical sources.
-
-- **S01** — [Cellife Product Sheet - Stress Relief.pdf](</private/var/folders/vt/qlg0csh55yj5vscjrljnvyp80000gn/T/codex-file-preview-Hb3rAN/Cellife Product Sheet - Stress Relief.pdf>) · p1 · SHA-256 `dc6e8eacac6bd36490a9e638f377a27e1ca6ea623a1fe5d53fa8623a9c8a0784`
-
-- **S02** — [Cellife Product Sheet - Propolis.pdf](</private/var/folders/vt/qlg0csh55yj5vscjrljnvyp80000gn/T/codex-file-preview-Uato2N/Cellife Product Sheet - Propolis.pdf>) · p1 · SHA-256 `09b3d6b791b3cfa3d86725ca34e9fcd81c7c9e2e5df7fa22848c4ec379cb9594`
-
-- **S03** — [Cellife Product Sheet - Man Power (520645).pdf](</private/var/folders/vt/qlg0csh55yj5vscjrljnvyp80000gn/T/codex-file-preview-pieVK4/Cellife Product Sheet - Man Power (520645).pdf>) · p1 · SHA-256 `aef635d446fdc456b4ff9fc187fe15bc9c3279a67f3753cdea00e440241038eb`
-
-- **S04** — [Cellife Product Sheet - Sugar Support.pdf](</private/var/folders/vt/qlg0csh55yj5vscjrljnvyp80000gn/T/codex-file-preview-Dg7B7C/Cellife Product Sheet - Sugar Support.pdf>) · p1 · SHA-256 `b1173ff3c8cd28fb34fe6fcabf04de6011cbe3ebfcb1d7192ce3a7987372529e`
-
-- **S05** — [Cellife Product Sheet - Bromelains & Quercetin.pdf](</private/var/folders/vt/qlg0csh55yj5vscjrljnvyp80000gn/T/codex-file-preview-LMJ1N9/Cellife Product Sheet - Bromelains & Quercetin.pdf>) · p1 · SHA-256 `21e890581cb0609032957125c270e18b15d38029931100fca1a31fd44e02110e`
-
-- **S06** — [Cellife Product Sheet - R.R.R. (521752).pdf](</private/var/folders/vt/qlg0csh55yj5vscjrljnvyp80000gn/T/codex-file-preview-5qkEJM/Cellife Product Sheet - R.R.R. (521752).pdf>) · p1 · SHA-256 `a1e02d8b0e8230a135779b5e9807215d53685efcc0dfc1c5f93b51c11fd849d2`
-
-- **S07** — [Cellife Product Sheet - COQ10 (316798).pdf](</private/var/folders/vt/qlg0csh55yj5vscjrljnvyp80000gn/T/codex-file-preview-jmktj2/Cellife Product Sheet - COQ10 (316798).pdf>) · p1 · SHA-256 `94346ad41d76cef8e26e57b019b83351ec1ac2ffa58c3c20214c10fd9ed4ea71`
-
-- **S08** — [Cellife Product Sheet - DETOX (322109).pdf](</private/var/folders/vt/qlg0csh55yj5vscjrljnvyp80000gn/T/codex-file-preview-iWMHKy/Cellife Product Sheet - DETOX (322109).pdf>) · p1 · SHA-256 `e2500231bf9033c2038d6753659edc96ca7fd05184e7763222c61de3ac82e568`
-
-- **S09** — [Cellife Product Sheet - R.R.R. Boost (395833).pdf](</private/var/folders/vt/qlg0csh55yj5vscjrljnvyp80000gn/T/codex-file-preview-1VHOAa/Cellife Product Sheet - R.R.R. Boost (395833).pdf>) · p1 · SHA-256 `29ae99e23467f01eb4acc814fcc87eb4f1d9fbfe6ae3e8fee3e29036a6a221d3`
-
-- **S10** — [Cellife Product Sheet - Vision+.pdf](</private/var/folders/vt/qlg0csh55yj5vscjrljnvyp80000gn/T/codex-file-preview-7FFZhg/Cellife Product Sheet - Vision+.pdf>) · p1 · SHA-256 `6acfa5292fc0c238708be174289024eae77112268a0e5be3be02d2def7b92195`
-
-- **S11** — [Cellife Product Sheet - AMPK Fatburst.pdf](</Users/mills/Downloads/Cellife Supplement-2/Cellife Product Sheet - AMPK Fatburst.pdf>) · p1 · SHA-256 `9b0b401c944607f99d60f430ac66218df7a288e2b6bb93de6e62763717054c39`
-
-- **S12** — [Cellife Product Sheet - Antioxidant.pdf](</Users/mills/Downloads/Cellife Supplement-2/Cellife Product Sheet - Antioxidant.pdf>) · p1 · SHA-256 `2be2647db05b2838428c88684a5c876de257cc1b8d3e34fac3869b692031c7bb`
+- Use this document as the authoritative routing/UI brief. Attach v1 only as the evidence appendix; do not merge the old five-question flow into this one.
+- Make category labels, introductory copy and visual settings editable. Keep route IDs, product warning obligations and result scope intact.
+- Provide one Shopify product selector per stable product ID (12 total). Product links/images come from selected Shopify products, not fabricated handles. Missing selections fail closed.
+- Store route tables separately from rendering code. Retain evidence labels F/C/W/P and reviewer status from v1.
+- Build and test all 15 valid paths, validation states and warning presentation. Provide actual test results separately from this spec.
+- Match the existing theme's typography, controls, spacing and responsive behaviour. Reproduce the reference's simple single-choice interaction pattern; use Cellife's own copy and branding.
+- Keep answers in memory; no marketing capture, health profiling or tracking by default.
+- Build locally or in an unpublished theme preview. Do not deploy, publish, edit live product copy or modify the live storefront.

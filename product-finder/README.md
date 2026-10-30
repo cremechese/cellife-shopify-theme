@@ -1,127 +1,101 @@
-# Cellife Product Finder — unpublished draft
+# Cellife Product Finder v2
 
-## Integration
+A short, interest-based discovery quiz. It does not assess medical suitability.
+`BRIEF.md` is the current flow specification; `EVIDENCE_APPENDIX.md` retains only
+v1's source matrix, evidence boundary and register. The old five-screen flow,
+health-answer engine, exclusions, review/no-match outcomes and flow tests have
+been replaced, not combined with v2.
 
-`sections/cellife-product-finder.liquid` is a reusable Online Store 2.0 section,
-with `templates/page.product-finder.json` as its dedicated page template. It uses
-Cellife's existing blue/red, Dawn typography fallbacks and native product objects.
-Its CSS and ES modules load only when the section is present. There are no new
-storefront dependencies, apps, backend services, cart changes or checkout changes.
-Existing homepage sections and quiz links have not been changed.
+## Theme integration
 
-Create a Shopify page and assign `product-finder` when an unpublished preview is
-authorized. In the Theme Editor choose **Cellife Product Finder** to edit the
-heading, intro, button label, colours, width and twelve product selectors.
-The page template prefills all twelve using inspected real handles, including
-Bromelains & Quercetin after it was activated and Royal Jelly as instructed by the
-owner. See `catalogue-mappings.json` for exact catalogue IDs and remaining identity
-review. Section presets added elsewhere require their selectors to be assigned.
-Native Shopify selectors, not inferred handles at runtime, supply destinations.
+- Reusable section: `sections/cellife-product-finder.liquid`.
+- Dedicated page template: `templates/page.product-finder.json`.
+- All twelve native product-selector connections remain assigned, with real
+  catalogue handles recorded in `catalogue-mappings.json`.
+- Editable: heading, intro, optional eyebrow, four category titles/subtitles,
+  colours and maximum width. Editing labels never changes route IDs.
+- Protected in code/data: routing, warning obligations, result scope and review
+  holds. The page opens directly on Q1 with no extra Start screen.
+- Existing homepage links, other sections, product copy and the live theme remain
+  unchanged. The owner's preview-branch push authorisation remains in effect.
 
-**Royal Jelly identity hold:** stable ID `propolis` and source S02 describe a
-500mg propolis formula. The selected Royal Jelly 1000mg product is not assumed to
-have the same formulation. `connectDestination` holds this route, including its
-otherwise-excluded outcome, so neither S02 claims nor warnings are presented as
-Royal Jelly information. A new current source sheet and rule review are required.
-This does not block an eligible BQ result for the immune no-preference route.
+Most routes use two questions. Only energy/cellular and resilience/immune ask a
+third preference question. Antioxidant is the only cross-category overlap, with
+the same general-antioxidant rationale in both places. No scoring, AI, commercial
+fallback, stack, automatic cart addition, dose selection or warning checkbox.
 
-## Source records and build
+## Source and runtime structure
 
-- `products.json`: twelve stable source IDs; F ingredient facts, C secondary
-  claims, W warnings and P safeguards remain separate. No approvals default on.
-- `evidence.json`: source/page/section IDs, faithful **brief-derived paraphrases**,
-  evidence kind, quantities with units/basis and unreviewed metadata.
-- `sources.json`: source-register hashes as reported by the supplied brief.
-- `questions.json`: typed enums, exclusive choices, stop conditions and exact
-  primary routes. Secondary claims never enter scoring.
-- `recommend.ts`: dependency-free TypeScript-compatible JavaScript; pure evaluator
-  and pure catalogue-destination adapter. No DOM or networking. No runtime LLM.
-- `BRIEF.md`: supplied specification, retained as the source of this draft.
+`products.json`, `sources.json` and `evidence.json` retain the twelve-product
+appendix and F/C/W/P distinctions. Historical v1 `policyRules` and P records are
+reference material only; the engine never executes those health exclusions.
+The original PDFs/current labels are still unavailable for verification.
+Reviewer/date fields remain null and source claims remain unreviewed.
 
-The original PDFs referenced by that brief were not attached or available at
-those local paths. **Original wording and current labels have not been verified.**
-`originalWording`, reviewers and dates remain null. Unresolved propolis
-extract-equivalence wording is recorded without inventing an equivalence basis.
-Reported vitamin E amounts are not converted into independently verified nutrient
-equivalence. Missing dose/storage details are not invented or generalised.
-Do not treat this dataset as an approved claims dossier or interaction database.
+The active flow is deliberately small and separate from presentation:
 
-Run `node scripts/build-product-finder.cjs` after source changes. The generated
-`assets/cellife-finder-engine.js` and `assets/cellife-finder-data.js` are committed
-with the source; `--check` detects stale generated files. A deterministic checksum
-and structural checks reject accidental record changes at runtime. The checksum
-is an integrity check, not a cryptographic security mechanism.
-Theme assets are public files: they contain supplier records and policy, never
-private staff material, customer answers or secrets. The evidence **panel** is
-rendered only in Shopify's authenticated Theme Editor (`request.design_mode`),
-not in ordinary preview/storefront HTML. It shows IDs and evidence distinctions,
-never telemetry or raw answer logs.
+- `questions.json`: four categories, branch labels and the two optional Q3s.
+- `routes.json`: fifteen exact paths to one product/rationale each.
+- `rationales.json`: narrow supplier claims with source C references.
+- `warnings.json`: required visible W warnings, F ingredient notes, and separate
+  verification notes; no warning changes based on undisclosed health details.
+- `guidance.json`: fixed scope and proposed general guidance, classified P.
+- `recommend.ts`: pure evaluator and pure catalogue-destination adapter.
+- `assets/cellife-product-finder.js`: presentation and memory-only choices.
 
-## Draft and release controls
+`evaluate({category, interest, preference?}, catalog, mode)` returns
+`INCOMPLETE`, `INVALID`, `DATA_HOLD` or `DISCOVERY_MATCH`. Completed valid source
+routes produce exactly one ID plus rationale evidence and source-warning IDs.
+No result is a safety clearance. Unknown/cross-branch answers and stale Q3 are
+invalid; missing questions are incomplete. Source/destination problems hold the
+result without substitutions.
 
-The draft only runs for an unpublished theme or Theme Editor context. On a
-published/unknown theme role Liquid renders the review hold before JavaScript;
-no question controls or data-module URLs are emitted there. The pure evaluator
-also returns DATA_HOLD in public mode. The public-release constant is false in
-code and cannot be enabled in theme settings. These are draft presentation gates,
-not checkout or medical eligibility enforcement.
+**Royal Jelly:** the owner-connected product is still mapped to ID `propolis`,
+while S02 describes propolis. The source route is testable, but its real catalogue
+connection remains DATA_HOLD until replacement evidence and warning review are
+provided. No propolis claims or warnings are transferred to Royal Jelly.
 
-All twelve source records must pass integrity checks even if a route needs only
-one. A match returns one source ID at most; non-match outcomes return zero.
-Missing/duplicate/invalid destinations return DATA_HOLD, never another product.
-Ratings, source listing numbers, marketing claims and formulation preference are
-not treated as efficacy evidence. Result copy is explicitly draft, attributes
-supplier statements, and gives no dosing recommendation, stack, urgency,
-subscription, automatically added cart item or guarantee of safety/effectiveness.
+Build the two dependency-free runtime assets with
+`node scripts/build-product-finder.cjs`; use `--check` to detect stale output.
+Source structure and warning/rationale relationships are checked before building;
+a runtime checksum detects accidental drift. It is not a security signature.
+Theme assets are public; no private/customer data belongs in source records.
+The evidence panel is rendered only in the Shopify Theme Editor.
 
-Before any public release: obtain all current labels/original sheets; review
-claims, warnings, clinical routing and complete ingredient/excipient declarations;
-reconcile unusual source warnings and dose omissions; resolve Royal Jelly's
-identity; confirm every product destination; review privacy alongside existing
-store apps; re-run the acceptance suite; obtain explicit publication approval.
-A code review and new release process are required, not a Theme Editor checkbox.
+Public release remains disabled in both Liquid and the evaluator. An unpublished
+preview can demonstrate draft routes with a visible DRAFT marker. A public
+release requires current labels, claims/precautions/destinations review and
+explicit approval; no Theme Editor switch can grant those approvals.
 
-## Privacy and interaction
+## Interaction, privacy and validation
 
-Categorical answers live only on the section instance, with no default selections.
-No email gate, health free text, answer URLs, analytics, CRM, cookies, browser
-storage, network submission or console logging is added. Restart, pagehide and
-section teardown clear answers, detached controls and evidence output. A browser
-Back/bfcache return restarts the finder rather than restoring health answers.
-Within the finder, Back preserves valid choices; changing Q1 clears Q5. Editing
-answers removes the previous result, so a previous product link cannot remain
-visible while safety answers change. Multiple-choice exclusivity is enforced by
-both UI and evaluator.
+Choices live only in section memory. No health answers are collected or inferred,
+no free text/email gate/tracking is added, and nothing is written to URLs, CRM,
+network submissions or browser storage. Back preserves valid choices; changing
+Q1 clears Q2/Q3 and changing Q2 clears Q3. Restart, leaving the page, browser Back
+restoration and section teardown clear choices. Native radio controls, fieldsets,
+focus handling, errors and visible Step 1/2/optional 3 support keyboard use.
 
-The component uses fieldsets, legends, native controls, error alerts, focus
-management, large targets and accessible progress. With JavaScript disabled it
-shows a pharmacist-help message and never emits a suggestion.
+Every displayed result states suitability was not assessed. A visible precautions
+panel appears before “Read product information”; no tooltip/collapsed warning,
+extra intake form or acknowledgement gate. Product detail pages retain their
+full labels, storage and seal instructions. The quiz does not modify them.
 
-## Validation
+Validation commands/results:
 
-- `node tests/product-finder/engine.cjs`: T01–T40 expanded, deterministic ordering,
-  exclusion/one-result invariants, malformed data, mapping holds and Royal Jelly
-  identity protections. Current result: **77 passing tests** plus combination
-  checks inside the suite.
-- `node tests/product-finder/browser.cjs`: renders the actual section with LiquidJS
-  and fixture Shopify product objects, then checks 320/390/1440px layouts, native
-  keyboard completion, errors, early review, Back/restart, stale Q5 clearing,
-  browser Back, no answer requests/storage, missing destinations, staff panel and
-  axe WCAG 2 A/AA + 2.1 AA checks on intro/question/match/review states.
-- `python3 scripts/check-theme-json.py`: JSON/embedded schemas.
-- `node scripts/build-product-finder.cjs --check`: generated assets.
-- Shopify CLI Theme Check: zero errors; eleven warnings in pre-existing files,
-  none in the new finder section.
+- `node tests/product-finder/engine.cjs`: **34 passing tests**, including all
+  15 valid paths, validation/integrity failures, source warnings, overlap,
+  one-result guarantees, determinism and catalogue identity/destination holds.
+- `node tests/product-finder/browser.cjs`: all 15 paths at 320/390/1440px; 2/3-step
+  counts; warnings before CTA; Back/restart/upstream clearing; keyboard controls;
+  no answer requests/storage/URL data; staff panel and no-JS fallback; axe WCAG
+  A/AA checks on category, formula and warning-result states. Royal Jelly is
+  explicitly checked as the unresolved catalogue hold.
+- Theme Check: **0 errors**, 11 pre-existing warnings, none in the new section.
+- `python3 scripts/check-theme-json.py`, build freshness and `git diff --check`.
 
-Browser checks need development-only `liquidjs`, `playwright` and
-`@axe-core/playwright` plus Chromium; no packages are loaded into the storefront.
-This environment uses NODE_PATH to the temporary test dependencies and installed
-Playwright runtime, and `/usr/bin/chromium`. Set `SCREENSHOT_DIR` for fixture
-screenshots. These checks are not a clinical review, manual screen-reader audit,
-Shopify admin/page-creation test or validation against the absent original PDFs.
-
-The owner subsequently authorised pushing this milestone to `cellife-rebuild`,
-which is connected to an unpublished preview theme. That authorisation does not
-publish the live theme or approve product claims. Draft and source-identity holds
-remain in place. A Shopify page record must be assigned the new template before
-the dedicated page can be visited.
+Browser tests use development-only LiquidJS, Playwright and axe with installed
+Chromium (`/usr/bin/chromium`); no test dependency is shipped in the theme.
+Set NODE_PATH to these tooling packages and SCREENSHOT_DIR for fixture images.
+These checks do not replace claims review, original-sheet/current-label checks,
+manual screen-reader review or a Shopify preview verification.

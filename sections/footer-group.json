@@ -1,52 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
-    "footer": {
-      "type": "footer",
-      "blocks": {
-        "brand": {
-          "type": "text",
-          "settings": {
-            "heading": "Cellife. The fountain of you.",
-            "subtext": "<p>Explore supplements, diagnostic test kits and product information.</p>"
-          }
-        },
-        "shop": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Explore",
-            "menu": "main-menu"
-          }
-        }
-      },
-      "block_order": [
-        "brand",
-        "shop"
-      ],
+    "cellife_first_offer": {
+      "type": "cellife-first-offer",
       "settings": {
-        "color_scheme": "scheme-3",
-        "newsletter_enable": false,
-        "newsletter_heading": "Subscribe to our emails",
-        "enable_follow_on_shop": true,
-        "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "payment_enable": true,
-        "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 64,
-        "padding_bottom": 32
+        "eyebrow": "A LITTLE WELCOME",
+        "heading": "10% off your first order.",
+        "text": "<p>Join the Cellife list for 10% off your first order of supplements or diagnostic test kits.</p>",
+        "offer_ready": true,
+        "discount_code": "CELLIFE10",
+        "pending_text": "Offer preview — not active yet. Configure the eligible-customer discount in Shopify before enabling signup.",
+        "email_label": "Email address",
+        "button_label": "Get 10% Off",
+        "success_text": "Thanks for joining Cellife. Your welcome code is:",
+        "eligibility_text": "For email subscribers placing their first order. If asked, confirm your subscription by email before using the code. Eligibility and offer terms are checked at checkout.",
+        "consent_text": "By subscribing, you agree to receive Cellife marketing emails. You can unsubscribe at any time.",
+        "privacy_label": "Privacy policy"
       }
     },
     "cellife_newsletter": {
       "type": "newsletter",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "heading": {
           "type": "heading",
@@ -71,16 +54,29 @@
         "copy",
         "form"
       ],
-      "disabled": true
-    },
-    "cellife_first_offer": {
-      "type": "cellife-first-offer",
+      "disabled": true,
       "settings": {
-        "offer_ready": true,
-        "discount_code": "CELLIFE10",
-        "text": "<p>Join the Cellife list for 10% off your first order of supplements or diagnostic test kits.</p>",
-        "success_text": "Thanks for joining Cellife. Your welcome code is:",
-        "eligibility_text": "For email subscribers placing their first order. If asked, confirm your subscription by email before using the code. Eligibility and offer terms are checked at checkout."
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 64,
+        "padding_bottom": 32
       }
     }
   },

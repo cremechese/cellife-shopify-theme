@@ -360,7 +360,7 @@
         "heading": "A routine that starts with you.",
         "text": "<p>Explore the supplement range, or start with a little guidance.</p>",
         "shop_label": "Shop Now",
-        "shop_link": "",
+        "shop_link": "shopify://collections/all",
         "quiz_label": "Take The Quiz",
         "pending_label": ""
       }

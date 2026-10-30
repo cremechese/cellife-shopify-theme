@@ -196,7 +196,9 @@
         "mosaic_placeholder_0": {
           "type": "story",
           "settings": {
-            "approved": false,
+            "approved": true,
+            "video": "shopify://files/videos/testimonial_3.mp4",
+            "poster": "shopify://shop_images/testimonial_3_poster.png",
             "quote": "",
             "quote_text_scale": 100,
             "attribution": "",
@@ -204,7 +206,7 @@
             "rating": 0,
             "verified": false,
             "transcript": "",
-            "product": "",
+            "product": "cellife-nad-60-tabs-exp-06-25",
             "product_overlay": true
           }
         }

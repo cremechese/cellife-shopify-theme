@@ -51,7 +51,7 @@ async function accessible(page){const out=await new AxeBuilder({page}).include('
     assert(await page.getByText('Matched to your interests.',{exact:true}).isVisible());
     const panel=page.getByRole('region',{name:'Before you consider this product'}),link=page.getByRole('link',{name:'View product details'});
     assert(await panel.isVisible());assert((await panel.textContent()).includes(catalog.warnings[productId].warnings[0]));
-    assert(await panel.evaluate(p=>Boolean(p.compareDocumentPosition(p.parentElement.querySelector('.cellife-finder__commerce'))&Node.DOCUMENT_POSITION_FOLLOWING)));
+    assert(await panel.evaluate(p=>Boolean(p.compareDocumentPosition(p.parentElement.querySelector('.cellife-finder__commerce'))&Node.DOCUMENT_POSITION_PRECEDING)));
     assert(await page.getByRole('heading',{name:'Fixture '+productId,exact:true}).isVisible());assert(await page.locator('.cellife-finder__price').isVisible());assert(await page.getByRole('button',{name:'Add to cart',exact:true}).isVisible());
     assert.equal(await page.locator('[data-finder-stage] a').count(),1);assert.equal(await link.getAttribute('href'),'/products/fixture-'+productId);
     assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));
@@ -67,7 +67,7 @@ async function accessible(page){const out=await new AxeBuilder({page}).include('
    await page.goto(base+'/public');await page.getByRole('heading',{name:'Product finder unavailable'}).waitFor();assert.equal(await page.locator('input').count(),0);await page.goBack();await page.locator('input[value="energy"]').waitFor();assert.equal(await page.locator('input:checked').count(),0);
    const state=await page.evaluate(()=>({local:localStorage.length,session:sessionStorage.length,search:location.search}));assert.deepEqual(state,{local:0,session:0,search:''});assert.deepEqual(errors,[]);assert.deepEqual(requests,[]);
    if(process.env.SCREENSHOT_DIR)await page.screenshot({path:path.join(process.env.SCREENSHOT_DIR,`intro-${width}.png`),fullPage:true});
-   console.log(`PASS ${width}px: all 15 routes, 2/3 screens, visible warnings before CTA, keyboard, upstream clearing, Back/restart, privacy and no overflow`);await context.close();
+   console.log(`PASS ${width}px: all 15 routes, 2/3 screens, commerce above visible precautions, keyboard, upstream clearing, Back/restart, privacy and no overflow`);await context.close();
   }
   const context=await browser.newContext(),page=await context.newPage();await ready(page,'/missing');await pick(page,'care');await pick(page,'eyes');await page.getByRole('heading',{name:'Product information unavailable'}).waitFor();assert.equal(await page.locator('[data-finder-stage] a').count(),0);
   await ready(page,'/staff');assert.equal(await page.locator('[data-finder-evidence]').count(),0);

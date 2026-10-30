@@ -123,12 +123,12 @@ if (!customElements.get('cellife-product-finder')) {
         precautions.append(this.node('h4','Before you consider this product'));
         const warnings=this.node('ul');for(const warning of payload.warnings)warnings.append(this.node('li',warning));precautions.append(warnings);
         if(payload.ingredientNotes.length)precautions.append(this.node('p',payload.ingredientNotes.join(' ')));
-        precautions.append(this.node('p',this.catalog.guidance.general,'cellife-finder__general-guidance'));panel.append(precautions);
+        precautions.append(this.node('p',this.catalog.guidance.general,'cellife-finder__general-guidance'));
         const purchase=this.querySelector(`template[data-finder-purchase="${id}"]`);
         const commerce=this.node('div',null,'cellife-finder__commerce');
         if(purchase)commerce.append(purchase.content.cloneNode(true));
         if(!purchase?.content.querySelector('a')){const link=this.node('a','View product details','cellife-finder__product-link cellife-finder__secondary');link.href=destination;commerce.append(link);}
-        panel.append(commerce);
+        panel.append(commerce,precautions);
       }else{
         panel.append(this.node('p','We couldn’t load this product’s information. Please contact Cellife for help.'));
       }

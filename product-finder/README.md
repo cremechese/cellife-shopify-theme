@@ -81,7 +81,8 @@ focus handling, errors and visible Step 1/2/optional 3 support keyboard use.
 
 Result copy uses “Recommended Product”, “Matched to your interests.” and a narrow
 “You selected…” explanation. It shows the native product title and current price.
-A visible precautions panel appears before purchase actions; there is no
+Purchase actions appear below the product details, followed by a visible
+precautions panel; there is no
 tooltip/collapsed warning, extra intake form or acknowledgement gate. Product detail pages retain their
 full labels, storage and seal instructions. The quiz does not modify them.
 
@@ -91,7 +92,7 @@ Validation commands/results:
   15 valid paths, validation/integrity failures, source warnings, overlap,
   one-result guarantees, determinism and catalogue identity/destination holds.
 - `node tests/product-finder/browser.cjs`: all 15 paths at 320/390/1440px; 2/3-step
-  counts; warnings before CTA; Back/restart/upstream clearing; keyboard controls;
+  counts; visible warnings below purchase controls; Back/restart/upstream clearing; keyboard controls;
   no answer requests/storage/URL data; absence of review/staff labels; no-JS fallback; axe WCAG
   A/AA checks on category, formula and warning-result states. Royal Jelly is
   explicitly checked as the unresolved catalogue hold.
@@ -114,7 +115,8 @@ Products needing variant selection, a required selling plan or special quantity
 rules link to Choose options. Sold-out products show a disabled control. Prices
 come from Liquid and are prefixed From when they vary. Shopify remains
 authoritative for stock, selling plans, quantity limits and checkout validation.
-The product details link remains available alongside Add to cart.
+The product details link remains available alongside Add to cart. At the owner’s
+request, these controls sit above “Before you consider this product”.
 
 Browser tests submit only to a local fixture, never a real store cart. They check
 the exact native form fields and options/selling-plan/quantity/sold-out fallbacks.

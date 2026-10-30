@@ -106,6 +106,7 @@
           "settings": {
             "approved": true,
             "quote": "After taking NADH, I felt noticeably more alert, and my thoughts seemed sharper and more focused. I also found my mind felt more active and engaged while taking it, along with experiencing an increase in overall energy levels.",
+            "quote_text_scale": 100,
             "attribution": "Clement L.",
             "attribution_subtitle": "Pharmacist · Blooms The Chemist",
             "rating": 5,
@@ -120,6 +121,7 @@
           "settings": {
             "approved": true,
             "quote": "Cellife NADH most definitely gave me a lift. I had the flushing due to not eating enough, so I knew it was absorbed well. Overall, the best version I have tried of a NAD+ precursor.",
+            "quote_text_scale": 100,
             "attribution": "Ian Z.",
             "attribution_subtitle": "Pharmacist · HealthSave+ Custom Made Medicine",
             "rating": 5,
@@ -134,6 +136,7 @@
           "settings": {
             "approved": true,
             "quote": "Taking Cellife NAD and NMN has given me more stamina and made it much easier to get through long days. I’ve been so happy with the results that I even have my parents taking Cellife NMN.",
+            "quote_text_scale": 100,
             "attribution": "Andrew S.",
             "attribution_subtitle": "Pharmacist · Woombye Pharmacy",
             "rating": 5,
@@ -150,6 +153,7 @@
             "video": "shopify://files/videos/testimonial_1.mov",
             "poster": "shopify://shop_images/testimonial_1_poster.png",
             "quote": "",
+            "quote_text_scale": 100,
             "attribution": "",
             "attribution_subtitle": "",
             "rating": 0,
@@ -164,6 +168,7 @@
           "settings": {
             "approved": true,
             "quote": "I have been taking Cellife NMN Extra for several years now. Over this time, I’ve noticed a significant improvement in my energy levels and metabolism. Having used it consistently for years, I honestly can’t see myself stopping.",
+            "quote_text_scale": 100,
             "attribution": "Natasha L.",
             "attribution_subtitle": "Pharmacist · Bondi Beach Chemist  ",
             "rating": 5,
@@ -178,6 +183,7 @@
           "settings": {
             "approved": true,
             "quote": "I started taking Cellife NADH and initially felt good on it but didn’t notice a major difference at first. However, when I forgot to take it for a day, I really noticed a change—I felt more tired and less focused. Since then, I haven’t missed a day. It has genuinely made a difference to my energy levels and overall vitality.",
+            "quote_text_scale": 80,
             "attribution": "Chris L.",
             "attribution_subtitle": "Pharmacist · Priceline Pharmacy",
             "rating": 5,
@@ -192,6 +198,7 @@
           "settings": {
             "approved": false,
             "quote": "",
+            "quote_text_scale": 100,
             "attribution": "",
             "attribution_subtitle": "",
             "rating": 0,

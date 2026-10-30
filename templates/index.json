@@ -354,6 +354,7 @@
     "quiz_banner": {
       "type": "cellife-quiz-banner",
       "settings": {
+        "image": "shopify://shop_images/wellbeing-support-company.jpg",
         "placeholder_label": "Campaign photography placeholder",
         "eyebrow": "YOUR NEXT CHAPTER",
         "heading": "A routine that starts with you.",

@@ -60,7 +60,7 @@
   .cellife-hero__copy .cellife-actions { justify-content: center; }
   /* Keep artwork in normal flow below the copy; preserve the full mobile composition. */
   .cellife-hero__media { position: relative; inset: auto; width: 100%; background: var(--cellife-hero-background, #f4f3f2); }
-  .cellife-hero__media picture { position: static; display: block; }
+  .cellife-hero__media picture { position: static; display: block; padding: 20px 24px 28px; }
   .cellife-hero__media > .cellife-placeholder { min-height: 320px; }
   .cellife-hero h1 { font-size: clamp(36px, 9vw, 56px); max-width: 14ch; }
   .cellife-hero__image { width: 100%; height: auto; max-height: none; object-fit: contain; }

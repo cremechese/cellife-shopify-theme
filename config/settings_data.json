@@ -12,9 +12,8 @@
     "logo": "shopify://shop_images/cellife-health-logo.png",
     "logo_width": 160,
     "favicon": "shopify://shop_images/cellife-favicon.png",
-    "type_header_font": "assistant_n4",
+    "cellife_heading_weight": "500",
     "heading_scale": 100,
-    "type_body_font": "assistant_n4",
     "body_scale": 100,
     "page_width": 1200,
     "spacing_sections": 0,
@@ -132,6 +131,9 @@
     "cart_color_scheme": "scheme-1",
     "customer_account_menu": "customer-account-main-menu",
     "cellife_diagnostics_page": "diagnostic-kits",
+    "cellife_quiz_url": "/pages/product-finder",
+    "type_header_font": "assistant_n4",
+    "type_body_font": "assistant_n4",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
@@ -203,8 +205,7 @@
           "shadow": "#121212"
         }
       }
-    },
-    "cellife_quiz_url": "/pages/product-finder"
+    }
   },
   "presets": {
     "Dawn": {

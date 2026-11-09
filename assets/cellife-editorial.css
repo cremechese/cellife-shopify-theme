@@ -31,7 +31,7 @@
 .cellife-section-heading { max-width: 720px; margin-bottom: 36px; }
 .cellife-section-heading h2 { margin: 0; color: var(--cellife-brand, #03107b); font-size: clamp(32px, 3.5vw, 52px); }
 .cellife-tone--dark .cellife-section-heading h2, .cellife-tone--dark h3 { color: white; }
-.cellife-section-heading .rte { margin-top: 20px; max-width: 62ch; line-height: 1.7; }
+.cellife-section-heading .rte { margin-top: 20px; max-width: 62ch; line-height: 1.7; overflow-wrap: anywhere; }
 .cellife-kicker { margin: 0 0 16px; text-transform: uppercase; letter-spacing: .15em; font-size: 11px; font-weight: 600; }
 .cellife-kicker::before { content: ''; width: 18px; height: 2px; display: inline-block; vertical-align: middle; margin-right: 10px; background: var(--cellife-accent, #8f2c26); }
 .cellife-draft-label { display: block; font-size: 11px; line-height: 1.5; letter-spacing: .06em; text-transform: uppercase; }

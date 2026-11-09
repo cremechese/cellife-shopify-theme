@@ -5,7 +5,7 @@
     <div class="cellife-section-heading">
       {% if section.settings.eyebrow != blank %}<p class="cellife-kicker">{{ section.settings.eyebrow | escape }}</p>{% endif %}
       <h2 id="Editorial-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
-      {% if section.settings.text != blank %}<div class="rte">{{ section.settings.text }}</div>{% endif %}
+      {% if section.settings.text != blank %}<div class="rte">{{ section.settings.text | replace: '&nbsp;', ' ' | replace: ' ', ' ' }}</div>{% endif %}
     </div>
     <cellife-story-rail data-layout="mosaic" data-auto-scroll="{{ section.settings.auto_scroll }}" data-speed="{{ section.settings.scroll_speed }}">
       <div class="cellife-story-controls"><button type="button" data-rail-toggle hidden data-pause-label="{{ section.settings.pause_label | escape }}" data-play-label="{{ section.settings.play_label | escape }}">{{ section.settings.pause_label | escape }}</button></div>

@@ -21,7 +21,7 @@
 .cellife-shell .cellife-journey-nav a { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
 .cellife-shell .cellife-hero { min-height: 720px; }
 .cellife-shell .cellife-hero__copy { border-radius: 16px; }
-.cellife-shell .cellife-hero h1 { max-width: 12ch; font-size: clamp(42px, 4.8vw, 76px); }
+.cellife-shell .cellife-hero h1 { max-width: 12ch; font-size: clamp(42px, 4.8vw, 66px); }
 .cellife-shell .cellife-hero .cellife-actions { gap: 12px; }
 .cellife-shell .cellife-action { font-weight: 600; }
 .cellife-container { width: min(1280px, calc(100% - 80px)); margin-inline: auto; }

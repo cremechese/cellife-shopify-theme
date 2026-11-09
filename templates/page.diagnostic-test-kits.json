@@ -14,7 +14,7 @@
       "settings": {
         "eyebrow": "CELLIFE HEALTHCARE",
         "heading": "Know More. Live Better.",
-        "text": "{{ page.content }}",
+        "text": "<p>Explore our range of convenient at-home respiratory self-tests to help you stay informed.</p>",
         "image": "shopify://shop_images/test_kit_Hero_desktop_ff7f1aff-23a3-4d9e-b9d3-2cdf8a042170.png",
         "desktop_height": 620,
         "background_color": "#f4f3f2",

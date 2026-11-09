@@ -1,6 +1,19 @@
 {% comment %}Self-hosted brand fonts; shared by storefront, password and gift card layouts.{% endcomment %}
 {{ 'inter-latin-normal.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
-{{ 'broadacre-regular.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{%- liquid
+  assign heading_font_asset = 'broadacre-medium.woff2'
+  case settings.cellife_heading_weight
+    when '100'
+      assign heading_font_asset = 'broadacre-hairline.woff2'
+    when '200'
+      assign heading_font_asset = 'broadacre-thin.woff2'
+    when '300'
+      assign heading_font_asset = 'broadacre-light.woff2'
+    when '400'
+      assign heading_font_asset = 'broadacre-regular.woff2'
+  endcase
+-%}
+{{ heading_font_asset | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
 {% style %}
   @font-face { font-family: 'Inter'; src: url('{{ 'inter-latin-normal.woff2' | asset_url }}') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
   @font-face { font-family: 'Inter'; src: url('{{ 'inter-latin-italic.woff2' | asset_url }}') format('woff2'); font-weight: 100 900; font-style: italic; font-display: swap; }

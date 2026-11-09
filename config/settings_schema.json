@@ -106,11 +106,40 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Brand fonts are self-hosted: Broadacre for headings and Inter for body text. Adjust their sizes below."
+        "content": "Brand fonts are self-hosted: Broadacre for headings and Inter for body text. Choose heading thickness and adjust sizes below."
       },
       {
         "type": "header",
         "content": "t:settings_schema.typography.settings.header__1.content"
+      },
+      {
+        "type": "select",
+        "id": "cellife_heading_weight",
+        "label": "Broadacre heading weight",
+        "options": [
+          {
+            "value": "100",
+            "label": "Hairline"
+          },
+          {
+            "value": "200",
+            "label": "Thin"
+          },
+          {
+            "value": "300",
+            "label": "Light"
+          },
+          {
+            "value": "400",
+            "label": "Regular"
+          },
+          {
+            "value": "500",
+            "label": "Medium"
+          }
+        ],
+        "default": "500",
+        "info": "Applies to Broadacre headings throughout the theme. Product titles remain Inter."
       },
       {
         "type": "range",

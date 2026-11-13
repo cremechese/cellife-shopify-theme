@@ -1,0 +1,52 @@
+<cellife-export-enquiry id="cellife-export-enquiry" class="cellife-export-enquiry page-width" data-cart-url="{{ routes.cart_url }}" data-root-url="{{ routes.root_url }}">
+  <h2>Export enquiry cart</h2>
+  <p>These products are available for export only and cannot be purchased within Australia. Please submit your enquiry and our team will contact you with availability, pricing, and shipping information.</p>
+  <p>No payment is collected. This is an enquiry, not a confirmed order.</p>
+  <p data-export-empty>Your export enquiry cart is empty. <a href="{{ routes.root_url }}collections/export-line">Browse export products</a>.</p>
+  <div data-export-items></div>
+  <p role="status" data-export-message></p>
+  <p data-export-mixed hidden>Regular products stay in your shopping cart. Submit your export enquiry first, then check out regular products separately.</p>
+  <div data-export-native-warning hidden>
+    <p>Your regular cart contains export-only products. They cannot go through payment checkout.</p>
+    <button type="button" class="button button--secondary" data-export-migrate>Move export products to enquiry cart</button>
+  </div>
+  {% form 'contact', id: 'CellifeExportEnquiry', return_to: routes.cart_url %}
+    {% if form.posted_successfully? %}
+      <div role="status" tabindex="-1" data-export-success>
+        <h3>Thank you—your export enquiry has been submitted.</h3>
+        <p>The Cellife team will contact you with availability, pricing and shipping information. No payment has been taken.</p>
+      </div>
+    {% endif %}
+    {% if form.errors %}<div role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+    <fieldset data-export-fields disabled>
+      <legend>Your enquiry details</legend>
+      <input type="hidden" name="contact[Enquiry type]" value="Export product enquiry">
+      <label for="ExportName">Name</label>
+      <input id="ExportName" name="contact[name]" autocomplete="name" required maxlength="200" value="{{ form.name | escape }}">
+      <label for="ExportEmail">Email</label>
+      <input id="ExportEmail" type="email" name="contact[email]" autocomplete="email" required maxlength="254" value="{{ form.email | escape }}">
+      <label for="ExportCompany">Company (optional)</label>
+      <input id="ExportCompany" name="contact[Company]" autocomplete="organization" maxlength="200">
+      <label for="ExportCountry">Destination country</label>
+      <select id="ExportCountry" name="contact[Destination country]" required><option value="">Select a country</option>{{ all_country_option_tags }}</select>
+      <label for="ExportInformation">Additional information (optional)</label>
+      <textarea id="ExportInformation" name="contact[Additional information]" rows="4" maxlength="4000"></textarea>
+      <textarea name="contact[body]" data-export-summary hidden></textarea>
+      <p>Your selected products and quantities will be included automatically.</p>
+      <button type="submit" class="button">Submit export enquiry</button>
+    </fieldset>
+  {% endform %}
+  <noscript><p>Enable JavaScript to review your saved enquiry cart, or <a href="{{ routes.root_url }}pages/contact">contact Cellife</a> directly.</p></noscript>
+  {% assign export_regular_count = 0 %}
+  {% for item in cart.items %}
+    {% capture export_count_check %}{% render 'cellife-is-export-product', product: item.product %}{% endcapture %}
+    {% unless export_count_check == 'true' %}{% assign export_regular_count = export_regular_count | plus: item.quantity %}{% endunless %}
+  {% endfor %}
+  <script type="application/json" data-export-native>{"regularCount": {{ export_regular_count }}, "items": [
+    {% assign export_separator = '' %}
+    {% for item in cart.items %}
+      {% capture is_export %}{% render 'cellife-is-export-product', product: item.product %}{% endcapture %}
+      {% if is_export == 'true' %}{{ export_separator }}{"key": {{ item.key | json }}, "handle": {{ item.product.handle | json }}, "variantId": {{ item.variant_id | append: '' | json }}, "quantity": {{ item.quantity }}}{% assign export_separator = ',' %}{% endif %}
+    {% endfor %}
+  ]}</script>
+</cellife-export-enquiry>

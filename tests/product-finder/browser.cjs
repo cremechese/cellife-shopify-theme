@@ -4,12 +4,13 @@ const {Liquid}=require('liquidjs'),{chromium}=require('playwright'),AxeBuilder=r
 const root=path.resolve(__dirname,'../..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const source=read('sections/cellife-product-finder.liquid'),schema=JSON.parse(source.split('{% schema %}')[1].split('{% endschema %}')[0]);
 const catalog=Object.fromEntries(['products','evidence','sources','questions','routes','rationales','warnings','guidance'].map(n=>[n,JSON.parse(read('product-finder/'+n+'.json'))]));
-const engine=new Liquid({strictFilters:true});
+const engine=new Liquid({strictFilters:true,root:path.join(root,'snippets'),extname:'.liquid'});
 engine.registerFilter('asset_url',x=>'/assets/'+x);engine.registerFilter('stylesheet_tag',x=>`<link rel="stylesheet" href="${x}">`);engine.registerFilter('json',x=>JSON.stringify(x===undefined?null:x));engine.registerFilter('image_url',()=>'/fixture.svg');engine.registerFilter('money_with_currency',()=>'$49.95 AUD');
 async function build(role='unpublished',staff=false,missing=false,purchaseCase=''){
  const settings=Object.fromEntries(schema.settings.filter(s=>s.id).map(s=>[s.id,s.default]));
  for(const [i,p]of catalog.products.entries())settings['product_'+p.id]={id:String(i+1),title:'Fixture '+p.id,url:'/products/fixture-'+p.id,price:4995,price_varies:false,featured_image:{id:1},available:true,requires_selling_plan:false,variants:[{id:100+i}],selected_or_first_available_variant:{id:100+i,quantity_rule:{min:1,increment:1}}};
  if(missing)settings.product_vision=null;
+ if(purchaseCase==='export')settings.product_vision.collections=[{handle:'export-line'}];
  if(purchaseCase==='options')settings.product_vision.variants.push({id:999});
  if(purchaseCase==='plan')settings.product_vision.requires_selling_plan=true;
  if(purchaseCase==='quantity')settings.product_vision.selected_or_first_available_variant.quantity_rule.min=2;
@@ -19,7 +20,7 @@ async function build(role='unpublished',staff=false,missing=false,purchaseCase='
 }
 async function accessible(page){const out=await new AxeBuilder({page}).include('cellife-product-finder').withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();assert.deepEqual(out.violations.map(v=>({id:v.id,nodes:v.nodes.length})),[]);}
 (async()=>{
- const pages={'/':await build(),'/public':await build('main'),'/staff':await build('unpublished',true),'/missing':await build('unpublished',false,true),'/options':await build('unpublished',false,false,'options'),'/plan':await build('unpublished',false,false,'plan'),'/quantity':await build('unpublished',false,false,'quantity'),'/soldout':await build('unpublished',false,false,'soldout')};
+ const pages={'/export':await build('unpublished',false,false,'export'),'/':await build(),'/public':await build('main'),'/staff':await build('unpublished',true),'/missing':await build('unpublished',false,true),'/options':await build('unpublished',false,false,'options'),'/plan':await build('unpublished',false,false,'plan'),'/quantity':await build('unpublished',false,false,'quantity'),'/soldout':await build('unpublished',false,false,'soldout')};
  const cartPosts=[];
  const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://localhost');if(url.pathname==='/cart/add'&&req.method==='POST'){let body='';req.on('data',c=>body+=c);req.on('end',()=>{cartPosts.push(Object.fromEntries(new URLSearchParams(body)));res.writeHead(303,{Location:'/cart'});res.end();});return;}if(url.pathname==='/cart'){res.setHeader('Content-Type','text/html');return res.end('<h1>Cart</h1>');}if(url.pathname.startsWith('/assets/')){const file=url.pathname.slice(1);if(!/^assets\/[a-z0-9.-]+$/.test(file)){res.writeHead(404);return res.end();}res.setHeader('Content-Type',file.endsWith('.css')?'text/css':'text/javascript');return res.end(read(file));}if(url.pathname==='/fixture.svg'){res.setHeader('Content-Type','image/svg+xml');return res.end('<svg xmlns="http://www.w3.org/2000/svg" width="240" height="400"><rect x="60" y="20" width="120" height="360" rx="20" fill="#3e2b62"/></svg>');}res.setHeader('Content-Type','text/html');res.end(pages[url.pathname]||pages['/']);});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
@@ -72,6 +73,7 @@ async function accessible(page){const out=await new AxeBuilder({page}).include('
   const context=await browser.newContext(),page=await context.newPage();await ready(page,'/missing');await pick(page,'care');await pick(page,'eyes');await page.getByRole('heading',{name:'Product information unavailable'}).waitFor();assert.equal(await page.locator('[data-finder-stage] a').count(),0);
   await ready(page,'/staff');assert.equal(await page.locator('[data-finder-evidence]').count(),0);
   for(const url of ['/options','/plan','/quantity']){await ready(page,url);await pick(page,'care');await pick(page,'eyes');assert(await page.getByRole('link',{name:'Choose options',exact:true}).isVisible());assert.equal(await page.getByRole('button',{name:'Add to cart',exact:true}).count(),0);}
+  await ready(page,'/export');await pick(page,'care');await pick(page,'eyes');assert(await page.getByRole('link',{name:'Choose for export enquiry',exact:true}).isVisible());assert.equal(await page.getByRole('button',{name:'Add to cart',exact:true}).count(),0);
   await ready(page,'/soldout');await pick(page,'care');await pick(page,'eyes');assert(await page.getByRole('button',{name:'Sold out'}).isDisabled());
   await ready(page);await pick(page,'care');await pick(page,'eyes');await page.getByRole('button',{name:'Add to cart',exact:true}).click();await page.getByRole('heading',{name:'Cart',exact:true}).waitFor();
   assert.equal(cartPosts.length,1);assert.deepEqual(Object.keys(cartPosts[0]).sort(),['id','quantity','return_to']);assert.equal(cartPosts[0].quantity,'1');assert.equal(cartPosts[0].return_to,'/cart');assert(/^\d+$/.test(cartPosts[0].id));await context.close();

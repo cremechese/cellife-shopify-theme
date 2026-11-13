@@ -1,0 +1,14 @@
+{%- comment -%}One classification rule, shared by product UI, cart guards and enquiry data.{%- endcomment -%}
+{%- liquid
+  assign export_only = false
+  if product.metafields.cellife.export_only.value == true or product.tags contains 'export-only'
+    assign export_only = true
+  endif
+  for export_collection in product.collections
+    if export_collection.handle == 'export-line'
+      assign export_only = true
+      break
+    endif
+  endfor
+  echo export_only
+-%}

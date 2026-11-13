@@ -267,6 +267,8 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'cellife-editorial.css' | asset_url | stylesheet_tag }}
+    {{ 'section-cellife-export.css' | asset_url | stylesheet_tag }}
+    <script type="module" src="{{ 'cellife-export-enquiry.js' | asset_url }}"></script>
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -318,6 +320,7 @@
       data-template="{{ template.name }}"
     >
       {{ content_for_layout }}
+      {% if request.page_type == 'cart' %}{% render 'cellife-export-enquiry' %}{% endif %}
     </main>
 
     {% sections 'footer-group' %}
@@ -379,5 +382,6 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-  </body>
+    <script type="application/json" id="CellifeExportRoutes">{"root": {{ routes.root_url | json }}, "cart": {{ routes.cart_url | json }}}</script>
+</body>
 </html>

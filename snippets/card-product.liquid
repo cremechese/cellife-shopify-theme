@@ -20,6 +20,8 @@
   Usage:
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
+{% capture cellife_card_export %}{% render 'cellife-is-export-product', product: card_product %}{% endcapture %}
+{% if cellife_card_export == 'true' %}{% assign quick_add = 'none' %}{% endif %}
 {%- unless skip_styles -%}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
@@ -133,7 +135,7 @@
                   id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
                   class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
                 >
-                  {{- 'products.product.sold_out' | t -}}
+                  {% if cellife_card_export == 'true' %}Export only{% else %}{{- 'products.product.sold_out' | t -}}{% endif %}
                 </span>
               {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
                 <span
@@ -208,10 +210,7 @@
               {%- endif -%}
 
               {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
-              {% if settings.cellife_card_details %}
-                {% if card_product.metafields.cellife.short_summary != blank %}<p class="cellife-card-summary">{{ card_product.metafields.cellife.short_summary.value | escape }}</p>{% endif %}
-                <a class="cellife-card-action" href="{{ card_product.url }}">{{ 'products.product.view_full_details' | t }}</a>
-              {% endif %}
+              {% render 'cellife-card-details', card_product: card_product, export_only: cellife_card_export %}
               {%- if card_product.quantity_price_breaks_configured? -%}
                 {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                   {% liquid
@@ -561,7 +560,7 @@
                 id="Badge-{{ section_id }}-{{ card_product.id }}"
                 class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
               >
-                {{- 'products.product.sold_out' | t -}}
+                {% if cellife_card_export == 'true' %}Export only{% else %}{{- 'products.product.sold_out' | t -}}{% endif %}
               </span>
             {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
               <span

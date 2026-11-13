@@ -1,3 +1,7 @@
+{% capture cellife_export_product %}{% render 'cellife-is-export-product', product: product %}{% endcapture %}
+{% if cellife_export_product == 'true' %}
+  <div {{ block.shopify_attributes }}>{% render 'cellife-export-picker', product: product %}</div>
+{% else %}
 {% comment %}
   Renders product buy-buttons.
   Accepts:
@@ -149,3 +153,5 @@
     <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 </div>
+
+{% endif %}

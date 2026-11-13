@@ -1,0 +1,6 @@
+{% if export_only == 'true' %}
+  <a class="cellife-card-action" href="{{ card_product.url }}">Choose for export enquiry</a>
+{% elsif settings.cellife_card_details %}
+  {% if card_product.metafields.cellife.short_summary != blank %}<p class="cellife-card-summary">{{ card_product.metafields.cellife.short_summary.value | escape }}</p>{% endif %}
+  <a class="cellife-card-action" href="{{ card_product.url }}">{{ 'products.product.view_full_details' | t }}</a>
+{% endif %}

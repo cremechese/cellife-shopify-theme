@@ -1,0 +1,13 @@
+{%- liquid
+  assign has_export = false
+  for item in cart.items
+    capture item_export
+      render 'cellife-is-export-product', product: item.product
+    endcapture
+    if item_export == 'true'
+      assign has_export = true
+      break
+    endif
+  endfor
+  echo has_export
+-%}

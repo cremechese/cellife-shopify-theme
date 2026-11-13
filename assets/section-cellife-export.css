@@ -1,0 +1,31 @@
+.cellife-export-picker, .cellife-export-enquiry { color: #262125; line-height: 1.6; }
+.cellife-export-picker { display: grid; gap: 16px; margin-block: 24px; padding: 20px; border: 1px solid #dfe3f3; border-radius: 8px; background: #f4f3f2; }
+.cellife-export-picker p { margin: 0; }
+.cellife-export-label { color: #03107b; font-weight: 600; }
+.cellife-export-picker label { display: grid; gap: 6px; }
+.cellife-export-picker select, .cellife-export-picker input, .cellife-export-enquiry input, .cellife-export-enquiry select, .cellife-export-enquiry textarea { width: 100%; min-width: 0; min-height: 44px; padding: 10px; border: 1px solid #8b8b8b; border-radius: 4px; background: #fff; color: #262125; font: inherit; }
+.cellife-export-enquiry { display: block; padding-block: 40px; overflow-wrap: anywhere; }
+.cellife-export-enquiry fieldset { display: grid; gap: 10px; min-width: 0; border: 0; padding: 0; margin-top: 24px; max-width: 700px; }
+.cellife-export-enquiry legend { font-weight: 600; padding: 0 0 16px; }
+.cellife-export-enquiry fieldset:disabled { display: none; }
+.cellife-export-item { display: grid; grid-template-columns: minmax(0, 1fr) 100px auto; gap: 16px; align-items: center; padding-block: 16px; border-bottom: 1px solid #dfe3f3; }
+.cellife-export-item h3 { font-family: var(--font-body-family); font-weight: 500; margin: 0; font-size: 18px; }
+.cellife-export-item p { margin: 4px 0; }
+.cellife-export-enquiry button:not(:disabled), .cellife-export-picker button:not(:disabled) { cursor: pointer; }
+.cellife-export-enquiry [hidden], .cellife-export-picker [hidden] { display: none; }
+/* Export products have their own stock-independent variant and quantity chooser. */
+product-info:has(cellife-export-picker) :is(variant-selects, .product-form__quantity, .product__inventory, .product__tax, .shopify-payment-button) { display: none; }
+.cellife-export-pending .cart__dynamic-checkout-buttons { display: none; }
+@media (max-width: 749px) {
+  .cellife-export-item { grid-template-columns: minmax(0, 1fr) 80px; gap: 12px; }
+  .cellife-export-item button { grid-column: 1 / -1; justify-self: start; }
+}
+
+.cellife-export-count { position: absolute; top: 0; right: -4px; min-width: 18px; height: 18px; padding-inline: 3px; border-radius: 50%; background: #03107b; color: #fff; font: 10px/18px var(--font-body-family, sans-serif); text-align: center; }
+.cellife-export-count[hidden] { display: none; }
+
+.cellife-export-enquiry[hidden] { display: none; }
+.cellife-export-pending cart-items.is-empty .cart__warnings { display: none; }
+.cellife-shell .header__icon--cart { position: relative; }
+
+.cellife-export-enquiry:not(:defined) { display: none; }

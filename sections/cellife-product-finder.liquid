@@ -31,6 +31,9 @@
     {% if purchase_product != blank %}
       {% assign purchase_variant = purchase_product.selected_or_first_available_variant %}
       <template data-finder-purchase="{{ finder_id }}">
+        {% capture finder_export_product %}{% render 'cellife-is-export-product', product: purchase_product %}{% endcapture %}
+        {% if finder_export_product == 'true' %}<a class="cellife-finder__product-link" href="{{ purchase_product.url }}">Choose for export enquiry</a>
+        {% else %}
         {% if purchase_product.available == false %}
           <button type="button" disabled>Sold out</button>
         {% elsif purchase_product.variants.size > 1 or purchase_product.requires_selling_plan or purchase_variant.quantity_rule.min > 1 or purchase_variant.quantity_rule.increment > 1 %}
@@ -42,6 +45,7 @@
             <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
             <button type="submit">Add to cart</button>
           </form>
+        {% endif %}
         {% endif %}
       </template>
     {% endif %}

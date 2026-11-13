@@ -1,0 +1,15 @@
+{%- capture export_status -%}{%- render 'cellife-is-export-product', product: product -%}{%- endcapture -%}
+{
+  "exportOnly": {% if export_status == 'true' %}true{% else %}false{% endif %},
+  "id": {{ product.id | append: '' | json }},
+  "handle": {{ product.handle | json }},
+  "title": {{ product.title | json }},
+  "url": {{ product.url | json }},
+  "vendor": {{ product.vendor | json }},
+  "type": {{ product.type | json }},
+  "variants": [
+    {%- for variant in product.variants -%}
+      {"id": {{ variant.id | append: '' | json }}, "title": {{ variant.title | json }}, "sku": {{ variant.sku | json }}, "barcode": {{ variant.barcode | json }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}

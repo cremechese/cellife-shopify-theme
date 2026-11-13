@@ -1,3 +1,4 @@
+{% capture cellife_cart_has_export %}{% render 'cellife-export-cart-status', cart: cart %}{% endcapture %}
 {% comment %}
   Renders cart drawer
 
@@ -575,7 +576,10 @@
         <!-- CTAs -->
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>
-          <button
+          {% if cellife_cart_has_export == 'true' %}
+<a class="button" href="{{ routes.cart_url }}#cellife-export-enquiry">Review export enquiry</a><p>Export-only products cannot go through payment checkout.</p>
+{% else %}
+<button
             type="submit"
             id="CartDrawer-Checkout"
             class="cart__checkout-button button"
@@ -587,6 +591,7 @@
           >
             {{ 'sections.cart.checkout' | t }}
           </button>
+{% endif %}
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+{% capture cellife_cart_has_export %}{% render 'cellife-export-cart-status', cart: cart %}{% endcapture %}
 {{ 'component-cart.css' | asset_url | stylesheet_tag }}
 {{ 'component-totals.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
@@ -105,7 +106,10 @@
               </div>
             {%- else -%}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
-                <button
+                {% if cellife_cart_has_export == 'true' %}
+<a class="button" href="{{ routes.cart_url }}#cellife-export-enquiry">Review export enquiry</a><p>Export-only products cannot go through payment checkout.</p>
+{% else %}
+<button
                   type="submit"
                   id="checkout"
                   class="cart__checkout-button button"
@@ -117,9 +121,10 @@
                 >
                   {{ 'sections.cart.checkout' | t }}
                 </button>
+{% endif %}
               </div>
 
-              {%- if additional_checkout_buttons -%}
+              {%- if additional_checkout_buttons and cellife_cart_has_export != 'true' -%}
                 <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
                   {{ content_for_additional_checkout_buttons }}
                 </div>

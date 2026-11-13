@@ -14,7 +14,7 @@ def deps(p):
  for n in re.findall(r"(?:render|include)\s+['\"]([^'\"]+)",s):deps(r/'snippets'/f'{n}.liquid')
  for n in re.findall(r"['\"]([^'\"]+)['\"]\s*\|\s*(?:asset_url|inline_asset_content)",s):deps(r/'assets'/n)
 for name in names:
- d=json.loads((r/'templates'/name).read_text());assert set(d['order'])==set(d['sections']) and len(d['order'])==len(d['sections'])
+ d=json.loads(re.sub(r'^\s*/\*.*?\*/', '', (r/'templates'/name).read_text(), flags=re.S));assert set(d['order'])==set(d['sections']) and len(d['order'])==len(d['sections'])
  for sec in d['sections'].values():
   p=r/'sections'/f"{sec['type']}.liquid";deps(p);schema=json.loads(re.search(r'{% schema %}(.*?){% endschema %}',p.read_text(),re.S)[1]);validate(sec['settings'],schema['settings'])
   blocks=sec.get('blocks',{});assert sec.get('block_order',[])==list(blocks)
